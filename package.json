@@ -1,0 +1,88 @@
+{
+  "name": "@r3e-network/neo-devpack-solidity",
+  "version": "0.27.0",
+  "description": "Production-focused Solidity-to-NeoVM compilation system",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r3e-network/neo-devpack-solidity.git"
+  },
+  "homepage": "https://github.com/r3e-network/neo-devpack-solidity#readme",
+  "bugs": {
+    "url": "https://github.com/r3e-network/neo-devpack-solidity/issues"
+  },
+  "author": {
+    "name": "Jimmy",
+    "email": "jimmy@r3e.network"
+  },
+  "license": "MIT",
+  "keywords": [
+    "neo",
+    "solidity",
+    "blockchain",
+    "smart-contracts",
+    "neovm",
+    "ethereum",
+    "evm",
+    "compiler",
+    "r3e-network"
+  ],
+  "scripts": {
+    "build": "cd tooling && turbo run build",
+    "test": "cd tooling && turbo run test",
+    "lint": "cd tooling && turbo run lint",
+    "format": "prettier --write .",
+    "dev": "cd tooling && turbo run dev",
+    "clean": "cd tooling && turbo run clean",
+    "typecheck": "cd tooling && turbo run typecheck",
+    "vendor:famous-contracts": "node scripts/vendor_famous_contracts.js",
+    "audit:famous-contracts": "node scripts/famous_contracts_audit.js",
+    "verify:famous-contracts": "node scripts/verify_famous_contract_sources.js",
+    "deploy:famous-contracts:neoxp": "node scripts/famous_contracts_neoxp_deploy.js",
+    "verify:famous-contracts:neoxp-runtime": "node scripts/famous_contracts_neoxp_runtime.js",
+    "audit:famous-contracts:render": "node scripts/famous_contracts_audit.js --render-only",
+    "docs:generate:original-contracts": "node scripts/generate_original_contract_docs.js",
+    "docs:check": "node scripts/check_docs_structure.js",
+    "docs:check:links": "node scripts/check_built_docs_links.js",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^2.8.17",
+    "prettier": "^3.0.0",
+    "turbo": "^1.10.7",
+    "typescript": "^5.1.6",
+    "vitepress": "^1.6.3"
+  },
+  "overrides": {
+    "ajv": "6.14.0",
+    "@vitejs/plugin-vue": "6.0.6",
+    "esbuild": "0.27.1",
+    "flatted": "3.4.2",
+    "picomatch": "4.0.4",
+    "postcss": "8.5.13",
+    "vite": "7.3.2",
+    "eslint": {
+      "minimatch": "3.1.4"
+    },
+    "@eslint/eslintrc": {
+      "minimatch": "3.1.4"
+    },
+    "@humanwhocodes/config-array": {
+      "minimatch": "3.1.4"
+    },
+    "@ethersproject/bignumber": {
+      "bn.js": "5.2.3"
+    },
+    "rollup": "4.59.0",
+    "glob@10.5.0": {
+      ".": "$glob",
+      "minimatch": "9.0.7"
+    }
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || ^24.0.0",
+    "npm": ">=8.0.0"
+  }
+}

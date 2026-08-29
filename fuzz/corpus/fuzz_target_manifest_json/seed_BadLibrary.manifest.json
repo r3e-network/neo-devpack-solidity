@@ -1,0 +1,49 @@
+{
+  "abi": {
+    "events": [],
+    "methods": [
+      {
+        "name": "broken",
+        "offset": 0,
+        "parameters": [
+          {
+            "name": "value",
+            "type": "Integer"
+          }
+        ],
+        "returntype": "Integer",
+        "safe": true
+      },
+      {
+        "name": "_deploy",
+        "offset": 127,
+        "parameters": [
+          {
+            "name": "data",
+            "type": "Any"
+          },
+          {
+            "name": "update",
+            "type": "Boolean"
+          }
+        ],
+        "returntype": "Void",
+        "safe": false
+      }
+    ]
+  },
+  "extra": {
+    "Author": "Jimmy <jimmy@r3e.network>",
+    "Compiler": "neo-devpack-solidity-0.16.0",
+    "Description": "Solidity contract 'BadLibrary' compiled to NeoVM",
+    "Version": "0.16.0.0"
+  },
+  "features": {},
+  "groups": [],
+  "name": "BadLibrary",
+  "permissions": [],
+  "supportedstandards": [
+    "NEP-29"
+  ],
+  "trusts": []
+}

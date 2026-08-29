@@ -1,0 +1,48 @@
+{
+  "description": "Example test manifest for OpenZeppelin ERC20",
+  "variables": {
+    "GENESIS_HASH": "0x6d7a4d2f6c1b3e5a9f8c7d6e5b4a3f2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6",
+    "NODE1_HASH": "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2"
+  },
+  "cases": [
+    {
+      "contract": "ERC20",
+      "contractHash": "<resolved-at-deploy-time>",
+      "assertions": [
+        {
+          "name": "name() returns MyToken",
+          "kind": "read",
+          "operation": "name",
+          "args": [],
+          "expect": { "type": "ByteString", "value": "MyToken" }
+        },
+        {
+          "name": "symbol() returns MTK",
+          "kind": "read",
+          "operation": "symbol",
+          "args": [],
+          "expect": { "type": "ByteString", "value": "MTK" }
+        },
+        {
+          "name": "approve(genesis, 1000)",
+          "kind": "write",
+          "operation": "approve",
+          "args": [
+            { "type": "Hash160", "value": "$GENESIS_HASH" },
+            1000
+          ]
+        },
+        {
+          "name": "allowance(node1, genesis) == 1000",
+          "kind": "read",
+          "operation": "allowance",
+          "args": [
+            { "type": "Hash160", "value": "$NODE1_HASH" },
+            { "type": "Hash160", "value": "$GENESIS_HASH" }
+          ],
+          "expect": { "type": "Integer", "value": 1000 }
+        }
+      ]
+    }
+  ]
+}

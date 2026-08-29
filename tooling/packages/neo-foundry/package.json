@@ -1,0 +1,68 @@
+{
+  "name": "@neo-devpack-solidity/neo-foundry",
+  "version": "0.14.1",
+  "description": "Foundry integration adapter for Neo DevPack for Solidity development",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "neo-forge": "./dist/cli.js",
+    "neo-cast": "./dist/cast-cli.js",
+    "neo-anvil": "./dist/anvil-cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./cli": {
+      "import": "./dist/cli.js"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts"
+  },
+  "keywords": [
+    "foundry",
+    "forge",
+    "cast",
+    "anvil",
+    "neo",
+    "blockchain",
+    "solidity",
+    "neovm"
+  ],
+  "dependencies": {
+    "@neo-devpack-solidity/types": "^0.14.1",
+    "commander": "^11.1.0",
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.0",
+    "fs-extra": "^11.3.4",
+    "chokidar": "^3.5.3",
+    "semver": "^7.7.4",
+    "debug": "^4.3.4",
+    "axios": "^1.13.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.37",
+    "@types/fs-extra": "^11.0.4",
+    "@types/debug": "^4.1.12",
+    "@types/inquirer": "^9.0.7",
+    "typescript": "^5.3.3",
+    "vitest": "^4.0.18",
+    "eslint": "^8.57.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

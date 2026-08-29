@@ -1,0 +1,264 @@
+{
+  "generatedAt": "2026-02-15T09:14:27.438Z",
+  "neoSolcVersion": "neo-solc 0.12.0",
+  "reportScope": "historical snapshot; current repo compiler line is 0.27.0",
+  "neoxpVersion": "3.9.1.3+e36e7bad7e",
+  "totals": {
+    "total": 13,
+    "pass": 13,
+    "fail": 0
+  },
+  "results": [
+    {
+      "id": "openzeppelin-erc20",
+      "project": "OpenZeppelin",
+      "contract": "ERC20",
+      "sourcePath": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "deployData": [
+        "NeoUSD",
+        "nUSD"
+      ],
+      "probe": {
+        "operation": "name",
+        "args": []
+      },
+      "clearSupportedStandards": true,
+      "note": "Clears supportedstandards for EVM ERC-20 vs NEP-17 strict schema mismatch.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "compileSourcePath": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "warningCount": 3,
+      "contractHash": "0xe116d4f26c4e4af4ed3b6cbf9c9b1505973687cf",
+      "txHash": "0x83e374898215580a64721bdfd7392807519a696576e676daf80f48344fbdd8b5",
+      "probeState": "HALT"
+    },
+    {
+      "id": "openzeppelin-erc721",
+      "project": "OpenZeppelin",
+      "contract": "ERC721",
+      "sourcePath": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+      "deployData": [
+        "NeoNFT",
+        "nNFT"
+      ],
+      "probe": {
+        "operation": "name",
+        "args": []
+      },
+      "clearSupportedStandards": true,
+      "note": "Clears supportedstandards for EVM ERC-721 vs NEP-11 strict schema mismatch.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+      "compileSourcePath": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+      "warningCount": 2,
+      "contractHash": "0x931e486a418c1da855dab93f8790750b6a96a161",
+      "txHash": "0xc160e432fac5e9ced9fc44e4c6b5458210323432b76e031884ab3405c6fcfc0c",
+      "probeState": "HALT"
+    },
+    {
+      "id": "openzeppelin-accesscontrol",
+      "project": "OpenZeppelin",
+      "contract": "AccessControl",
+      "sourcePath": "@openzeppelin/contracts/access/AccessControl.sol",
+      "probe": {
+        "operation": "DEFAULT_ADMIN_ROLE",
+        "args": []
+      },
+      "clearSupportedStandards": false,
+      "note": "Original upstream contract deployed as-is.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@openzeppelin/contracts/access/AccessControl.sol",
+      "compileSourcePath": "@openzeppelin/contracts/access/AccessControl.sol",
+      "warningCount": 0,
+      "contractHash": "0x9792e50cb0ba36252e1e90a2dc9b506e4a26a807",
+      "txHash": "0xb0024435c1c585facc73aa58d71d85427d3353bde63ec40d29ce5c0c6690fe91",
+      "probeState": "HALT"
+    },
+    {
+      "id": "aave-weth9",
+      "project": "Aave V3",
+      "contract": "WETH9",
+      "sourcePath": "@aave/core-v3/contracts/dependencies/weth/WETH9.sol",
+      "probe": {
+        "operation": "name",
+        "args": []
+      },
+      "clearSupportedStandards": true,
+      "note": "Clears supportedstandards to bypass strict NEP method-shape checks.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@aave/core-v3/contracts/dependencies/weth/WETH9.sol",
+      "compileSourcePath": "@aave/core-v3/contracts/dependencies/weth/WETH9.sol",
+      "warningCount": 2,
+      "contractHash": "0x70a37cd49461eeeceee53ba9609ef15bc589b473",
+      "txHash": "0x30c9a7dacd03ad38341ca00b5299f2f5ec71cc1c3a7813948d9f178db8f23ec2",
+      "probeState": "HALT"
+    },
+    {
+      "id": "aave-poolconfigurator",
+      "project": "Aave V3",
+      "contract": "PoolConfigurator",
+      "sourcePath": "@aave/core-v3/contracts/protocol/pool/PoolConfigurator.sol",
+      "clearSupportedStandards": false,
+      "note": "Original upstream contract deployed; runtime integration calls require further protocol wiring.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@aave/core-v3/contracts/protocol/pool/PoolConfigurator.sol",
+      "compileSourcePath": "@aave/core-v3/contracts/protocol/pool/PoolConfigurator.sol",
+      "warningCount": 0,
+      "contractHash": "0x4d05f64ee940f5d02bb412d0400e9d16c728ec96",
+      "txHash": "0x09d5e44c08a9522d450532bd0649952f0a4f87af06dfa602d19c8ba2d72a0151",
+      "probeState": "SKIPPED"
+    },
+    {
+      "id": "safe-safe",
+      "project": "Safe",
+      "contract": "Safe",
+      "sourcePath": "@safe-global/safe-contracts/contracts/Safe.sol",
+      "probe": {
+        "operation": "getThreshold",
+        "args": []
+      },
+      "clearSupportedStandards": false,
+      "note": "Original upstream multisig core contract deployed.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@safe-global/safe-contracts/contracts/Safe.sol",
+      "compileSourcePath": "@safe-global/safe-contracts/contracts/Safe.sol",
+      "warningCount": 3,
+      "contractHash": "0xf04634c55fbc3fd5421b3c25c971f57ccc431a37",
+      "txHash": "0x072c0df1a1d6a707e75ae7957f4408c1d8d07298f166ea8c9cdd96103f2da9c9",
+      "probeState": "HALT"
+    },
+    {
+      "id": "safe-safel2",
+      "project": "Safe",
+      "contract": "SafeL2",
+      "sourcePath": "@safe-global/safe-contracts/contracts/SafeL2.sol",
+      "probe": {
+        "operation": "getThreshold",
+        "args": []
+      },
+      "clearSupportedStandards": false,
+      "note": "Original upstream L2-flavored Safe contract deployed.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@safe-global/safe-contracts/contracts/SafeL2.sol",
+      "compileSourcePath": "@safe-global/safe-contracts/contracts/SafeL2.sol",
+      "warningCount": 6,
+      "contractHash": "0x40e6300e17d0f393ea84ff59313b15a0c6f1ba9d",
+      "txHash": "0xfa2407f1978bbbb51c3af80972f2a40cac23e7d9564bb4213b79492568d633cf",
+      "probeState": "HALT"
+    },
+    {
+      "id": "safe-proxyfactory",
+      "project": "Safe",
+      "contract": "SafeProxyFactory",
+      "sourcePath": "@safe-global/safe-contracts/contracts/proxies/SafeProxyFactory.sol",
+      "probe": {
+        "operation": "proxyCreationCode",
+        "args": []
+      },
+      "clearSupportedStandards": false,
+      "note": "Original upstream proxy factory deployed.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@safe-global/safe-contracts/contracts/proxies/SafeProxyFactory.sol",
+      "compileSourcePath": "@safe-global/safe-contracts/contracts/proxies/SafeProxyFactory.sol",
+      "warningCount": 0,
+      "contractHash": "0x1eb9b3930d49389f6669454fa042b262cb7fbc96",
+      "txHash": "0x9c408734a5e64e83d2ee6ecf7ef8775147cfd43b3cdc888f22c8b3ff8dc0d282",
+      "probeState": "HALT"
+    },
+    {
+      "id": "safe-multisend",
+      "project": "Safe",
+      "contract": "MultiSend",
+      "sourcePath": "@safe-global/safe-contracts/contracts/libraries/MultiSend.sol",
+      "clearSupportedStandards": false,
+      "note": "Original upstream library contract deployed (no zero-arg probe method).",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@safe-global/safe-contracts/contracts/libraries/MultiSend.sol",
+      "compileSourcePath": "@safe-global/safe-contracts/contracts/libraries/MultiSend.sol",
+      "warningCount": 0,
+      "contractHash": "0x6c7cd6f7e8128df4b11bb5ed7834ab401e5f7a35",
+      "txHash": "0x2a6bb38ee9fe0ced02d889ee41c311d0a274e6a5a9b39c0558ea7c62ff277301",
+      "probeState": "SKIPPED"
+    },
+    {
+      "id": "uniswap-v2-pair",
+      "project": "Uniswap V2 Core",
+      "contract": "UniswapV2Pair",
+      "sourcePath": "@uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "probe": {
+        "operation": "factory",
+        "args": []
+      },
+      "clearSupportedStandards": true,
+      "note": "Clears supportedstandards due ERC-style strict schema mismatch.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "compileSourcePath": "@uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "warningCount": 4,
+      "contractHash": "0x9bf49d45d85d3ba71a67a201e01c8e07ca185523",
+      "txHash": "0x1b99c8ee4c28e9811ddaa69cd65e204b5a545f2c2309cc32967d7139a615fbba",
+      "probeState": "HALT"
+    },
+    {
+      "id": "uniswap-v2-erc20",
+      "project": "Uniswap V2 Core",
+      "contract": "UniswapV2ERC20",
+      "sourcePath": "@uniswap/v2-core/contracts/UniswapV2ERC20.sol",
+      "probe": {
+        "operation": "name",
+        "args": []
+      },
+      "clearSupportedStandards": true,
+      "note": "Clears supportedstandards due ERC-style strict schema mismatch.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@uniswap/v2-core/contracts/UniswapV2ERC20.sol",
+      "compileSourcePath": "@uniswap/v2-core/contracts/UniswapV2ERC20.sol",
+      "warningCount": 4,
+      "contractHash": "0x0bd1fc83a16b718bf0ed559c668e4db6c231e565",
+      "txHash": "0xe75e071b1190ac1c99c1d818b4a20fe3c0e11544db14d052a3298760252d7c8c",
+      "probeState": "HALT"
+    },
+    {
+      "id": "chainlink-mockv3aggregator",
+      "project": "Chainlink",
+      "contract": "MockV3Aggregator",
+      "sourcePath": "@chainlink/contracts/src/v0.8/shared/mocks/MockV3Aggregator.sol",
+      "deployData": [
+        8,
+        123456789
+      ],
+      "probe": {
+        "operation": "decimals",
+        "args": []
+      },
+      "clearSupportedStandards": false,
+      "note": "Original upstream oracle mock deployed.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@chainlink/contracts/src/v0.8/shared/mocks/MockV3Aggregator.sol",
+      "compileSourcePath": "@chainlink/contracts/src/v0.8/shared/mocks/MockV3Aggregator.sol",
+      "warningCount": 0,
+      "contractHash": "0xab83be98437967a5605af09bae8286fb6373b387",
+      "txHash": "0xf7c7f631981801aac705df76f5e381a31374b93e8dc79a609290aa3bd8423a2f",
+      "probeState": "HALT"
+    },
+    {
+      "id": "chainlink-owneriscreator",
+      "project": "Chainlink",
+      "contract": "OwnerIsCreator",
+      "sourcePath": "@chainlink/contracts/src/v0.8/shared/access/OwnerIsCreator.sol",
+      "probe": {
+        "operation": "owner",
+        "args": []
+      },
+      "clearSupportedStandards": false,
+      "note": "Original upstream access-control primitive deployed.",
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@chainlink/contracts/src/v0.8/shared/access/OwnerIsCreator.sol",
+      "compileSourcePath": "@chainlink/contracts/src/v0.8/shared/access/OwnerIsCreator.sol",
+      "warningCount": 0,
+      "contractHash": "0x516a69c1618dfa5c4b86e5c6c2d2446284a498f8",
+      "txHash": "0x910ed6b378e7fa7fc5cb5bbf2f5e95f253e637c86897a1d05d02e6a7dc12f3c2",
+      "probeState": "HALT"
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+use super::*;
+
+pub(crate) fn resolve_syscalls_member(member: &str) -> Option<BuiltinCall> {
+    match member {
+        "contractCall" => Some(BuiltinCall::ContractCall),
+        "contractCallWithFlags" => Some(BuiltinCall::ContractCallWithFlags),
+        "getCallFlags" => Some(BuiltinCall::Syscall(
+            "System.Contract.GetCallFlags".to_string(),
+        )),
+        // Neo N3 contract management is implemented via the native ContractManagement contract.
+        // Keep compatibility with older devpack helpers that model these as syscalls.
+        "contractCreate" => Some(BuiltinCall::DeployContract),
+        "contractUpdate" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::ContractManagement,
+            method: "update".to_string(),
+        }),
+        "contractDestroy" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::ContractManagement,
+            method: "destroy".to_string(),
+        }),
+        "createStandardAccount" => Some(BuiltinCall::Syscall(
+            "System.Contract.CreateStandardAccount".to_string(),
+        )),
+        "createMultisigAccount" => Some(BuiltinCall::Syscall(
+            "System.Contract.CreateMultisigAccount".to_string(),
+        )),
+        "notify" => Some(BuiltinCall::NotifySerialized),
+        "getCurrentIndex" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "currentIndex".to_string(),
+        }),
+        "getCurrentHash" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "currentHash".to_string(),
+        }),
+        "getBlock" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "getBlock".to_string(),
+        }),
+        "getTransaction" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "getTransaction".to_string(),
+        }),
+        "getTransactionHeight" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "getTransactionHeight".to_string(),
+        }),
+        "getTransactionFromBlock" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "getTransactionFromBlock".to_string(),
+        }),
+        "getTransactionSigners" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "getTransactionSigners".to_string(),
+        }),
+        "getTransactionVMState" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Ledger,
+            method: "getTransactionVMState".to_string(),
+        }),
+        "getExecutingScriptHash" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetExecutingScriptHash".to_string(),
+        )),
+        "getCallingScriptHash" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetCallingScriptHash".to_string(),
+        )),
+        "getEntryScriptHash" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetEntryScriptHash".to_string(),
+        )),
+        "getScriptContainer" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetScriptContainer".to_string(),
+        )),
+        "loadScript" => Some(BuiltinCall::Syscall(
+            "System.Runtime.LoadScript".to_string(),
+        )),
+        "getStorageContext" => Some(BuiltinCall::Syscall(
+            "System.Storage.GetContext".to_string(),
+        )),
+        "getReadOnlyStorageContext" => Some(BuiltinCall::Syscall(
+            "System.Storage.GetReadOnlyContext".to_string(),
+        )),
+        "storageAsReadOnly" => Some(BuiltinCall::Syscall(
+            "System.Storage.AsReadOnly".to_string(),
+        )),
+        "storageGet" => Some(BuiltinCall::Syscall("System.Storage.Get".to_string())),
+        "storagePut" => Some(BuiltinCall::Syscall("System.Storage.Put".to_string())),
+        "storageDelete" => Some(BuiltinCall::Syscall("System.Storage.Delete".to_string())),
+        "storageFind" => Some(BuiltinCall::Syscall("System.Storage.Find".to_string())),
+        // `storage*Local` wrappers were removed: they lowered to fictional
+        // `System.Storage.Local.*` syscalls that Neo N3 nodes do not register,
+        // so every call would FAULT on-chain. Use the context-based
+        // `storageGet/Put/Delete/Find` wrappers instead.
+        "checkWitness" => Some(BuiltinCall::Syscall(
+            "System.Runtime.CheckWitness".to_string(),
+        )),
+        "getTime" => Some(BuiltinCall::Syscall("System.Runtime.GetTime".to_string())),
+        "gasLeft" => Some(BuiltinCall::Syscall("System.Runtime.GasLeft".to_string())),
+        "getPlatform" => Some(BuiltinCall::Syscall("System.Runtime.Platform".to_string())),
+        "getTrigger" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetTrigger".to_string(),
+        )),
+        "getNotifications" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetNotifications".to_string(),
+        )),
+        "log" => Some(BuiltinCall::Syscall("System.Runtime.Log".to_string())),
+        "getCurrentSigners" => Some(BuiltinCall::Syscall(
+            "System.Runtime.CurrentSigners".to_string(),
+        )),
+        "checkSig" => Some(BuiltinCall::Syscall("System.Crypto.CheckSig".to_string())),
+        "checkMultisig" => Some(BuiltinCall::Syscall(
+            "System.Crypto.CheckMultisig".to_string(),
+        )),
+        "sha256" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "sha256".to_string(),
+        }),
+        "ripemd160" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "ripemd160".to_string(),
+        }),
+        "verifyWithECDsa" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "verifyWithECDsa".to_string(),
+        }),
+        "murmur32" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "murmur32".to_string(),
+        }),
+        "keccak256" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "keccak256".to_string(),
+        }),
+        // Devpack `Syscalls.neoKeccak256` is an alias used when the caller
+        // wants to disambiguate from Solidity's bare `keccak256` intrinsic.
+        // Maps to the same CryptoLib native method.
+        "neoKeccak256" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "keccak256".to_string(),
+        }),
+        "recoverSecp256K1" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "recoverSecp256K1".to_string(),
+        }),
+        "verifyWithEd25519" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "verifyWithEd25519".to_string(),
+        }),
+        "bls12381Serialize" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "bls12381Serialize".to_string(),
+        }),
+        "bls12381Deserialize" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "bls12381Deserialize".to_string(),
+        }),
+        "bls12381Equal" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "bls12381Equal".to_string(),
+        }),
+        "bls12381Add" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "bls12381Add".to_string(),
+        }),
+        "bls12381Mul" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "bls12381Mul".to_string(),
+        }),
+        "bls12381Pairing" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::CryptoLib,
+            method: "bls12381Pairing".to_string(),
+        }),
+        // NOTE: The CryptoLib native contract exposes exactly six BLS methods
+        // (bls12381Serialize, bls12381Deserialize, bls12381Equal, bls12381Add,
+        // bls12381Mul, bls12381Pairing — verified against
+        // `CryptoLib.BLS12_381.cs`). There are NO `bls12381G1Add` / `G1Mul` /
+        // `G2Add` / `G2Mul` / `G1Neg` / `G2Neg` methods; G1 vs G2 is inferred
+        // on-chain from the deserialized point length, not from the method
+        // name. Mapping invented names would emit a `System.Contract.Call`
+        // that faults with "method not found" on a real node.
+        "serialize" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "serialize".to_string(),
+        }),
+        "deserialize" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "deserialize".to_string(),
+        }),
+        "itoa" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "itoa".to_string(),
+        }),
+        "atoi" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "atoi".to_string(),
+        }),
+        "jsonSerialize" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "jsonSerialize".to_string(),
+        }),
+        "jsonDeserialize" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "jsonDeserialize".to_string(),
+        }),
+        "base64Encode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base64Encode".to_string(),
+        }),
+        "base64Decode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base64Decode".to_string(),
+        }),
+        "base64UrlEncode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base64UrlEncode".to_string(),
+        }),
+        "base64UrlDecode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base64UrlDecode".to_string(),
+        }),
+        "base58Encode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base58Encode".to_string(),
+        }),
+        "base58Decode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base58Decode".to_string(),
+        }),
+        "base58CheckEncode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base58CheckEncode".to_string(),
+        }),
+        "base58CheckDecode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "base58CheckDecode".to_string(),
+        }),
+        // Neo's native StdLib DOES expose `hexEncode`/`hexDecode`
+        // (see StdLib.cs — `[ContractMethod] private static string HexEncode(...)`).
+        "hexEncode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "hexEncode".to_string(),
+        }),
+        "hexDecode" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "hexDecode".to_string(),
+        }),
+        "memoryCompare" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "memoryCompare".to_string(),
+        }),
+        "memorySearch" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "memorySearch".to_string(),
+        }),
+        "stringSplit" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "stringSplit".to_string(),
+        }),
+        "strLen" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::StdLib,
+            method: "strLen".to_string(),
+        }),
+        "iteratorNext" => Some(BuiltinCall::Syscall("System.Iterator.Next".to_string())),
+        "iteratorValue" => Some(BuiltinCall::Syscall("System.Iterator.Value".to_string())),
+        "getCurrentRandom" => Some(BuiltinCall::Syscall("System.Runtime.GetRandom".to_string())),
+        "getNetwork" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetNetwork".to_string(),
+        )),
+        "getAddressVersion" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetAddressVersion".to_string(),
+        )),
+        "burnGas" => Some(BuiltinCall::Syscall("System.Runtime.BurnGas".to_string())),
+        "getInvocationCounter" => Some(BuiltinCall::Syscall(
+            "System.Runtime.GetInvocationCounter".to_string(),
+        )),
+        "getFeePerByte" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getFeePerByte".to_string(),
+        }),
+        "getExecFeeFactor" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getExecFeeFactor".to_string(),
+        }),
+        "getExecPicoFeeFactor" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getExecPicoFeeFactor".to_string(),
+        }),
+        "getStoragePrice" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getStoragePrice".to_string(),
+        }),
+        "getMillisecondsPerBlock" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getMillisecondsPerBlock".to_string(),
+        }),
+        "getMaxValidUntilBlockIncrement" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getMaxValidUntilBlockIncrement".to_string(),
+        }),
+        "getMaxTraceableBlocks" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getMaxTraceableBlocks".to_string(),
+        }),
+        "getAttributeFee" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "getAttributeFee".to_string(),
+        }),
+        "isBlocked" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Policy,
+            method: "isBlocked".to_string(),
+        }),
+        "oracleRequest" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Oracle,
+            method: "request".to_string(),
+        }),
+        "getOraclePrice" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::Oracle,
+            method: "getPrice".to_string(),
+        }),
+        "getDesignatedByRole" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::RoleManagement,
+            method: "getDesignatedByRole".to_string(),
+        }),
+        // NOTE: there is intentionally no `hasRole` intrinsic. Neo N3's native
+        // RoleManagement contract only exposes `getDesignatedByRole(role, index)`
+        // (returning the ECPoint node list designated at a block height) and
+        // `designateAsRole`; neither real Neo N3 nor the official C# devpack
+        // (neo-devpack-dotnet) provides a generic role-membership check. Use
+        // `Syscalls.getDesignatedByRole(...)` and scan the returned list, or
+        // `Runtime.checkWitness(...)` for account authorization. A dead
+        // `"hasRole" => None` arm used to live here; it advertised an intrinsic
+        // that could never lower. Calls now fail with the standard
+        // "unsupported builtin library call" diagnostic.
+        "getContractScript" => Some(BuiltinCall::GetContractScript),
+        "contractExists" => Some(BuiltinCall::NativeCall {
+            contract: NativeContract::ContractManagement,
+            method: "isContract".to_string(),
+        }),
+        _ => None,
+    }
+}

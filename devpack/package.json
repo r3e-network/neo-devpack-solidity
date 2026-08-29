@@ -1,0 +1,95 @@
+{
+  "name": "@neo-devpack-solidity/contracts",
+  "version": "0.27.0",
+  "description": "Complete Neo N3 development framework for Solidity smart contracts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r3e-network/neo-devpack-solidity.git",
+    "directory": "devpack"
+  },
+  "homepage": "https://github.com/r3e-network/neo-devpack-solidity/tree/main/devpack",
+  "bugs": {
+    "url": "https://github.com/r3e-network/neo-devpack-solidity/issues"
+  },
+  "author": {
+    "name": "Jimmy",
+    "email": "jimmy@r3e.network"
+  },
+  "license": "MIT",
+  "keywords": [
+    "neo",
+    "neo-n3",
+    "solidity",
+    "smart-contracts",
+    "neovm",
+    "devpack",
+    "syscalls",
+    "nep-17",
+    "nep-11",
+    "nep-24",
+    "blockchain",
+    "r3e-network"
+  ],
+  "files": [
+    "contracts/",
+    "standards/",
+    "libraries/",
+    "examples/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rm -rf artifacts/build-info artifacts/neo-build-info && NODE_PRESERVE_SYMLINKS=1 hardhat neo-compile",
+    "test": "rm -rf artifacts/build-info artifacts/neo-build-info && NODE_PRESERVE_SYMLINKS=1 hardhat neo-compile --force",
+    "test:integration": "rm -rf artifacts/build-info artifacts/neo-build-info && NODE_PRESERVE_SYMLINKS=1 hardhat neo-compile --force && NODE_PRESERVE_SYMLINKS=1 hardhat test --no-compile",
+    "deploy:testnet": "NODE_PRESERVE_SYMLINKS=1 hardhat neo-deploy --network neo_testnet",
+    "deploy:mainnet": "NODE_PRESERVE_SYMLINKS=1 hardhat neo-deploy --network neo_mainnet",
+    "verify": "NODE_PRESERVE_SYMLINKS=1 hardhat neo-verify",
+    "clean": "NODE_PRESERVE_SYMLINKS=1 hardhat clean",
+    "format": "prettier --write '**/*.{js,json,md,sol}'"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.0"
+  },
+  "devDependencies": {
+    "@ethersproject/bignumber": "^5.7.0",
+    "@neo-devpack-solidity/types": "file:../tooling/packages/types",
+    "@neo-devpack-solidity/hardhat-solc-neo": "file:../tooling/packages/hardhat-solc-neo",
+    "@neo-devpack-solidity/hardhat-neo-deployer": "file:../tooling/packages/hardhat-neo-deployer",
+    "axios": "^1.13.6",
+    "chai": "^4.5.0",
+    "chalk": "^5.3.0",
+    "debug": "^4.3.4",
+    "ethers": "^6.16.0",
+    "fs-extra": "^11.3.4",
+    "hardhat": "^2.28.6",
+    "prettier": "^3.0.0",
+    "prettier-plugin-solidity": "^1.1.3"
+  },
+  "peerDependencies": {
+    "hardhat": ">=2.28.6 <3"
+  },
+  "overrides": {
+    "cookie": "1.1.1",
+    "immutable": "4.3.8",
+    "serialize-javascript": "7.0.5",
+    "tmp": "0.2.5",
+    "undici": "6.24.1",
+    "mocha": {
+      "minimatch": "5.1.8",
+      "serialize-javascript": "7.0.5"
+    },
+    "@ethersproject/bignumber": {
+      "bn.js": "5.2.3"
+    },
+    "@ethersproject/signing-key": {
+      "bn.js": "5.2.3"
+    },
+    "elliptic": {
+      "bn.js": "4.12.3"
+    }
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || ^24.0.0",
+    "npm": ">=8.0.0"
+  }
+}

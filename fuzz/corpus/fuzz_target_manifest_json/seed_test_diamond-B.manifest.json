@@ -1,0 +1,44 @@
+{
+  "abi": {
+    "events": [],
+    "methods": [
+      {
+        "name": "f",
+        "offset": 0,
+        "parameters": [],
+        "returntype": "Integer",
+        "safe": false
+      },
+      {
+        "name": "_deploy",
+        "offset": 2,
+        "parameters": [
+          {
+            "name": "data",
+            "type": "Any"
+          },
+          {
+            "name": "update",
+            "type": "Boolean"
+          }
+        ],
+        "returntype": "Void",
+        "safe": false
+      }
+    ]
+  },
+  "extra": {
+    "Author": "Jimmy <jimmy@r3e.network>",
+    "Compiler": "neo-devpack-solidity-0.16.0",
+    "Description": "Solidity contract 'B' compiled to NeoVM",
+    "Version": "0.16.0.0"
+  },
+  "features": {},
+  "groups": [],
+  "name": "B",
+  "permissions": [],
+  "supportedstandards": [
+    "NEP-29"
+  ],
+  "trusts": []
+}

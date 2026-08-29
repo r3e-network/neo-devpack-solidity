@@ -1,0 +1,668 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ============================================================
+   Neo DevPack for Solidity -- VitePress Custom Theme
+   Brand: #00E599 (Neo green) / #00AF92 (accent) / #0B1426 (dark bg)
+   ============================================================ */
+
+:root {
+  /* Typography */
+  --vp-font-family-base: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --vp-font-family-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Brand palette -- light mode */
+  --vp-c-brand-1: #00af92;
+  --vp-c-brand-2: #00c9a7;
+  --vp-c-brand-3: #00e599;
+  --vp-c-brand-soft: rgba(0, 229, 153, 0.14);
+
+  /* Hero gradient */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #00e599 0%, #00af92 50%, #008f76 100%);
+  --vp-home-hero-image-background-image:
+    radial-gradient(circle at 30% 30%, rgba(0, 229, 153, 0.25), transparent 55%),
+    radial-gradient(circle at 70% 40%, rgba(0, 175, 146, 0.3), transparent 55%),
+    radial-gradient(circle at 50% 80%, rgba(0, 143, 118, 0.15), transparent 50%);
+  --vp-home-hero-image-filter: blur(56px);
+
+  /* Button overrides */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #0b1426;
+  --vp-button-brand-bg: #00e599;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: #0b1426;
+  --vp-button-brand-hover-bg: #00c9a7;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: #0b1426;
+  --vp-button-brand-active-bg: #00af92;
+}
+
+/* ---- Dark mode ---- */
+.dark {
+  --vp-c-bg: #0b1426;
+  --vp-c-bg-soft: #0f1d33;
+  --vp-c-bg-alt: #0d1829;
+  --vp-c-text-1: #e8f4ee;
+  --vp-c-text-2: #a3c4b8;
+  --vp-c-brand-1: #00e599;
+  --vp-c-brand-2: #33ebad;
+  --vp-c-brand-3: #66f0c2;
+  --vp-c-brand-soft: rgba(0, 229, 153, 0.16);
+
+  --vp-button-brand-text: #0b1426;
+  --vp-button-brand-hover-text: #0b1426;
+  --vp-button-brand-active-text: #0b1426;
+}
+
+/* ============================================================
+   Hero Section
+   ============================================================ */
+.VPHero .name {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  letter-spacing: -0.01em;
+}
+
+.VPHero .text {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  font-weight: 600;
+  max-width: 52rem;
+}
+
+.VPHero .tagline {
+  max-width: 48rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   Feature Cards
+   ============================================================ */
+.VPFeature {
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--vp-c-brand-1) 6%, transparent), transparent 60%);
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.VPFeature:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 45%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--vp-c-brand-1) 10%, transparent);
+}
+
+.VPFeature .title {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  font-weight: 600;
+}
+
+/* ============================================================
+   Content Typography
+   ============================================================ */
+.vp-doc h1 {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  letter-spacing: -0.02em;
+}
+
+.vp-doc h2 {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+  padding-top: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.vp-doc h3 {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+}
+
+.vp-doc a {
+  font-weight: 500;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.vp-doc a:hover {
+  text-decoration-color: var(--vp-c-brand-1);
+}
+
+/* ============================================================
+   Code Blocks
+   ============================================================ */
+.vp-doc div[class*="language-"] {
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
+  border-radius: 8px;
+}
+
+.vp-doc div[class*="language-"] code {
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.vp-doc :not(pre) > code {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg-soft));
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.875em;
+  color: var(--vp-c-brand-1);
+}
+
+/* ============================================================
+   Custom Containers (tip, warning, danger, info)
+   ============================================================ */
+.vp-doc .custom-block.tip {
+  border-color: var(--vp-c-brand-1);
+}
+
+/* ============================================================
+   Layout — wider content area
+   ============================================================ */
+:root {
+  /* Widen the overall layout cap so wide screens get a usable content column. */
+  --vp-layout-max-width: 1920px !important;
+  --vp-sidebar-width: 272px;
+}
+
+/* Force the content area to use the available width on every breakpoint —
+   VitePress defaults to a narrow ~688px prose column which wastes the entire
+   right half of a 1440px+ screen. Override aggressively (!important) so the
+   theme's media queries don't shrink us back. */
+.VPDoc .container {
+  max-width: 1880px !important;
+}
+
+.VPDoc.has-sidebar .container {
+  max-width: 1880px !important;
+}
+
+.VPDoc .content-container {
+  max-width: 100% !important;
+}
+
+.VPDoc .content {
+  max-width: 100% !important;
+  padding-right: 32px !important;
+}
+
+.vp-doc {
+  max-width: none !important;
+}
+
+/* The doc prose / paragraph column itself — VitePress uses 688px by default.
+   Bump to 1440px so headings, paragraphs, and especially code blocks get
+   ~1.5x more horizontal space. Code blocks remain horizontally scrollable
+   inside this wider column when individual lines exceed it. */
+.vp-doc > div,
+.vp-doc > h1,
+.vp-doc > h2,
+.vp-doc > h3,
+.vp-doc > h4,
+.vp-doc > p,
+.vp-doc > ul,
+.vp-doc > ol,
+.vp-doc > blockquote,
+.vp-doc > table,
+.vp-doc > div[class*='language-'],
+.vp-doc > pre {
+  max-width: 1440px;
+}
+
+/* Tables — full width so wide comparison tables in standards-mirror pages
+   don't horizontally scroll when they don't have to. */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+.VPSidebar .group .title {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  font-weight: 600;
+}
+
+/* ============================================================
+   Nav bar
+   ============================================================ */
+.VPNavBar .title {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  font-weight: 600;
+}
+
+/* ============================================================
+   Home page -- custom markdown sections below the fold
+   ============================================================ */
+.vp-doc .home-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.vp-doc .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.vp-doc .stat-card {
+  text-align: center;
+  padding: 1.25rem 1rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 4%, var(--vp-c-bg-soft));
+}
+
+.vp-doc .stat-card .stat-value {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.vp-doc .stat-card .stat-label {
+  font-size: 0.875rem;
+  color: var(--vp-c-text-2);
+}
+
+/* Pipeline diagram */
+.vp-doc .pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  font-family: "JetBrains Mono", var(--vp-font-family-mono);
+  font-size: 0.8rem;
+}
+
+.vp-doc .pipeline .stage {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 6%, var(--vp-c-bg-soft));
+  white-space: nowrap;
+}
+
+.vp-doc .pipeline .arrow {
+  color: var(--vp-c-brand-1);
+  font-weight: 700;
+}
+
+/* Quick links grid */
+.vp-doc .links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.vp-doc .links-grid a {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 3%, var(--vp-c-bg-soft));
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.vp-doc .links-grid a:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg-soft));
+}
+
+/* ============================================================
+   Solidity-style specific layout blocks
+   ============================================================ */
+.solidity-keywords-cloud {
+  text-align: center;
+  padding: 1rem 0 2rem;
+}
+.solidity-keywords-cloud code {
+  margin: 0.2rem 0.4rem;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg-soft));
+  color: var(--vp-c-brand-1);
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  font-family: var(--vp-font-family-mono);
+  display: inline-block;
+}
+
+.alert-box {
+  background: var(--vp-c-bg-soft);
+  border-left: 4px solid var(--vp-c-brand-1);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin: 2rem 0;
+}
+.alert-box h3 {
+  margin-top: 0 !important;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+}
+.alert-box p {
+  margin: 0.5rem 0 1rem;
+  line-height: 1.6;
+}
+.alert-box a {
+  font-weight: 600;
+}
+
+.solidity-hr {
+  margin: 4rem 0;
+  border: 0;
+  height: 1px;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+}
+
+.contribute-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.contribute-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 2%, var(--vp-c-bg-soft));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.contribute-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 229, 153, 0.1);
+  border-color: var(--vp-c-brand-1);
+}
+.contribute-card h4 {
+  margin-top: 0 !important;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.contribute-card p {
+  font-size: 0.95rem;
+  color: var(--vp-c-text-2);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.action-cta-box {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-soft));
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent);
+  margin: 2rem 0;
+}
+.action-cta-box h3 {
+  margin-top: 0 !important;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  background-color: var(--vp-c-brand-1);
+  color: var(--vp-c-bg) !important;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none !important;
+  transition: background-color 0.2s;
+}
+.cta-button:hover {
+  background-color: var(--vp-c-brand-2);
+}
+.dark .cta-button {
+  color: #0b1426 !important;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 640px) {
+  .VPHero .tagline {
+    font-size: 1rem;
+  }
+
+  .vp-doc .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vp-doc .pipeline {
+    font-size: 0.7rem;
+  }
+
+  .vp-doc .pipeline .stage {
+    padding: 0.35rem 0.5rem;
+  }
+}
+/* ============================================================
+   Solidity-style specific layout blocks
+   ============================================================ */
+
+/* Playground Mockup */
+.playground-mockup {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 15%, var(--vp-c-bg-soft));
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 2rem;
+  background: var(--vp-c-bg-soft);
+}
+
+.playground-sidebar {
+  width: 200px;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 3%, var(--vp-c-bg-soft));
+  border-right: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent);
+}
+
+.playground-sidebar .tab {
+  padding: 0.75rem 1rem;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  border-bottom: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 8%, transparent);
+}
+
+.playground-sidebar .tab.active {
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+  border-left: 3px solid var(--vp-c-brand-1);
+}
+
+.playground-editor {
+  flex: 1;
+  padding: 0;
+  background: var(--vp-c-bg);
+  overflow-x: auto;
+}
+
+.playground-editor pre {
+  margin: 0 !important;
+  padding: 1.5rem !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.playground-output {
+  width: 300px;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 3%, var(--vp-c-bg-soft));
+  border-left: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent);
+  display: flex;
+  flex-direction: column;
+}
+
+.playground-output .output-tab {
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent);
+  cursor: pointer;
+}
+
+.playground-output .output-tab.active {
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg);
+}
+
+.playground-output .output-content {
+  padding: 1rem;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.8rem;
+  color: var(--vp-c-text-1);
+  flex: 1;
+  background: var(--vp-c-bg);
+}
+
+.solidity-section-header {
+  font-family: "Space Grotesk", var(--vp-font-family-base);
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+  margin-top: 3rem !important;
+  margin-bottom: 1.5rem !important;
+  border: none !important;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .playground-mockup {
+    flex-direction: column;
+  }
+  .playground-sidebar, .playground-output {
+    width: 100%;
+    border-right: none;
+    border-left: none;
+  }
+  .playground-sidebar {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent);
+  }
+  .playground-sidebar .tab {
+    border-bottom: none;
+    border-left: none;
+  }
+  .playground-sidebar .tab.active {
+    border-bottom: 3px solid var(--vp-c-brand-1);
+  }
+}
+
+/* ============================================================
+   Standards Mirror Category Cards
+   ============================================================ */
+.mirror-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 3rem;
+}
+
+.mirror-cat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.2rem 1.25rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 3%, var(--vp-c-bg-soft));
+  text-decoration: none !important;
+  color: var(--vp-c-text-1);
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.mirror-cat:hover {
+  transform: translateY(-2px);
+  border-color: var(--vp-c-brand-1);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--vp-c-bg-soft));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--vp-c-brand-1) 16%, transparent);
+}
+
+.cat-eyebrow {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-brand-1);
+}
+
+.cat-title {
+  font-family: 'Space Grotesk', var(--vp-font-family-base);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.cat-desc {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.78rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+
+.cat-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.cat-pill {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.66rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cat-pill-direct {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 16%, transparent);
+  color: var(--vp-c-brand-1);
+}
+
+.cat-pill-neo {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 10%, transparent);
+  color: var(--vp-c-brand-1);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 30%, transparent);
+}
+
+.cat-pill-native {
+  background: color-mix(in srgb, #6ea8ff 16%, transparent);
+  color: #4d8bff;
+}
+
+.dark .cat-pill-native {
+  color: #87b3ff;
+}
+
+.cat-pill-pattern {
+  background: color-mix(in srgb, #ffb14e 16%, transparent);
+  color: #c97a14;
+}
+
+.dark .cat-pill-pattern {
+  color: #ffc874;
+}

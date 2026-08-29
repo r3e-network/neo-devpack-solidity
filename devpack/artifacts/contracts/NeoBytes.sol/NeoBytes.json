@@ -1,0 +1,162 @@
+{
+  "contractName": "NeoBytes",
+  "sourceName": "contracts/NeoBytes.sol",
+  "metadata": {
+    "compiler": {
+      "version": "0.1.0",
+      "settings": {
+        "optimizer": {
+          "enabled": true,
+          "runs": 200
+        },
+        "outputSelection": {
+          "*": {
+            "*": [
+              "abi",
+              "evm.bytecode",
+              "evm.deployedBytecode",
+              "evm.methodIdentifiers",
+              "evm.gasEstimates",
+              "metadata",
+              "storageLayout",
+              "evm.assembly",
+              "evm.legacyAssembly"
+            ]
+          }
+        },
+        "neo": {
+          "generateNef": true,
+          "generateManifest": true,
+          "optimizeGas": true,
+          "debugInfo": true,
+          "target": "3.0",
+          "optimization": 3,
+          "gasModel": "neo",
+          "devpack": {
+            "enabled": true,
+            "syscalls": "all",
+            "nativeContracts": "all",
+            "nepStandards": [
+              "NEP-17",
+              "NEP-11",
+              "NEP-24"
+            ],
+            "libraries": [
+              "Neo",
+              "Storage",
+              "Runtime"
+            ]
+          }
+        }
+      }
+    },
+    "buildTime": "2026-03-18T09:55:38.348Z",
+    "environment": {
+      "nodeVersion": "v24.11.1",
+      "platform": "linux",
+      "architecture": "x64"
+    },
+    "dependencies": {}
+  },
+  "contract": {
+    "abi": [
+      {
+        "inputs": [
+          {
+            "internalType": "Any",
+            "name": "data",
+            "type": "Any"
+          },
+          {
+            "internalType": "bool",
+            "name": "update",
+            "type": "bool"
+          }
+        ],
+        "name": "_deploy",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ],
+    "evm": {
+      "bytecode": {
+        "linkReferences": {},
+        "object": "0x57020110706878cab527210000007868ceca1198270700000009406868119e71697069454523e0ffffff0840570c010c0070107110726a78cab5271f00000069786aceca9e736b716b456a6a119e746c726c454523e2ffffff698870107510766e78cab52752000000786ece77071077086f086f07cab5272d000000686d6d119e77096f09756f09456f076f08ced06f086f08119e770a6f0a77086f0a454523d2ffffff6e6e119e770b6f0b766f0b454523afffffff684057030210707900209e78cab7270700000010401071690020b527220000006818a87879699ece01ff009192706969119e726a716a454523dfffffff6840570303797a9e78cab727080000000c00407a88701071697ab5271c00000068697879699eced06969119e726a716a454523e6ffffff68451040570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff6840570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff684057000240",
+        "opcodes": "",
+        "sourceMap": ""
+      },
+      "deployedBytecode": {
+        "linkReferences": {},
+        "object": "0x57020110706878cab527210000007868ceca1198270700000009406868119e71697069454523e0ffffff0840570c010c0070107110726a78cab5271f00000069786aceca9e736b716b456a6a119e746c726c454523e2ffffff698870107510766e78cab52752000000786ece77071077086f086f07cab5272d000000686d6d119e77096f09756f09456f076f08ced06f086f08119e770a6f0a77086f0a454523d2ffffff6e6e119e770b6f0b766f0b454523afffffff684057030210707900209e78cab7270700000010401071690020b527220000006818a87879699ece01ff009192706969119e726a716a454523dfffffff6840570303797a9e78cab727080000000c00407a88701071697ab5271c00000068697879699eced06969119e726a716a454523e6ffffff68451040570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff6840570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff684057000240",
+        "opcodes": "",
+        "sourceMap": ""
+      },
+      "methodIdentifiers": {
+        "_deploy(Any,bool)": "0x6b7dda86"
+      }
+    },
+    "metadata": "{\"compiler\":{\"name\":\"neo-devpack-solidity-0.14.0\",\"version\":\"0.14.0.0\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"Any\",\"name\":\"data\",\"type\":\"Any\"},{\"internalType\":\"bool\",\"name\":\"update\",\"type\":\"bool\"}],\"name\":\"_deploy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"contractName\":\"NeoBytes\"},\"settings\":{\"optimizer\":{\"enabled\":true,\"runs\":200}},\"sources\":{\"contracts/NeoBytes.sol\":{\"keccak256\":\"0xa0159b4c7d9485f84229354d6a2971597e0f863a48bb770fe905449e2857ca18\",\"urls\":[]}},\"version\":1}",
+    "neo": {
+      "gasEstimates": {
+        "creation": {
+          "gas": "0",
+          "networkFee": "0",
+          "systemFee": "0"
+        },
+        "functions": {}
+      },
+      "manifest": {
+        "abi": {
+          "events": [],
+          "methods": [
+            {
+              "name": "_deploy",
+              "offset": 432,
+              "parameters": [
+                {
+                  "name": "data",
+                  "type": "Any"
+                },
+                {
+                  "name": "update",
+                  "type": "Boolean"
+                }
+              ],
+              "returntype": "Void",
+              "safe": false
+            }
+          ]
+        },
+        "extra": {
+          "Author": "Jimmy <jimmy@r3e.network>",
+          "Compiler": "neo-devpack-solidity-0.14.0",
+          "Description": "Solidity contract 'NeoBytes' compiled to NeoVM",
+          "Version": "0.14.0.0"
+        },
+        "features": {},
+        "groups": [],
+        "name": "NeoBytes",
+        "permissions": [],
+        "supportedstandards": [
+          "NEP-29"
+        ],
+        "trusts": []
+      },
+      "methodMap": {
+        "_deploy(Any,bool)": "_deploy"
+      },
+      "nef": {
+        "checksum": "f0e1e37c",
+        "compiler": "neo-devpack-solidity-0.14.0",
+        "image": "4e4546336e656f2d736f6c69646974792d302e31342e3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016636f6e7472616374732f4e656f42797465732e736f6c00000000fdb40157020110706878cab527210000007868ceca1198270700000009406868119e71697069454523e0ffffff0840570c010c0070107110726a78cab5271f00000069786aceca9e736b716b456a6a119e746c726c454523e2ffffff698870107510766e78cab52752000000786ece77071077086f086f07cab5272d000000686d6d119e77096f09756f09456f076f08ced06f086f08119e770a6f0a77086f0a454523d2ffffff6e6e119e770b6f0b766f0b454523afffffff684057030210707900209e78cab7270700000010401071690020b527220000006818a87879699ece01ff009192706969119e726a716a454523dfffffff6840570303797a9e78cab727080000000c00407a88701071697ab5271c00000068697879699eced06969119e726a716a454523e6ffffff68451040570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff6840570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff684057000240f0e1e37c",
+        "magic": "NEF3",
+        "script": "57020110706878cab527210000007868ceca1198270700000009406868119e71697069454523e0ffffff0840570c010c0070107110726a78cab5271f00000069786aceca9e736b716b456a6a119e746c726c454523e2ffffff698870107510766e78cab52752000000786ece77071077086f086f07cab5272d000000686d6d119e77096f09756f09456f076f08ced06f086f08119e770a6f0a77086f0a454523d2ffffff6e6e119e770b6f0b766f0b454523afffffff684057030210707900209e78cab7270700000010401071690020b527220000006818a87879699ece01ff009192706969119e726a716a454523dfffffff6840570303797a9e78cab727080000000c00407a88701071697ab5271c00000068697879699eced06969119e726a716a454523e6ffffff68451040570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff6840570501107078ca71690020b7270800000000207110726a69b5272600000068786ace01ff0091186aa0a892736b706b456a6a119e746c726c454523dcffffff684057000240",
+        "source": "contracts/NeoBytes.sol",
+        "tokens": []
+      },
+      "storageMap": {}
+    }
+  },
+  "buildInfo": "build-1773827738348-k03odhbb2"
+}

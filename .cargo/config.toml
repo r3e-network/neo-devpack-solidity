@@ -1,0 +1,24 @@
+# Cargo configuration for Neo DevPack Solidity
+# Optimized for development iteration speed with incremental compilation
+
+[build]
+# Enable incremental compilation for faster rebuilds
+incremental = true
+
+[profile.dev]
+# Use debug line tables only for faster compilation during development
+debug = 1
+# Keep optimization level at 0 for fast compilation
+opt-level = 0
+
+[profile.release]
+# Full debug info in release for crash analysis
+debug = true
+opt-level = 3
+lto = false
+
+[profile.test]
+# Optimized test compilation for CI
+incremental = true
+opt-level = 0
+debug = 1

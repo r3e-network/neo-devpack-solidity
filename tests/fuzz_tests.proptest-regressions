@@ -1,0 +1,14 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc b094f1746849eea106486b807fdede9d19b52b93375af48d00a5e131c1979c8f # shrinks to key = [0]
+cc 362b3cc2cf1cbb6a1df13db8d2c52362027a8d154a0d3470ac2adc51a36a67fb # shrinks to key = [0], value1 = [], value2 = []
+cc 889455ea9b3da6024d9886782f41625a8d49675f09d3d5bb083a8d95eb582295 # shrinks to key = [0], value1 = [], value2 = []
+cc 97257d4cfff6cf7b6e358d6dc50f7d30ff0964508a7a95d72ab859951e6580c8 # shrinks to keys = [[6], [6]]
+cc 6527ffa33318b99df97440a38ca4dd69b85679702dc44c542d74ad96c81a8774 # shrinks to key = [0], value = []
+cc c5a2c6cdf595151e18799d8d9d9501a598ffd623443914fdcdd2feb7509f4d60 # shrinks to func_name = "as"
+cc 72556fd45def134df61e433e995fdc6eaf4a5e25cce6a194212ba8a817c82b12 # shrinks to lib_name = "n", contract_name = "a", method_name = "A"
+cc 3ddfb6dd42db98e9a3baa48abfb0e1d03a3d14ce49e3ce0f57686ba49ce372d6 # shrinks to b0 = 0, b1 = 128, b2 = 0, b3 = 0

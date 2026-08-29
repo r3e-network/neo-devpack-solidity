@@ -1,0 +1,278 @@
+{
+  "generatedAt": "2026-02-15T11:02:38.153Z",
+  "rpcAddress": "http://seed1t5.neo.org:20332",
+  "networkMagic": 894710606,
+  "neoSolcVersion": "neo-solc 0.12.0",
+  "reportScope": "historical snapshot; current repo compiler line is 0.27.0",
+  "deployerAddress": "NTmHjwiadq4g3VHpJ5FQigQcD4fF5m8TyX",
+  "deployerScriptHash": "0x0c3146e78efc42bfb7d4cc2e06e3efd063c01c56",
+  "gasBefore": "3308892238902",
+  "gasAfter": "3308899474196",
+  "totals": {
+    "total": 6,
+    "pass": 6,
+    "fail": 0,
+    "assertionsTotal": 12,
+    "assertionsPassed": 12
+  },
+  "results": [
+    {
+      "id": "openzeppelin-erc20",
+      "project": "OpenZeppelin",
+      "contract": "ERC20",
+      "sourcePath": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "deployData": [
+        "NeoUSD",
+        "nUSD"
+      ],
+      "clearSupportedStandards": true,
+      "note": "Original upstream ERC20; clears supportedstandards due ERC-20 vs NEP-17 shape mismatch.",
+      "assertions": [
+        {
+          "name": "approve(deployer, 123)",
+          "kind": "write",
+          "operation": "approve",
+          "status": "pass",
+          "txHash": "0x208d87d55951fbf1150a776a585d592dc028d3907f4b821a92f1e43d84f904fb",
+          "actual": {
+            "vmstate": "HALT"
+          }
+        },
+        {
+          "name": "allowance(deployer, deployer) == 123",
+          "kind": "read",
+          "operation": "allowance",
+          "status": "pass",
+          "expect": {
+            "type": "Integer",
+            "value": "123"
+          },
+          "actual": {
+            "type": "Integer",
+            "value": "123"
+          }
+        }
+      ],
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "contractHash": "0xf38b0b0ded81ed23a1675c251a697cd04286fe45",
+      "deployTxHash": "ALREADY_DEPLOYED",
+      "assertionsTotal": 2,
+      "assertionsPassed": 2,
+      "warningCount": 3
+    },
+    {
+      "id": "openzeppelin-erc721",
+      "project": "OpenZeppelin",
+      "contract": "ERC721",
+      "sourcePath": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+      "deployData": [
+        "NeoNFT",
+        "nNFT"
+      ],
+      "clearSupportedStandards": true,
+      "note": "Original upstream ERC721; clears supportedstandards due ERC-721 vs NEP-11 shape mismatch.",
+      "assertions": [
+        {
+          "name": "setApprovalForAll(self, true)",
+          "kind": "write",
+          "operation": "setApprovalForAll",
+          "status": "pass",
+          "txHash": "0xbd38024203535984b56c283894802e7443674de12239e20d1c17d23b486a0ed9",
+          "actual": {
+            "vmstate": "HALT"
+          }
+        },
+        {
+          "name": "isApprovedForAll(self, self) == true",
+          "kind": "read",
+          "operation": "isApprovedForAll",
+          "status": "pass",
+          "expect": {
+            "type": "Boolean",
+            "value": true
+          },
+          "actual": {
+            "type": "Boolean",
+            "value": true
+          }
+        }
+      ],
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+      "contractHash": "0x8381348d65e3edfa30be05b111525bb3026eb7bf",
+      "deployTxHash": "ALREADY_DEPLOYED",
+      "assertionsTotal": 2,
+      "assertionsPassed": 2,
+      "warningCount": 2
+    },
+    {
+      "id": "aave-weth9",
+      "project": "Aave V3",
+      "contract": "WETH9",
+      "sourcePath": "@aave/core-v3/contracts/dependencies/weth/WETH9.sol",
+      "clearSupportedStandards": true,
+      "note": "Original upstream WETH9; clears supportedstandards due ERC-style schema mismatch.",
+      "assertions": [
+        {
+          "name": "approve(self, 77)",
+          "kind": "write",
+          "operation": "approve",
+          "status": "pass",
+          "txHash": "0xc585d307f05e996e70e99f891f910e85a90ca5abdbbe404ffb44eb4bfdb330d3",
+          "actual": {
+            "vmstate": "HALT"
+          }
+        },
+        {
+          "name": "allowance(self, self) == 77",
+          "kind": "read",
+          "operation": "allowance",
+          "status": "pass",
+          "expect": {
+            "type": "Integer",
+            "value": "77"
+          },
+          "actual": {
+            "type": "Integer",
+            "value": "77"
+          }
+        }
+      ],
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@aave/core-v3/contracts/dependencies/weth/WETH9.sol",
+      "contractHash": "0xd0d4d626c833e820c411e5fa60ff5c3101929788",
+      "deployTxHash": "ALREADY_DEPLOYED",
+      "assertionsTotal": 2,
+      "assertionsPassed": 2,
+      "warningCount": 2
+    },
+    {
+      "id": "uniswap-v2-pair",
+      "project": "Uniswap V2 Core",
+      "contract": "UniswapV2Pair",
+      "sourcePath": "@uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "clearSupportedStandards": true,
+      "note": "Original upstream pair contract; approve/allowance path runtime-verified.",
+      "assertions": [
+        {
+          "name": "approve(self, 321)",
+          "kind": "write",
+          "operation": "approve",
+          "status": "pass",
+          "txHash": "0x548627f5862e80af059ac26ed56e70eabc6113ef1b83676f4b7112ec537c1934",
+          "actual": {
+            "vmstate": "HALT"
+          }
+        },
+        {
+          "name": "allowance(self, self) == 321",
+          "kind": "read",
+          "operation": "allowance",
+          "status": "pass",
+          "expect": {
+            "type": "Integer",
+            "value": "321"
+          },
+          "actual": {
+            "type": "Integer",
+            "value": "321"
+          }
+        }
+      ],
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contractHash": "0x36eb6ef88ecf41e687007f840e558b1aecd81e95",
+      "deployTxHash": "ALREADY_DEPLOYED",
+      "assertionsTotal": 2,
+      "assertionsPassed": 2,
+      "warningCount": 4
+    },
+    {
+      "id": "uniswap-v2-erc20",
+      "project": "Uniswap V2 Core",
+      "contract": "UniswapV2ERC20",
+      "sourcePath": "@uniswap/v2-core/contracts/UniswapV2ERC20.sol",
+      "clearSupportedStandards": true,
+      "note": "Original upstream UniswapV2ERC20; approve/allowance runtime-verified.",
+      "assertions": [
+        {
+          "name": "approve(self, 456)",
+          "kind": "write",
+          "operation": "approve",
+          "status": "pass",
+          "txHash": "0x7369017268e331ad452a550aa029dfef3827611f6359b6b2267af1fcf00d1e53",
+          "actual": {
+            "vmstate": "HALT"
+          }
+        },
+        {
+          "name": "allowance(self, self) == 456",
+          "kind": "read",
+          "operation": "allowance",
+          "status": "pass",
+          "expect": {
+            "type": "Integer",
+            "value": "456"
+          },
+          "actual": {
+            "type": "Integer",
+            "value": "456"
+          }
+        }
+      ],
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@uniswap/v2-core/contracts/UniswapV2ERC20.sol",
+      "contractHash": "0x19fcd30e4473d167203d6f054b53faec302d6079",
+      "deployTxHash": "ALREADY_DEPLOYED",
+      "assertionsTotal": 2,
+      "assertionsPassed": 2,
+      "warningCount": 4
+    },
+    {
+      "id": "chainlink-mockv3aggregator",
+      "project": "Chainlink",
+      "contract": "MockV3Aggregator",
+      "sourcePath": "@chainlink/contracts/src/v0.8/shared/mocks/MockV3Aggregator.sol",
+      "deployData": [
+        8,
+        123456789
+      ],
+      "clearSupportedStandards": false,
+      "note": "Original upstream Chainlink mock oracle with update/read verification against a run-scoped value.",
+      "assertions": [
+        {
+          "name": "updateAnswer(dynamic)",
+          "kind": "write",
+          "operation": "updateAnswer",
+          "status": "pass",
+          "txHash": "0xe0da3f758e6f0d59d078ba6133564167f1f6f1c55273bbb6d4fcbd5270183ac1",
+          "actual": {
+            "vmstate": "HALT"
+          }
+        },
+        {
+          "name": "latestAnswer() final == dynamic",
+          "kind": "read",
+          "operation": "latestAnswer",
+          "status": "pass",
+          "expect": {
+            "type": "Integer",
+            "value": "1771153313341"
+          },
+          "actual": {
+            "type": "Integer",
+            "value": "1771153313341"
+          }
+        }
+      ],
+      "status": "pass",
+      "vendoredPath": "third_party/famous-contracts/sources/@chainlink/contracts/src/v0.8/shared/mocks/MockV3Aggregator.sol",
+      "contractHash": "0x7c198cd20c57da4bdc7a5fcf6a00682a977715a2",
+      "deployTxHash": "ALREADY_DEPLOYED",
+      "assertionsTotal": 2,
+      "assertionsPassed": 2,
+      "warningCount": 0
+    }
+  ]
+}

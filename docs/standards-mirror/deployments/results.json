@@ -1,0 +1,3344 @@
+{
+  "generatedAt": "2026-04-29T02:47:17.306Z",
+  "rpc": "http://seed1t5.neo.org:20332",
+  "networkMagic": 894710606,
+  "deployer": "NhMYxG5ATmRjSy6ocnPxrA2DiYba6xhFqu",
+  "pairs": [
+    {
+      "id": "erc-20",
+      "title": "ERC-20 ↔ NEP-17 — Fungible Token",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "d76434af829dc4c936c12648aa77932fa94c0f96",
+        "contractAddress": "NZbQsZAbH3eBdZZYShj6CgG1ZkVEbjZhwF",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DEMOSOL",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "REVNT1NPTA=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44454d4f534f4c"
+            }
+          },
+          {
+            "name": "decimals == 8",
+            "kind": "read",
+            "operation": "decimals",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "8"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "8"
+            }
+          },
+          {
+            "name": "faucet(deployer, 100T)",
+            "kind": "write",
+            "operation": "faucet",
+            "status": "pass",
+            "txHash": "0xf1dfb8604e45e76d72b07c3f53077431ea3e3027778521c99acf290db359322b",
+            "vmstate": "HALT",
+            "gasconsumed": "420211"
+          },
+          {
+            "name": "balanceOf(deployer) == 100T",
+            "kind": "read",
+            "operation": "balanceOf",
+            "status": "fail",
+            "actual": {
+              "type": "Integer",
+              "value": "1100000000000000"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "100000000000000"
+            },
+            "reason": "actual=1100000000000000 (raw type=Integer, value=1100000000000000), expected 100000000000000"
+          },
+          {
+            "name": "totalSupply == 100T",
+            "kind": "read",
+            "operation": "totalSupply",
+            "status": "fail",
+            "actual": {
+              "type": "Integer",
+              "value": "1100000000000000"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "100000000000000"
+            },
+            "reason": "actual=1100000000000000 (raw type=Integer, value=1100000000000000), expected 100000000000000"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "1f3a9b414de1c60434543dd8a05ac5e08b75b43a",
+        "contractAddress": "NRGNZQRrb5TuDo4fA5KPiqZQB29Uybp1zJ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DEMOCSH",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "REVNT0NTSA=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44454d4f435348"
+            }
+          },
+          {
+            "name": "decimals == 8",
+            "kind": "read",
+            "operation": "decimals",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "8"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "8"
+            }
+          },
+          {
+            "name": "totalSupply == 100T",
+            "kind": "read",
+            "operation": "totalSupply",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "AEB6EPNa"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "100000000000000"
+            }
+          },
+          {
+            "name": "balanceOf(deployer) == 100T",
+            "kind": "read",
+            "operation": "balanceOf",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "100000000000000"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "100000000000000"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-721",
+      "title": "ERC-721 ↔ NEP-11 — Non-Fungible Token",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "48b5f8f579810b402fed660844145fed406f77aa",
+        "contractAddress": "NbTK8px52xHxJ5zSJvVFqBujZ5eQEV4dYt",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DSOLNFT",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "RFNPTE5GVA=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44534f4c4e4654"
+            }
+          },
+          {
+            "name": "mint(deployer)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0x4e2b7fdaa8035bae056a19e6bce050225f53d4871ede2fdd532e4350d0de8925",
+            "vmstate": "HALT",
+            "gasconsumed": "611599"
+          },
+          {
+            "name": "balanceOf(deployer) >= 1",
+            "kind": "read",
+            "operation": "balanceOf",
+            "status": "fail",
+            "actual": {
+              "type": "Integer",
+              "value": "11"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "reason": "actual=11 (raw type=Integer, value=11), expected 1"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "15c664d51340a102490dbf5dec5647f541775baf",
+        "contractAddress": "NbuB1V5es6YBtPfVrW4R9bDtxDieuZoK38",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DCSHNFT",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "RENTSE5GVA=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "444353484e4654"
+            }
+          },
+          {
+            "name": "decimals == 0",
+            "kind": "read",
+            "operation": "decimals",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          },
+          {
+            "name": "mint(deployer, ...)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0x16f67a2e40d4b8d78cb1bbe29664853af43f9a5d49b3d5c73c15e100a4764d8a",
+            "vmstate": "HALT",
+            "gasconsumed": "799062"
+          },
+          {
+            "name": "balanceOf(deployer) >= 1",
+            "kind": "read",
+            "operation": "balanceOf",
+            "status": "fail",
+            "actual": {
+              "type": "Integer",
+              "value": "13"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "reason": "actual=13 (raw type=Integer, value=13), expected 1"
+          },
+          {
+            "name": "totalSupply >= 1",
+            "kind": "read",
+            "operation": "totalSupply",
+            "status": "fail",
+            "actual": {
+              "type": "ByteString",
+              "value": "DQ=="
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "reason": "actual=13 (raw type=ByteString, value=DQ==), expected 1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-2981",
+      "title": "ERC-2981 ↔ NEP-24 — NFT Royalty",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "ade57dfd9ad85fff8dca3845cf22206346468234",
+        "contractAddress": "NQhcPMzycbfy5h4ZBg7vrbAvioa41KdR6i",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DSOLROY",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "RFNPTFJPWQ=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44534f4c524f59"
+            }
+          },
+          {
+            "name": "mint(deployer)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0xf865208311c02864bf2d5e0774a7d59313209de534ef5bebdfd50809b99038bb",
+            "vmstate": "HALT",
+            "gasconsumed": "611599"
+          },
+          {
+            "name": "setDefaultRoyalty(deployer, 500)",
+            "kind": "write",
+            "operation": "setDefaultRoyalty",
+            "status": "pass",
+            "txHash": "0xf634563b793a0eeee68c8adf887ef4e7fb9cecfef8a3d17aff72bcd9f1e60c89",
+            "vmstate": "HALT",
+            "gasconsumed": "245832"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "bf3fe7eb875750c81c2915d53123c380685a65e1",
+        "contractAddress": "NgTke4MQShakWQpPvskjqX1XEmpMF4EmSC",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DCSHROY",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "RENTSFJPWQ=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44435348524f59"
+            }
+          },
+          {
+            "name": "mint(deployer, ...)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0x03faeb262256e10a1e5125e91d3b2e8f10fb89b94281f7631682dd89daa0fe19",
+            "vmstate": "HALT",
+            "gasconsumed": "776052"
+          },
+          {
+            "name": "totalSupply >= 1",
+            "kind": "read",
+            "operation": "totalSupply",
+            "status": "fail",
+            "actual": {
+              "type": "ByteString",
+              "value": "DA=="
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "reason": "actual=12 (raw type=ByteString, value=DA==), expected 1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-3525",
+      "title": "ERC-3525 — Semi-Fungible Bond",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "d0fd56dad510d54ca7877bab2c578d63b82a52c6",
+        "contractAddress": "NdzbQnww1HMVDUgZtZzrfN5TvxFTBoBTW6",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DSOLBND",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "RFNPTEJORA=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44534f4c424e44"
+            }
+          },
+          {
+            "name": "mint(deployer, slot=1, value=1000)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0xc1543708470723f17ddb4f711aa4533053196f2afc2ad8a0f35ba5e2e459a255",
+            "vmstate": "HALT",
+            "gasconsumed": "870115"
+          },
+          {
+            "name": "balanceOfToken(1) == 1000",
+            "kind": "read",
+            "operation": "balanceOfToken",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "1000"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1000"
+            }
+          },
+          {
+            "name": "slotOf(1) == 1",
+            "kind": "read",
+            "operation": "slotOf",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "fcfde62a4764cbcd9b35615084e0075c4bddba6c",
+        "contractAddress": "NVpt23PJU2ZbEHXmDkzEqCfoE9NQfEopNZ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DCSHBND",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "RENTSEJORA=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44435348424e44"
+            }
+          },
+          {
+            "name": "valueDecimals == 8",
+            "kind": "read",
+            "operation": "valueDecimals",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "8"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "8"
+            }
+          },
+          {
+            "name": "mint(deployer, slot=1, value=1000)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0x6f8eba8ef505600e3a0db1317086e25dd3d70a8a09cbae0c83960b696c36c497",
+            "vmstate": "HALT",
+            "gasconsumed": "413869"
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-173",
+      "title": "ERC-173 — Contract Ownership",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "19977aea6f158de3844f3261988b17381156bbe4",
+        "contractAddress": "NgmPfqiGc6weStAM5PYBgC4SYgTGUZzPVh",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimOwnership()",
+            "kind": "write",
+            "operation": "claimOwnership",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0018Ownable: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "ce89aec2e79b121ec264231be49cd96111824459",
+        "contractAddress": "NU3yPrTayUJRB16Lu8RjFX8ERJ7pMYvxup",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-1820",
+      "title": "ERC-1820 — Interface Registry",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "02704624615747bdcc7994a6be347be42ad52ee4",
+        "contractAddress": "NgiVMV6vo8QHaQEhxMDBMCHdq2Ps5iXQxm",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getManager(deployer) == deployer (default)",
+            "kind": "read",
+            "operation": "getManager",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "8f36ff27ef6564209956c05a4b886c0c99cec59d",
+        "contractAddress": "NaJCEkEXwwsWFHXU791K6Zk3ZpFya5HPk6",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getManager(deployer) == deployer (default)",
+            "kind": "read",
+            "operation": "getManager",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-6372",
+      "title": "ERC-6372 — Contract Clock",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "e3c55758861ba8034c9f3d223ed93cf5df77442b",
+        "contractAddress": "NPrkGGCSZwLTUQxzUQnf4WSKsk2rZPTSKt",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "CLOCK_MODE",
+            "kind": "read",
+            "operation": "CLOCK_MODE",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "bW9kZT1ibG9ja251bWJlciZmcm9tPWRlZmF1bHQ="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "6d6f64653d626c6f636b6e756d6265722666726f6d3d64656661756c74"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "eb454a6b6e102b2700fc1d3b18d58b861ed6c335",
+        "contractAddress": "NQpFbsh7JUys9dYhB86gCVr2hxfYkzKJYw",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "clockMode",
+            "kind": "read",
+            "operation": "clockMode",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "bW9kZT1ibG9ja251bWJlciZmcm9tPWRlZmF1bHQ="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "6d6f64653d626c6f636b6e756d6265722666726f6d3d64656661756c74"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-1271",
+      "title": "ERC-1271 — Contract Signature (MultiSig)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "88eec008aaeb09d10ce68f93f6d98efbe92b9de7",
+        "contractAddress": "Nh2dZYCdvA6KfgeJ78712Twq5tZVRANtdk",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "ownerCount == 0 (pre-setup)",
+            "kind": "read",
+            "operation": "ownerCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "88079ecdd4af98cf932c25c80c0bb218a8cfb682",
+        "contractAddress": "NXq82dqPfYsB4gYxpurbn2sft8tT9v4NL2",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "threshold == 0 (pre-setup)",
+            "kind": "read",
+            "operation": "threshold",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-5192",
+      "title": "ERC-5192 — Soulbound Token",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "1b75ecb9e926203e66283e3f875ba5097f3c3034",
+        "contractAddress": "NQfv7FPi2BWZBnc3PGB9PggK72bJtZL9HH",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimIssuer()",
+            "kind": "write",
+            "operation": "claimIssuer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0014SBC: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "issue(deployer, soulbound=true)",
+            "kind": "write",
+            "operation": "issue",
+            "status": "pass",
+            "txHash": "0x0d4033acc4b9778ae69c69a89e7a30753845535f05e55597825056262e386b33",
+            "vmstate": "HALT",
+            "gasconsumed": "518816"
+          },
+          {
+            "name": "locked(1) == true",
+            "kind": "read",
+            "operation": "locked",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": true
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": true
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "7081fcf36db56a716b416ef553829ed23c07da2b",
+        "contractAddress": "NPuqRsgHLPkRZsxEJgs3igKKhZE1nqHVL3",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == SBC",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "U0JD"
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "534243"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-2771",
+      "title": "ERC-2771 — Trusted Forwarder",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "6653a8da9bac7b622987670d97bf740c2c124ed9",
+        "contractAddress": "NfiyLrGXijAAHiwq1LUGu69K92ybMu4ZS4",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getNonce(deployer) == 0",
+            "kind": "read",
+            "operation": "getNonce",
+            "status": "fail",
+            "actual": {
+              "type": "Integer",
+              "value": "9"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "reason": "actual=9 (raw type=Integer, value=9), expected 0"
+          },
+          {
+            "name": "bumpNonce(deployer)",
+            "kind": "write",
+            "operation": "bumpNonce",
+            "status": "pass",
+            "txHash": "0x5e4b1c23a07b8da3b2443e077c3f3c10bda575f547d8fc4e42526cae8c4a26e2",
+            "vmstate": "HALT",
+            "gasconsumed": "696149"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "1463ad54cf6a8fc7c0ffe3740ad1cf04a6280c0a",
+        "contractAddress": "NLq6WUsRv4FAtxrqhwtTNxTeSgxAWYhG8P",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getNonce(deployer) == 0",
+            "kind": "read",
+            "operation": "getNonce",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-4626",
+      "title": "ERC-4626 — Yield Vault",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "faf678fdb2053a279cf79f14a3623f3f1f9f810f",
+        "contractAddress": "NMKxbu3BoWHMqsehay8ybt4AX2Akbau7JF",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == vDEMO",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "dkRFTU8="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "7644454d4f"
+            }
+          },
+          {
+            "name": "totalSupply == 0",
+            "kind": "read",
+            "operation": "totalSupply",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "0e515ad2e892180273ab017a4883084e647740c5",
+        "contractAddress": "NdtwXkP4UYHoaEkfFavBat7fhNpMMaknX8",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == vDEMOC",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "dkRFTU9D"
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "7644454d4f43"
+            }
+          },
+          {
+            "name": "decimals == 8",
+            "kind": "read",
+            "operation": "decimals",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "8"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "8"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-3156",
+      "title": "ERC-3156 — Flash Lender",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "b7d5cd146852006f8bc5d8c1621852c9117d37ec",
+        "contractAddress": "NhSy8SUwdRdrYAvK2YadgbXZwRTfJZC6DT",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "feeBps == 0 (pre-setup)",
+            "kind": "read",
+            "operation": "feeBps",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "a82c8142c02ec0cf748bbaa57819f9c61440984b",
+        "contractAddress": "NSogFgSB3xhbRn81ie21Xb8L5vzxAguyZZ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "feeBps == 0 (pre-setup)",
+            "kind": "read",
+            "operation": "feeBps",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-1155",
+      "title": "ERC-1155 — Multi-Token",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "f1d7867c140a016333b69d3e1795b0ee224d0317",
+        "contractAddress": "NN1egYhfTFfr9fsLbodD2J822azmqZ5Ahq",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u001bMultiToken: already claimed\u0000\u0000\u0000\u0000\u0000"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "ef019e6feb75fd331149cb7c9c3ddfcaa8ba86bd",
+        "contractAddress": "NdC6JA2oU2pm9xexLSyB7qyEUEF7HRbDdc",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-1967",
+      "title": "ERC-1967 — Upgradeable Contract (NEP-22 update)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "48f6d58aa74ad1d507cb2eb07242e033bfdbd245",
+        "contractAddress": "NSHAQgxeKVWk6YBvnDbS7a9dC3L6WKxAfk",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimOwner()",
+            "kind": "write",
+            "operation": "claimOwner",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u001cUpgradeable: already claimed\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "getVersion == 1",
+            "kind": "read",
+            "operation": "getVersion",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "096f01e40f7cf9cea4304195cc2ab6bb481be976",
+        "contractAddress": "NWkiAvNNd8rAS7R8rD3WQ6TgB8aosHrWh4",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getVersion == 1",
+            "kind": "read",
+            "operation": "getVersion",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            }
+          },
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-1056",
+      "title": "ERC-1056 — Lightweight DID Registry",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "dd6d4a4806445d04982afc68866c9dc92ef41f50",
+        "contractAddress": "NTDdXJ1PMdf9D8KvPraZStPDqSsAvfo69C",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "identityOwner(deployer) == deployer (default)",
+            "kind": "read",
+            "operation": "identityOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "d13806f6c06854ad3d8b731aebee40f8b74c1b30",
+        "contractAddress": "NQJLKn8k1AP4xTXfiY8PjWJmBrcdwKMt1Q",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "identityOwner(deployer) == deployer (default)",
+            "kind": "read",
+            "operation": "identityOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-5805",
+      "title": "ERC-5805 — Voting Token w/ Delegation",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "b87fa58c80deef8dc910a0ca3a2cc186035f3110",
+        "contractAddress": "NMPb9C8XFWTWtVCQ16iVP3B4aRqMJcN9FK",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0015Vote: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "CLOCK_MODE",
+            "kind": "read",
+            "operation": "CLOCK_MODE",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "bW9kZT1ibG9ja251bWJlciZmcm9tPWRlZmF1bHQ="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "6d6f64653d626c6f636b6e756d6265722666726f6d3d64656661756c74"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "1d33818b3d053d291424848ed1ac7ebaa3243692",
+        "contractAddress": "NZF4hhAgSvkXqm5bFDSwwgce2x6gWWQCCJ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DVOTE",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "RFZPVEU="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44564f5445"
+            }
+          },
+          {
+            "name": "clockMode",
+            "kind": "read",
+            "operation": "clockMode",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "bW9kZT1ibG9ja251bWJlciZmcm9tPWRlZmF1bHQ="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "6d6f64653d626c6f636b6e756d6265722666726f6d3d64656661756c74"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-7818",
+      "title": "ERC-7818 — Expirable Token",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "fcaaf98f8c4693b326f883d52db9d9e4a8c6564d",
+        "contractAddress": "NSxuAq6fyoQL8xc2h2X6wjCJ6mhiTZGsr2",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "decimals == 0",
+            "kind": "read",
+            "operation": "decimals",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "cb1b0441c5b02a2f7de348951c6bf8e2a6ae56e0",
+        "contractAddress": "NgNAPWiYx2yWxkp7kWwizNa6Tozfsv2zMj",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DEXP",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "REVYUA=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44455850"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-2535",
+      "title": "ERC-2535 — Diamond (method-name router)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "26b6f333b18bffd00702348b1cec5b55cf79f527",
+        "contractAddress": "NPZFcCLf3LugZyo66qGtXuxj4fgAzzYfEQ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimOwner()",
+            "kind": "write",
+            "operation": "claimOwner",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0018Diamond: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "methodCount == 0 (no facets yet)",
+            "kind": "read",
+            "operation": "methodCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "1b3c602c1a208238f981125e2ad3045734c5bdcf",
+        "contractAddress": "NerQPwPTA9iqNHRJk1nkFi8XXAKKP3YfuE",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-777",
+      "title": "ERC-777 — Hooked Token",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "d0f1fb49a76b1e6aaf63cf2e2e132607950e5e7d",
+        "contractAddress": "NXLrKvihjBC2ZVg2iLTLEPE4zXoN2UzYCD",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0017Hooked: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "mint(deployer, 1000)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0xa790a57c606015c5024de7c672ea837864ff15512382a57c9fd8508f69c57233",
+            "vmstate": "HALT",
+            "gasconsumed": "451279"
+          },
+          {
+            "name": "balanceOf(deployer) == 1000",
+            "kind": "read",
+            "operation": "balanceOf",
+            "status": "fail",
+            "actual": {
+              "type": "Integer",
+              "value": "8000"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1000"
+            },
+            "reason": "actual=8000 (raw type=Integer, value=8000), expected 1000"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "0d64d453a705033c2698de7a4de9e5fd934b2849",
+        "contractAddress": "NSannXAy5BSKz1cBVQKC7d2DS3DwskPqNw",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "symbol == DHOOK",
+            "kind": "read",
+            "operation": "symbol",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "REhPT0s="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "44484f4f4b"
+            }
+          },
+          {
+            "name": "decimals == 8",
+            "kind": "read",
+            "operation": "decimals",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "8"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "8"
+            }
+          },
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-5267",
+      "title": "ERC-5267 — EIP-712 Domain Exposer",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "1dd8a39225d515a4621c5214f336c78f4b19bb6c",
+        "contractAddress": "NVptJKucxX4zMprEugbnYbG6KFKeqyTJ9G",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getName == MyDApp",
+            "kind": "read",
+            "operation": "getName",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "TXlEQXBw"
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "4d7944417070"
+            }
+          },
+          {
+            "name": "getVersion == 1",
+            "kind": "read",
+            "operation": "getVersion",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "MQ=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "31"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "dcfa06612bfa8614e4d197bc8206b68320cd9877",
+        "contractAddress": "NWpLeQJm8EArciJNF9nhFbrGuX8DsWcQSj",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getName == MyDApp",
+            "kind": "read",
+            "operation": "getName",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "TXlEQXBw"
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "4d7944417070"
+            }
+          },
+          {
+            "name": "getVersion == 1",
+            "kind": "read",
+            "operation": "getVersion",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "MQ=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "31"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-5114",
+      "title": "ERC-5114 — Soulbound Badge (parent-bound)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "91e34b16c373f845024013c3bd585ac9739b741f",
+        "contractAddress": "NNnHpiT3RLCqVdHQYom551rj475vtZpnBh",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0015ACHV: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "badgeCount == 0 (pre-attach)",
+            "kind": "read",
+            "operation": "badgeCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "d9d32f5f8d2d0cd5196cd94b49e3d11ac46d7039",
+        "contractAddress": "NR9gPNuFwuQeYDc5CUH3aqogaWgPgGGdnP",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "badgeCount == 0 (pre-attach)",
+            "kind": "read",
+            "operation": "badgeCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-5484",
+      "title": "ERC-5484 — Consensual Soulbound (BurnAuth)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "8a9e1835270c95ddf5250ee84a1d4714552cb951",
+        "contractAddress": "NTN5kMMrzDZDPP4Cus1nFKnWRn7NFrh3na",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimIssuer()",
+            "kind": "write",
+            "operation": "claimIssuer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0015CSBT: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "tokenCount == 0 (pre-issue)",
+            "kind": "read",
+            "operation": "tokenCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "02317b7192e3d91ba1739ae2a9f5fdcd44bf2dac",
+        "contractAddress": "NbcNDKQAB1imE8L32UPhYNc5JmMCFwnjMS",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getIssuer == deployer",
+            "kind": "read",
+            "operation": "getIssuer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-6147",
+      "title": "ERC-6147 — Guarded NFT (guard delegate)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "af32605e284ccf3e5e281af082f72605c506064f",
+        "contractAddress": "NT7ondo6UmgEVNtAwRXUjN3secCYgoemZ2",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "mint(deployer)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0x1e6a3fdca8a37275cb3dfcaae1c122c74bc51f9ea0aeb4138cc6ab535a712985",
+            "vmstate": "HALT",
+            "gasconsumed": "344426"
+          },
+          {
+            "name": "transfer(deployer, 1) — owner-as-required",
+            "kind": "write",
+            "operation": "transfer",
+            "status": "pass",
+            "txHash": "0x97d25d5ca0f176ce0991b30212b7e959272046ac36e4b89de3e6c678cb8c75cb",
+            "vmstate": "HALT",
+            "gasconsumed": "501904"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "274c031d361e30a518d30035d527eb95efac19df",
+        "contractAddress": "NgFcdW2axGQELJu6LQWsTPwoke2LSsW3CM",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "mint(deployer)",
+            "kind": "write",
+            "operation": "mint",
+            "status": "pass",
+            "txHash": "0xaac3acab7464edf72e28f975b07f53f8e4779637be42f4e7ab8ec92091602524",
+            "vmstate": "HALT",
+            "gasconsumed": "241861"
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-2470",
+      "title": "ERC-2470 — Singleton Factory",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "625c19cbd8d0b5cf03bd9996b67a824c14448012",
+        "contractAddress": "NMbo1HKrMM9yUmm6xkP1x7NyULqJyjUPho",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0018Factory: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "deployCount == 0 (initial)",
+            "kind": "read",
+            "operation": "deployCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "602d11eca4ebba2799b076fdbba251d1d9eaedf5",
+        "contractAddress": "NiLKkYWvoajPWRB91KUEHH9k939uZSvS6a",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "deployCount == 0 (initial)",
+            "kind": "read",
+            "operation": "deployCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-2309",
+      "title": "ERC-2309 — Consecutive Batch-Mint NFT",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "20262b3b96d92a0db7bfdc4782903fb3d997f900",
+        "contractAddress": "NL18BnxKFzXYFCTjtfguzDQoBzuJuT5C1f",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0016BMNFT: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "totalMinted == 0 (pre-batch)",
+            "kind": "read",
+            "operation": "totalMinted",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "2e157ce2532dee6084f53c1a848975bd960be918",
+        "contractAddress": "NNBgadSK2oTfL3idm1WNwQjnoaL4bLYhHh",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "totalMinted == 0 (pre-batch)",
+            "kind": "read",
+            "operation": "totalMinted",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-4906",
+      "title": "ERC-4906 — Dynamic Metadata NFT",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "86f4d37e2471fdddf6738bb977de99646102b793",
+        "contractAddress": "NZP1kfTyyNJNYVUZpiKrdShLEjFLRdb2rY",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0016DMETA: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "nextId == 0 (pre-mint)",
+            "kind": "read",
+            "operation": "nextId",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "3429da478e520ac009dc64520c8c3ccd00158061",
+        "contractAddress": "NUoWAfE9YmeQtc7nuVb4u6u22By2oqyLUz",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "nextId == 0 (pre-mint)",
+            "kind": "read",
+            "operation": "nextId",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-165",
+      "title": "ERC-165 — supportsInterface Detector",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "2b5db552d1c23a43f51a0ea50765e4a1a7a051e6",
+        "contractAddress": "NgunPTaeypMxwq3JeAVEr5X3DRdBNFNxX2",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "supportsInterface(0xdeadbeef) == false",
+            "kind": "read",
+            "operation": "supportsInterface",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "a400b6cb20159fb3140798401c41edcb06e00f49",
+        "contractAddress": "NSaHXnFvLM7EdxnLvidzJfV9GYhFoJQazW",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "supportsInterface(0x01ffc9a7) == true",
+            "kind": "read",
+            "operation": "supportsInterface",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": true
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": true
+            }
+          },
+          {
+            "name": "supportsInterface(0xdeadbeef) == false",
+            "kind": "read",
+            "operation": "supportsInterface",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-7201",
+      "title": "ERC-7201 — Namespaced Storage Layout",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "bb2553c79f3a740113bf22fbadb6828a9bdbdf32",
+        "contractAddress": "NQYy9GD432mvBeYJctg78YXmCzcMUy41GJ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013NS: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "0932ad78b3d71c7af06468604f1d00ef89c3205d",
+        "contractAddress": "NUQPH4p6mBQ6jtizeyZKmYfjXLpzExpbdd",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "namespaceTag == r3e.standards-mirror.demo.v1",
+            "kind": "read",
+            "operation": "namespaceTag",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "cjNlLnN0YW5kYXJkcy1taXJyb3IuZGVtby52MQ=="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "7233652e7374616e64617264732d6d6972726f722e64656d6f2e7631"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-1153",
+      "title": "EIP-1153 — Transient Storage Reentrancy Guard",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "7e4e48124ed93c56eb4715965bb5b91fd0eb1a66",
+        "contractAddress": "NVDrMqUTAJrG6WjRqJtMrUuuqiLEwfFxAb",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013TG: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "guardedCall()",
+            "kind": "write",
+            "operation": "guardedCall",
+            "status": "pass",
+            "txHash": "0xde4806ee192ad2fb371754fb83c294392ae97b7c59ee9983c5538be799e9358f",
+            "vmstate": "HALT",
+            "gasconsumed": "215393"
+          },
+          {
+            "name": "isLocked == false (after-call)",
+            "kind": "read",
+            "operation": "isLocked",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "e67e6815ad4d151bf87667af4e9aa9cbc3eaa7bf",
+        "contractAddress": "NdPMQUc1DF4p6zkbwe1aoajN2ajsHYBAh8",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "isLocked == false (initial)",
+            "kind": "read",
+            "operation": "isLocked",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "callsCompleted == 0 (initial)",
+            "kind": "read",
+            "operation": "callsCompleted",
+            "status": "fail",
+            "actual": {
+              "type": "Integer",
+              "value": "6"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "reason": "actual=6 (raw type=Integer, value=6), expected 0"
+          },
+          {
+            "name": "guardedCall()",
+            "kind": "write",
+            "operation": "guardedCall",
+            "status": "pass",
+            "txHash": "0x29f5b5b89622617aeee7bdfae9f3de990c6189c876cc8af0bbe44372d1dec155",
+            "vmstate": "HALT",
+            "gasconsumed": "233738"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-3198",
+      "title": "EIP-3198 — BASEFEE Introspection",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "8ed358aea7789a0d2c60a42c692c469bf1da60a0",
+        "contractAddress": "NaXyL4z4rfRTjpHcgVeHt8vrjCksPH12U7",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0019FeeAware: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "getLastSeenFee == 0 (initial)",
+            "kind": "read",
+            "operation": "getLastSeenFee",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "32b98cb268f39b8ced382e7fe6d160833ab4f630",
+        "contractAddress": "NQNsAG18kbBUT5RsxY9bmdyr5niPiHuja8",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getCurrentFeePerByte == 20 (testnet policy)",
+            "kind": "read",
+            "operation": "getCurrentFeePerByte",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "20"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "20"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-1014",
+      "title": "ERC-1014 — Deterministic Deploy (CREATE2)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "c267a2eaa32edae5ac95d484a69e77653fe10b0e",
+        "contractAddress": "NMCEssPogbdjgLT7FdepCbm4VKdJ9eDAj3",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013DF: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "deployCount == 0 (initial)",
+            "kind": "read",
+            "operation": "deployCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "462113ca40c8a41597165ccbeada2e70e57764f8",
+        "contractAddress": "NiZM7zYFCpWAVNJqgDeMWTyjyNvUf7gPGe",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "deployCount == 0 (initial)",
+            "kind": "read",
+            "operation": "deployCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-191",
+      "title": "EIP-191 — personal_sign Verifier",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "64d3b4d2e0ce6b26cf0dedad9a5c2d0bf96ddeb1",
+        "contractAddress": "Nc8TFPU7NAufqP4q7ddTFjWxcXmzw4qgMd",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013PS: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "d06071f84b917cde1d16c23110f501b9dc3e914e",
+        "contractAddress": "NT5PtZFTUyxmyiDNYoCRxei3jGURP2e6X4",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-2612",
+      "title": "ERC-2612 — Permit Token (off-chain authorization)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "edd521fdaa7422b7465673fa5df6551590c16aa0",
+        "contractAddress": "NaYBBzYm4aX97ZR8oH3xh26VP2q7mw8KK4",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0014PMT: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "nonceOf(deployer) == 0",
+            "kind": "read",
+            "operation": "nonceOf",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "b451279fd8ab0e735e50edd6c6ca7e60eb90b70c",
+        "contractAddress": "NM5DCTG24qSytAMyGtN6yUT1JfFYBkuE9s",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "nonceOf(deployer) == 0",
+            "kind": "read",
+            "operation": "nonceOf",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-4494",
+      "title": "ERC-4494 — Permit NFT (off-chain authorization)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "e683fa29d01521d99abfe15cb7e4b1f69ed47b66",
+        "contractAddress": "NVFrTDipYBJzWDyprqMwiJ3T25WK82xekQ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0015PNFT: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "nextId == 0 (pre-mint)",
+            "kind": "read",
+            "operation": "nextId",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "c705641088ed11e564c946bf8a9a1569a9cc9257",
+        "contractAddress": "NTu1qFUugBafvCEYVVmJYqcPNV9MuXt6Bq",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "nextId == 0 (pre-mint)",
+            "kind": "read",
+            "operation": "nextId",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-7540",
+      "title": "ERC-7540 — Async Vault (request → claim)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "d8838ba126e5a77727c673215782aec59f465b41",
+        "contractAddress": "NRsYTBd1Unk8ngZvHagAxvoaYh8i8SHmQu",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013AV: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "pendingDepositCount == 0 (initial)",
+            "kind": "read",
+            "operation": "pendingDepositCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          },
+          {
+            "name": "pendingRedeemCount == 0 (initial)",
+            "kind": "read",
+            "operation": "pendingRedeemCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "c2137b33423fdda8ce5a240e7feec8db2c4b626e",
+        "contractAddress": "NVydGRKKALityePgCpCoB4ewb5cSy3HBHk",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "pendingDepositCount == 0 (initial)",
+            "kind": "read",
+            "operation": "pendingDepositCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          },
+          {
+            "name": "pendingRedeemCount == 0 (initial)",
+            "kind": "read",
+            "operation": "pendingRedeemCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-7575",
+      "title": "ERC-7575 — Multi-Asset Vault",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "985a293c07f1b024f37a4ffc1d7fdf14edfe46b1",
+        "contractAddress": "Nc5Kqat2WNDw32fzQwYUuvp6zY24YqCnYU",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0014MAV: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "assetCount == 0 (initial)",
+            "kind": "read",
+            "operation": "assetCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "d85564c8072776e0c5252797f5ba9dfb7e401ffc",
+        "contractAddress": "Niu4uX7E2ja35uCbr4fK6c6faQZL1zcBEK",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "assetCount == 0 (initial)",
+            "kind": "read",
+            "operation": "assetCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-7579",
+      "title": "ERC-7579 — Modular Smart Account",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "5e6edfc08e536f6d8891af968a52f7d56c11a528",
+        "contractAddress": "NPcsxZQVxJS25eybpNmuqFphzgV4z43foe",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimOwner()",
+            "kind": "write",
+            "operation": "claimOwner",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013MA: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "moduleCount == 0 (initial)",
+            "kind": "read",
+            "operation": "moduleCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "cbd2e64f3ef5d5c9069fadf9c7d72ffcb8664f86",
+        "contractAddress": "NYA8rMgt4zd2moXtvH46gtgHAmM6D9PLQ6",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "moduleCount == 0 (initial)",
+            "kind": "read",
+            "operation": "moduleCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-4337",
+      "title": "ERC-4337 — Smart Account (UserOp / NEP-30 Verify)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "aa11f9ef784be1ccad7b0f7b23c32508c5705a56",
+        "contractAddress": "NTnZeAos82yvgKbigLxV4DsnE7MLBN44eg",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimOwner()",
+            "kind": "write",
+            "operation": "claimOwner",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013SA: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "getNonce == 0 (initial)",
+            "kind": "read",
+            "operation": "getNonce",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "e26da2300e0073c98f2292becda67170cbc6209f",
+        "contractAddress": "NaRMtcPmFFZzv5nAdV23QFmvBQS69apd9o",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getOwner == deployer",
+            "kind": "read",
+            "operation": "getOwner",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "getNonce == 0 (initial)",
+            "kind": "read",
+            "operation": "getNonce",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "erc-6492",
+      "title": "ERC-6492 — Pre-Deploy Signature Verifier",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "95170df70a3c425fdaad9795f77a68430ac659d9",
+        "contractAddress": "NfjDMxjpf13EbC197EwBXEfP8K7Q59KYWa",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0014PDS: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "verificationCount == 0 (initial)",
+            "kind": "read",
+            "operation": "verificationCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "7dd2cd08072ab383cf7152bf5ed734d7d240bfc9",
+        "contractAddress": "NeJi7pXw9fj5SCioDu7ohUEJqygS1iG952",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "verificationCount == 0 (initial)",
+            "kind": "read",
+            "operation": "verificationCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-712",
+      "title": "EIP-712 — Typed-Data Verifier (domain separator)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "8e501310318f17d20674c639fc49b5e6100f5fdd",
+        "contractAddress": "Ng6UPxMoJ9aUwFep9QCEpQmAKxdzH2bBer",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013TD: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "38e8f069271cbbbdfd2032629e733a528cd57c9a",
+        "contractAddress": "NZzpnvngrFuk1oiXJ3Nk9TsbHrrJfDRtDb",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "getDomainSeparator (32 bytes)",
+            "kind": "read",
+            "operation": "getDomainSeparator",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "R+eVNKJFlS6LFok6M2uFo9nqn6jFc/PYA6+5KnlGkhg="
+            },
+            "expect": {
+              "type": "ByteString",
+              "value": "47e79534a245952e8b16893a336b85a3d9ea9fa8c573f3d803afb92a79469218"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-2098",
+      "title": "EIP-2098 — Compact Signature Verifier",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "d63ea34d63f0628c4cd413f58aa1c2623b1121d9",
+        "contractAddress": "Nfi3RwVQiesNpc9y5k5vBLFDc7D1TzFqsU",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "compactSize == 64",
+            "kind": "read",
+            "operation": "compactSize",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "64"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "64"
+            }
+          },
+          {
+            "name": "legacySize == 65",
+            "kind": "read",
+            "operation": "legacySize",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "65"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "65"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "b2701b6d89a734b5a865a1ec6c247466391c4eee",
+        "contractAddress": "Nhe1acA5nndNVtF1pHa3e6rndYyUHTv5Sv",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "compactSize == 64",
+            "kind": "read",
+            "operation": "compactSize",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "64"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "64"
+            }
+          },
+          {
+            "name": "legacySize == 65",
+            "kind": "read",
+            "operation": "legacySize",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "65"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "65"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-2718",
+      "title": "EIP-2718 — Typed Transaction Envelope",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "4e2300b8426b26eb8bbf57398a53ad810e313bf6",
+        "contractAddress": "NiMvKeofdrr3mdU4VmFvicKxNszFsXkVyQ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "neoTxVersion == 0",
+            "kind": "read",
+            "operation": "neoTxVersion",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          },
+          {
+            "name": "evmDynamicFeeType == 2",
+            "kind": "read",
+            "operation": "evmDynamicFeeType",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "2"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "2"
+            }
+          },
+          {
+            "name": "evmBlobType == 3",
+            "kind": "read",
+            "operation": "evmBlobType",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "3"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "3"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "b600afb3c034ff11a3e25a26fa03b58e263d9cb8",
+        "contractAddress": "Nck6gihPX3gA51XqetNMLpRpMQf4tsqSDH",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "evmDynamicFeeType == 2",
+            "kind": "read",
+            "operation": "evmDynamicFeeType",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "2"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "2"
+            }
+          },
+          {
+            "name": "evmBlobType == 3",
+            "kind": "read",
+            "operation": "evmBlobType",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "3"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-2930",
+      "title": "EIP-2930 — Access List (witness scopes)",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "02a174b4080c57d8ceb2c66b223799a79d09a2c3",
+        "contractAddress": "NdkP4jJAVUgXSbSUpRbD8FnHi6TjWULNeW",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "scopeCalledByEntry == 1",
+            "kind": "read",
+            "operation": "scopeCalledByEntry",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            }
+          },
+          {
+            "name": "scopeGlobal == 128",
+            "kind": "read",
+            "operation": "scopeGlobal",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "128"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "128"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "3570e80f52a9329b604d5d18fb94de3133b0a6ad",
+        "contractAddress": "Nbk9meWCw4DQhKZeK2vgfGVG6oqDJT1XpP",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "scopeCalledByEntry == 1",
+            "kind": "read",
+            "operation": "scopeCalledByEntry",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "1"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "1"
+            }
+          },
+          {
+            "name": "scopeGlobal == 128",
+            "kind": "read",
+            "operation": "scopeGlobal",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "128"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "128"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-3855",
+      "title": "EIP-3855 — PUSH0 Opcode",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "52b860448a5d1ff537160a0bee8c83cdfe72fe4d",
+        "contractAddress": "NT2N2y4CH1FYG74j3cNV4CcgxXS6qp7Fh5",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "zero() == 0",
+            "kind": "read",
+            "operation": "zero",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          },
+          {
+            "name": "falseBool() == false",
+            "kind": "read",
+            "operation": "falseBool",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "6704d604997959ce4e098bd96ecbacef358e9ff6",
+        "contractAddress": "NiPzZ4HXxwVYptrpwZ8jDnf7KMekHTjnp3",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "zero() == 0",
+            "kind": "read",
+            "operation": "zero",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          },
+          {
+            "name": "falseBool() == false",
+            "kind": "read",
+            "operation": "falseBool",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-3860",
+      "title": "EIP-3860 — Initcode Size Limit",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "5d95f5db9f06ee751778208c36c408a49968d728",
+        "contractAddress": "NPdvGHEVkqeidDf9PMwimXLkXie23r1nEC",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "maxInitcodeSize == 49152",
+            "kind": "read",
+            "operation": "maxInitcodeSize",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "49152"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "49152"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "b58a104cecaaa87e7c44915464f09b60e4768337",
+        "contractAddress": "NQyVqccVtzvbS9uDbTmESyU2arGRxANcNo",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "evmMaxInitcodeSize == 49152",
+            "kind": "read",
+            "operation": "evmMaxInitcodeSize",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "49152"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "49152"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-6780",
+      "title": "EIP-6780 — SELFDESTRUCT Nerf",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "67a59c179448a3769d5559a691a4c118c7de9930",
+        "contractAddress": "NQLwx47c1P6NZ5mZn8qjzeqgALwyt3RUSZ",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013SD: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "isArmed == false (initial)",
+            "kind": "read",
+            "operation": "isArmed",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "8acf52e9a1f696965480cd40046c9c3de020f8eb",
+        "contractAddress": "NhRfE6pGvtbGShTB99eWnkYqVULs3sS1Tr",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "isArmed == false (initial)",
+            "kind": "read",
+            "operation": "isArmed",
+            "status": "pass",
+            "actual": {
+              "type": "Boolean",
+              "value": false
+            },
+            "expect": {
+              "type": "Boolean",
+              "value": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eip-7702",
+      "title": "EIP-7702 — Set Code for EOAs",
+      "solidity": {
+        "status": "deployed",
+        "contractHash": "b156b370b4ad897caf955e38fffa637195438751",
+        "contractAddress": "NTM3xbr9TpZEULn1hks9VAfdKjVa6oczqt",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "claimDeployer()",
+            "kind": "write",
+            "operation": "claimDeployer",
+            "status": "fail",
+            "reason": "Failed to get system fee. Error: Script execution failed. ExecutionEngine state = FAULT. An unhandled exception was thrown. \b�y�\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013SC: already claimed\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+          },
+          {
+            "name": "delegationCount == 0 (initial)",
+            "kind": "read",
+            "operation": "delegationCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      },
+      "csharp": {
+        "status": "deployed",
+        "contractHash": "158d0d7fdf17d71b6e733997cd74b68f0d1c3bfd",
+        "contractAddress": "NizvxJ3xboUGKi1pbXS7DSkwadJfdLTjh5",
+        "deployTx": null,
+        "reused": true,
+        "tests": [
+          {
+            "name": "getDeployer == deployer",
+            "kind": "read",
+            "operation": "getDeployer",
+            "status": "pass",
+            "actual": {
+              "type": "ByteString",
+              "value": "6zE6YTMrwn/52dCWcV3zCXMiqmk="
+            },
+            "expect": {
+              "type": "Hash160",
+              "value": "69aa227309f35d7196d0d9f97fc22b33613a31eb"
+            }
+          },
+          {
+            "name": "delegationCount == 0 (initial)",
+            "kind": "read",
+            "operation": "delegationCount",
+            "status": "pass",
+            "actual": {
+              "type": "Integer",
+              "value": "0"
+            },
+            "expect": {
+              "type": "Integer",
+              "value": "0"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

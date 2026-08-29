@@ -1,0 +1,13 @@
+{
+  "description": "OpenZeppelin ERC20 + AccessControl",
+  "collect": {
+    "npm": "@openzeppelin/contracts@5.4.0"
+  },
+  "compile": {
+    "Wno": ["W200", "W121", "W111", "W116", "W106", "W105"]
+  },
+  "deploy": {
+    "account": "node1",
+    "clear-standards": true
+  }
+}

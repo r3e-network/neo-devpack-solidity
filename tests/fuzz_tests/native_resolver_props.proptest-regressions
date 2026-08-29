@@ -1,0 +1,12 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc b9909e49e4f025c1ded4f1c0f1d44a5f34d371cdab785bf056ed9c65ac99e63b # shrinks to _seed = 0
+cc 899be270fe60958018c906e69aa1e1ac3a9ada10b3a60dd78e10e91338e482ed # shrinks to random_addr = [0, 226, 236, 164, 119, 23, 204, 73, 191, 181, 111, 142, 247, 27, 64, 242, 167, 89, 33, 215]
+cc 6203a8df9e1737623f3486fc2bc7233f98ad4dc5d423f1ea81eafcdfef46f464 # shrinks to _x = 0
+cc aaf3d43853c6ac36ed8ef99d7c40aa6349c91b748b162d3f16286e82214782b0 # shrinks to block_idx = 1
+cc 5e839b8e2831cc0524153945f6e69f6af1fe738005dde8bcbe7c40ba4e93e3c0 # shrinks to _x = 0
+cc 2dcc7a7700ac40c7ef2f6fc11af91e3df5e784c0641ea3863a88a87bbd1c085e # shrinks to amount = 741

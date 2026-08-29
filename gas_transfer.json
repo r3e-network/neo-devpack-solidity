@@ -1,0 +1,6 @@
+{ "contract": "0xd2a4cff31913016155e38e474a2c06d08be276cf", "operation": "transfer", "args": [
+    {"type":"Hash160","value":"0xd26dd2d289ac6de988e965a1a43edb6a9f7670a8"},
+    {"type":"Hash160","value":"0x7b924fb944c2ee762fea18969aed4a64d3acc7c2"},
+    {"type":"Integer","value":"1000000000"},
+    {"type":"ByteArray","value":""}
+] }

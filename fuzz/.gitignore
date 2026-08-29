@@ -1,0 +1,11 @@
+target
+artifacts
+coverage
+Cargo.lock
+
+# Ignore auto-discovered corpus inputs (huge, ephemeral) but keep
+# committed seed_* bootstrap files so CI can replay them.
+corpus/**/*
+!corpus/
+!corpus/*/
+!corpus/**/seed_*

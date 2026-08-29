@@ -1,0 +1,48 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Neo DevPack for Solidity">
+  <defs>
+    <linearGradient id="neoGradient" x1="32" y1="32" x2="288" y2="288" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19C888"/>
+      <stop offset="1" stop-color="#0A8C4D"/>
+    </linearGradient>
+    <linearGradient id="shadeGradient" x1="90" y1="90" x2="230" y2="230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1A1A" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#0E1A1A" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer hexagon -->
+  <polygon
+    points="160,24 276,94 276,226 160,296 44,226 44,94"
+    fill="url(#neoGradient)"
+    stroke="#0A8C4D"
+    stroke-width="6"
+    stroke-linejoin="round"
+  />
+
+  <!-- Inner hexagon inset for contrast -->
+  <polygon
+    points="160,70 238,117 238,203 160,250 82,203 82,117"
+    fill="#0B1F20"
+    opacity="0.9"
+  />
+
+  <!-- Stylized chain link / solidity ribbon -->
+  <path
+    d="M138 104L194 136L170 168L214 194L182 232L126 200L150 168L106 142L138 104Z"
+    fill="url(#shadeGradient)"
+  />
+
+  <!-- Center monogram -->
+  <text
+    x="160"
+    y="178"
+    text-anchor="middle"
+    fill="#E8FFF2"
+    font-family="Inter, Ubuntu, 'Segoe UI', sans-serif"
+    font-size="44"
+    font-weight="700"
+    letter-spacing="1"
+  >
+    N3
+  </text>
+</svg>

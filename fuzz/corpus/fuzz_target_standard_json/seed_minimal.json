@@ -1,0 +1,1 @@
+{"language":"Solidity","sources":{"a.sol":{"content":"pragma solidity ^0.8.19;\ncontract C {}"}}}

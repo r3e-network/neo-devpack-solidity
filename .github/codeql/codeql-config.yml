@@ -1,0 +1,44 @@
+name: "Neo DevPack for Solidity CodeQL Configuration"
+
+disable-default-queries: false
+
+queries:
+  - name: security-and-quality
+    uses: security-and-quality
+
+query-filters:
+  - exclude:
+      id: js/unused-local-variable
+  - exclude:
+      id: js/useless-assignment-to-local
+
+paths:
+  - src/
+  - tooling/
+  - devpack/
+
+paths-ignore:
+  - target/**
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/lib/**"
+  - "**/build/**"
+  - .git/**
+
+# Security-focused configuration
+security-severity: "high"
+
+# Language-specific configurations
+languages:
+  javascript:
+    # Include TypeScript files
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.js"
+    - "**/*.jsx"
+  
+  go:
+    - "**/*.go"
+  
+  csharp:
+    - "**/*.cs"

@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc a6285447eb87bf87448257de1976578b3ca745e940f00dfaec662d7b71868ec4 # shrinks to valid = [StateChange { change_type: BalanceChange, account: "0x0102030405060708090a0b0c0d0e0f1011121314", key: None, old_value: None, new_value: [0, 0, 0, 0, 0, 0, 0, 0] }, StateChange { change_type: BalanceChange, account: "0x000102030405060708090a0b0c0d0e0f10111213", key: None, old_value: None, new_value: [0, 0, 0, 0, 0, 0, 0, 0] }, StateChange { change_type: BalanceChange, account: "0x000102030405060708090a0b0c0d0e0f10111213", key: None, old_value: None, new_value: [0, 0, 0, 0, 0, 0, 0, 0] }, StateChange { change_type: BalanceChange, account: "0x000102030405060708090a0b0c0d0e0f10111213", key: None, old_value: None, new_value: [0, 0, 0, 0, 0, 0, 0, 0] }, StateChange { change_type: BalanceChange, account: "0x000102030405060708090a0b0c0d0e0f10111213", key: None, old_value: None, new_value: [0, 0, 0, 0, 0, 0, 0, 0] }, StateChange { change_type: BalanceChange, account: "0x000102030405060708090a0b0c0d0e0f10111213", key: None, old_value: None, new_value: [1, 0, 0, 0, 0, 0, 0, 0] }], insert_at = 2, bad_seed = 0

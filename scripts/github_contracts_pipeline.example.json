@@ -1,0 +1,20 @@
+{
+  "$schema": "./github_contracts_pipeline.schema.json",
+  "description": "Example pipeline config for OpenZeppelin ERC20",
+  "collect": {
+    "repo": "OpenZeppelin/openzeppelin-contracts",
+    "branch": "master",
+    "path": "contracts/token/ERC20"
+  },
+  "compile": {
+    "Wno": ["W200", "W121", "W111"]
+  },
+  "deploy": {
+    "account": "node1",
+    "data": "[\"MyToken\", \"MTK\"]",
+    "clear-standards": true
+  },
+  "test": {
+    "manifest": "./test-manifest.example.json"
+  }
+}

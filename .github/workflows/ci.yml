@@ -1,0 +1,231 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  schedule:
+    - cron: 0 0 * * *
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+  CARGO_INCREMENTAL: 0
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  daily-gate:
+    name: Daily Run Gate
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      should_run: ${{ steps.gate.outputs.should_run }}
+    steps:
+      - name: Allow only one CI run per UTC day
+        id: gate
+        uses: actions/github-script@v7
+        with:
+          script: "const owner = context.repo.owner;\nconst repo = context.repo.repo;\n\
+            const workflow_id = 'ci.yml';\nconst now = new Date();\nconst startOfUtcDay\
+            \ = new Date(Date.UTC(\n  now.getUTCFullYear(),\n  now.getUTCMonth(),\n\
+            \  now.getUTCDate(),\n  0, 0, 0\n));\n\nconst { data } = await github.rest.actions.listWorkflowRuns({\n\
+            \  owner,\n  repo,\n  workflow_id,\n  per_page: 100\n});\n\nconst runsToday\
+            \ = data.workflow_runs.filter((run) => {\n  if (run.id === context.runId)\
+            \ return false;\n  const createdAt = new Date(run.created_at);\n  return\
+            \ createdAt >= startOfUtcDay;\n});\n\nconst shouldRun = context.eventName\
+            \ !== 'schedule' || runsToday.length === 0;\ncore.info(`Event: ${context.eventName}.\
+            \ Found ${runsToday.length} existing CI run(s) today (UTC).`);\ncore.setOutput('should_run',\
+            \ shouldRun ? 'true' : 'false');\n"
+    timeout-minutes: 15
+  core:
+    name: Core CI
+    needs: daily-gate
+    if: needs.daily-gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: "~/.cargo/registry
+
+            ~/.cargo/git
+
+            target
+
+            "
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: "${{ runner.os }}-cargo-
+
+            "
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+      - name: Run tests
+        run: cargo test --workspace --all-features
+      - name: Audit file length (informational)
+        run: bash scripts/audit_file_length.sh
+        continue-on-error: true
+      - name: Audit unwrap usage (informational)
+        run: bash scripts/audit_unwrap.sh
+        continue-on-error: true
+      - name: Build release binary
+        run: cargo build --release
+      - name: Verify lean build (--no-default-features)
+        run: cargo build --no-default-features --bin neo-solc
+      - name: Compile smoke contract
+        run: "./target/release/neo-solc examples/ERC20Token.sol -o SmokeERC20 -v
+
+          test -f SmokeERC20.nef
+
+          test -f SmokeERC20.manifest.json
+
+          "
+      - name: Validate emitted artifacts
+        run: 'MAGIC=$(xxd -l 4 -p SmokeERC20.nef)
+
+          test "$MAGIC" = "4e454633"
+
+          python3 -c "import json; d=json.load(open(''SmokeERC20.manifest.json''));
+          assert d.get(''name''); assert ''abi'' in d; assert ''permissions'' in d"
+
+          '
+
+  # ==========================================================================
+  # Neo-Express on-chain smoke — the only oracle that catches "passes in the
+  # embedded simulator, fails on a real Neo N3 VM" regressions. See
+  # AUDIT_REPORT_v0.21.md §5 (M-TEST1) for why this gate exists.
+  #
+  # Per-PR we run all compiler-behavior scripts (deploy, CALLT, constructor,
+  # ABI encoding, storage round-trip, manifest permissions, lowlevel calls,
+  # struct storage, compound assignment, delete, update, evm-compat, abortmsg).
+  # The 10 DeFi/showcase scripts run in fuzz.yml's nightly cron.
+  # ==========================================================================
+  neoxp-smoke:
+    name: Neo-Express Smoke (${{ matrix.group }})
+    needs: daily-gate
+    if: needs.daily-gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: true
+      matrix:
+        group:
+          - core
+          - calls
+          - storage
+          - misc
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-smoke-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-smoke-
+      - name: Build neo-solc (release)
+        run: cargo build --release --bin neo-solc
+      - name: Install .NET SDK (for Neo-Express)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install Neo-Express + jq
+        run: |
+          dotnet tool install Neo.Express --tool-path "$PWD/build/dotnet-tools"
+          echo "$PWD/build/dotnet-tools" >> "$GITHUB_PATH"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq xxd
+      - name: Pin neo-solc binary for the smoke scripts
+        run: echo "NEO_SOLC=$PWD/target/release/neo-solc" >> "$GITHUB_ENV"
+      - name: Run Neo-Express smoke group ${{ matrix.group }}
+        env:
+          NEOXP_GROUP: ${{ matrix.group }}
+        run: |
+          set -e
+          case "$NEOXP_GROUP" in
+            core)
+              scripts="deploy callt_smoke constructor_smoke encoding_smoke"
+              ;;
+            calls)
+              scripts="lowlevel_call_smoke lowlevel_call_failure_smoke external_member_call_smoke view_readonly_call_smoke"
+              ;;
+            storage)
+              scripts="permissions_smoke compound_assignment_smoke struct_array_element_smoke nested_struct_storage_smoke"
+              ;;
+            misc)
+              scripts="delete_smoke update_smoke evm_compat_smoke abortmsg_smoke"
+              ;;
+          esac
+          for t in $scripts; do
+            echo "::group::test_neoxp_${t}.sh"
+            bash "examples/test_neoxp_${t}.sh"
+            echo "::endgroup::"
+          done
+
+  # ==========================================================================
+  # Neo-Express differential harness — runs the compiled DiffTest contract in
+  # BOTH the in-tree simulator AND a real Neo-Express node, then diffs the
+  # integer results for opcodes NOT covered by the smoke suite (POW, XOR, SHL,
+  # nested MOD, complex bitwise, DIV). Closes audit gap #1
+  # (AUDIT_REPORT_v0.21.md §5): the only oracle that proves compiler-emitted
+  # bytecode agrees with a real Neo N3 node, not just the embedded simulator.
+  #
+  # The test lives in tests/neoxp_differential.rs, is gated behind
+  # `#![cfg(feature = "neoxp-diff")]`, and every case is `#[ignore]`, so it is
+  # compiled (not run) by the default/all-features jobs and only executed here.
+  # ==========================================================================
+  neoxp-diff:
+    name: Neo-Express Differential
+    needs: daily-gate
+    if: needs.daily-gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-neoxpdiff-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-neoxpdiff-
+      - name: Build neo-solc (release)
+        run: cargo build --release --bin neo-solc
+      - name: Install .NET SDK (for Neo-Express)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install Neo-Express + jq
+        run: |
+          dotnet tool install Neo.Express --tool-path "$PWD/build/dotnet-tools"
+          echo "$PWD/build/dotnet-tools" >> "$GITHUB_PATH"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq xxd
+      - name: Pin neo-solc binary for the differential harness
+        run: echo "NEO_SOLC=$PWD/target/release/neo-solc" >> "$GITHUB_ENV"
+      - name: Run neoxp differential tests
+        run: cargo test --features neoxp-diff -- --ignored

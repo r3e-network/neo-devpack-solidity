@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E599"/>
+      <stop offset="100%" stop-color="#00AF92"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E599" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00AF92" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer hexagon (Neo) -->
+  <polygon points="60,8 104,30 104,74 60,96 16,74 16,30"
+           fill="none" stroke="url(#g1)" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Inner diamond (compilation/transformation) -->
+  <polygon points="60,28 84,52 60,76 36,52"
+           fill="url(#g2)" stroke="url(#g1)" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Arrow: Solidity in, NeoVM out -->
+  <line x1="44" y1="52" x2="76" y2="52" stroke="#00E599" stroke-width="2.5" stroke-linecap="round"/>
+  <polyline points="70,46 76,52 70,58" fill="none" stroke="#00E599" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Label -->
+  <text x="60" y="114" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="10" font-weight="600" fill="#00E599">NEO SOL</text>
+</svg>

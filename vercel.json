@@ -1,0 +1,8 @@
+{
+  "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" != \"doc\" ]",
+  "buildCommand": "npm run docs:build",
+  "outputDirectory": "docs/.vitepress/dist",
+  "installCommand": "npm install",
+  "framework": "vitepress",
+  "cleanUrls": true
+}

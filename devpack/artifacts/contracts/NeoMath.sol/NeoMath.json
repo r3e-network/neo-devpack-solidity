@@ -1,0 +1,162 @@
+{
+  "contractName": "NeoMath",
+  "sourceName": "contracts/NeoMath.sol",
+  "metadata": {
+    "compiler": {
+      "version": "0.1.0",
+      "settings": {
+        "optimizer": {
+          "enabled": true,
+          "runs": 200
+        },
+        "outputSelection": {
+          "*": {
+            "*": [
+              "abi",
+              "evm.bytecode",
+              "evm.deployedBytecode",
+              "evm.methodIdentifiers",
+              "evm.gasEstimates",
+              "metadata",
+              "storageLayout",
+              "evm.assembly",
+              "evm.legacyAssembly"
+            ]
+          }
+        },
+        "neo": {
+          "generateNef": true,
+          "generateManifest": true,
+          "optimizeGas": true,
+          "debugInfo": true,
+          "target": "3.0",
+          "optimization": 3,
+          "gasModel": "neo",
+          "devpack": {
+            "enabled": true,
+            "syscalls": "all",
+            "nativeContracts": "all",
+            "nepStandards": [
+              "NEP-17",
+              "NEP-11",
+              "NEP-24"
+            ],
+            "libraries": [
+              "Neo",
+              "Storage",
+              "Runtime"
+            ]
+          }
+        }
+      }
+    },
+    "buildTime": "2026-03-18T09:55:38.348Z",
+    "environment": {
+      "nodeVersion": "v24.11.1",
+      "platform": "linux",
+      "architecture": "x64"
+    },
+    "dependencies": {}
+  },
+  "contract": {
+    "abi": [
+      {
+        "inputs": [
+          {
+            "internalType": "Any",
+            "name": "data",
+            "type": "Any"
+          },
+          {
+            "internalType": "bool",
+            "name": "update",
+            "type": "bool"
+          }
+        ],
+        "name": "_deploy",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ],
+    "evm": {
+      "bytecode": {
+        "linkReferences": {},
+        "object": "0x5701027910b7270a000000231b0000000c13696e76616c69642064656e6f6d696e61746f723a7810972707000000104078799e119f797068109727130000000c0b50616e69633a20307831323a68a14057020205ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f70781097270b000000082308000000791097270700000010407868797169109727130000000c0b50616e69633a20307831323a69a1b7270700000068407879a04057000240",
+        "opcodes": "",
+        "sourceMap": ""
+      },
+      "deployedBytecode": {
+        "linkReferences": {},
+        "object": "0x5701027910b7270a000000231b0000000c13696e76616c69642064656e6f6d696e61746f723a7810972707000000104078799e119f797068109727130000000c0b50616e69633a20307831323a68a14057020205ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f70781097270b000000082308000000791097270700000010407868797169109727130000000c0b50616e69633a20307831323a69a1b7270700000068407879a04057000240",
+        "opcodes": "",
+        "sourceMap": ""
+      },
+      "methodIdentifiers": {
+        "_deploy(Any,bool)": "0x6b7dda86"
+      }
+    },
+    "metadata": "{\"compiler\":{\"name\":\"neo-devpack-solidity-0.14.0\",\"version\":\"0.14.0.0\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"Any\",\"name\":\"data\",\"type\":\"Any\"},{\"internalType\":\"bool\",\"name\":\"update\",\"type\":\"bool\"}],\"name\":\"_deploy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"contractName\":\"NeoMath\"},\"settings\":{\"optimizer\":{\"enabled\":true,\"runs\":200}},\"sources\":{\"contracts/NeoMath.sol\":{\"keccak256\":\"0x0367b5f354539a773d474c49ff826a5bd3cc9462c252552ce3ee8e2f471bc7cd\",\"urls\":[]}},\"version\":1}",
+    "neo": {
+      "gasEstimates": {
+        "creation": {
+          "gas": "0",
+          "networkFee": "0",
+          "systemFee": "0"
+        },
+        "functions": {}
+      },
+      "manifest": {
+        "abi": {
+          "events": [],
+          "methods": [
+            {
+              "name": "_deploy",
+              "offset": 181,
+              "parameters": [
+                {
+                  "name": "data",
+                  "type": "Any"
+                },
+                {
+                  "name": "update",
+                  "type": "Boolean"
+                }
+              ],
+              "returntype": "Void",
+              "safe": false
+            }
+          ]
+        },
+        "extra": {
+          "Author": "Jimmy <jimmy@r3e.network>",
+          "Compiler": "neo-devpack-solidity-0.14.0",
+          "Description": "Solidity contract 'NeoMath' compiled to NeoVM",
+          "Version": "0.14.0.0"
+        },
+        "features": {},
+        "groups": [],
+        "name": "NeoMath",
+        "permissions": [],
+        "supportedstandards": [
+          "NEP-29"
+        ],
+        "trusts": []
+      },
+      "methodMap": {
+        "_deploy(Any,bool)": "_deploy"
+      },
+      "nef": {
+        "checksum": "9741e230",
+        "compiler": "neo-devpack-solidity-0.14.0",
+        "image": "4e4546336e656f2d736f6c69646974792d302e31342e3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000015636f6e7472616374732f4e656f4d6174682e736f6c00000000b95701027910b7270a000000231b0000000c13696e76616c69642064656e6f6d696e61746f723a7810972707000000104078799e119f797068109727130000000c0b50616e69633a20307831323a68a14057020205ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f70781097270b000000082308000000791097270700000010407868797169109727130000000c0b50616e69633a20307831323a69a1b7270700000068407879a040570002409741e230",
+        "magic": "NEF3",
+        "script": "5701027910b7270a000000231b0000000c13696e76616c69642064656e6f6d696e61746f723a7810972707000000104078799e119f797068109727130000000c0b50616e69633a20307831323a68a14057020205ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f70781097270b000000082308000000791097270700000010407868797169109727130000000c0b50616e69633a20307831323a69a1b7270700000068407879a04057000240",
+        "source": "contracts/NeoMath.sol",
+        "tokens": []
+      },
+      "storageMap": {}
+    }
+  },
+  "buildInfo": "build-1773827738348-k03odhbb2"
+}
