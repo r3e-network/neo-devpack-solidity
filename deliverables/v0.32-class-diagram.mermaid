@@ -1,0 +1,91 @@
+classDiagram
+    class WorkspaceGuard {
+      +snapshot_status() Snapshot
+      +backup_files(paths: List~Path~) BackupManifest
+      +verify_preserved_changes() bool
+      +rollback_files(paths: List~Path~) void
+    }
+    class AuditRunner {
+      +audit_file_length(root: Path, limit: int) AuditReport
+      +audit_unwrap(root: Path, whitelist: Path) AuditReport
+      +audit_expect(root: Path, whitelist: Path) AuditReport
+      +check_versions(cargo: Path, packages: List~Path~) VersionReport
+    }
+    class VersionSource {
+      +cargo_version: String
+      +compiler_version_string_4() String
+      +validate_manifest_version(manifest: Json) bool
+      +sync_tooling(version: String) void
+    }
+    class LoweringContext {
+      +u256_scratch_locals(count: usize) Vec~usize~
+      +allocate_local(name: String, ty: ValueType) usize
+      +next_label() Label
+      +record_error(message: String) void
+      +return_types() Vec~ValueType~
+    }
+    class U256Facade {
+      +emit_u256_checked_arith(ctx, instructions, operator) void
+      +emit_u256_unchecked_add_ir(ctx, instructions) void
+      +emit_u256_unchecked_sub_ir(ctx, instructions) void
+      +emit_u256_unchecked_mul_ir(ctx, instructions) void
+    }
+    class ArrayFacade {
+      +lower_array_subscript_expression(expr, array, index, ctx, instructions) bool
+      +lower_array_slice_expression(array, start, end, ctx, instructions) bool
+      +lower_array_literal_expression(elements, ctx, instructions) bool
+    }
+    class MemberCallFacade {
+      +try_lower_member_call(func, args, ctx, instructions) Option~bool~
+      +inline_library_storage_call(body, receiver, args, ctx, instructions) bool
+    }
+    class ReturnFacade {
+      +lower_return_statement(expr, ctx, instructions) bool
+      +lower_implicit_return(types, slots, ctx, instructions) bool
+      +wrap_external_single_array_return_value(ctx, instructions) bool
+    }
+    class CompilerAPI {
+      +compile_contracts(input, options) Compilation
+      +compile_contracts_with_options(input, options) Compilation
+      +compiler_version_string_4() String
+    }
+    class ManifestBuilder {
+      +build_manifest(compilation) Result~Json, ManifestError~
+      +version_from_compiler() String
+    }
+    class NeoForge {
+      +build(options) Promise~BuildResult~
+    }
+    class CompilerInvoker {
+      +invoke_standard_json(input, options) InvocationResult
+    }
+    class BuildCache {
+      +get(key) Option~Artifacts~
+      +put(key, artifacts) void
+    }
+    class RuntimeConformance {
+      +run_vector(vector) ConformanceResult
+      +classify_gas() GasAccuracy
+    }
+    class CSharpRuntimeTests {
+      +run() TestReport
+    }
+
+    WorkspaceGuard --> AuditRunner : protects baseline
+    AuditRunner --> VersionSource : validates version
+    CompilerAPI --> LoweringContext : creates lowering context
+    U256Facade --> LoweringContext : allocates scratch/labels
+    ArrayFacade --> LoweringContext : lowers arrays
+    MemberCallFacade --> LoweringContext : lowers calls
+    ReturnFacade --> LoweringContext : lowers returns
+    CompilerAPI --> U256Facade : dispatches IR
+    CompilerAPI --> ArrayFacade : dispatches IR
+    CompilerAPI --> MemberCallFacade : dispatches IR
+    CompilerAPI --> ReturnFacade : dispatches statements
+    CompilerAPI --> ManifestBuilder : emits output
+    ManifestBuilder --> VersionSource : reads Cargo-derived version
+    NeoForge --> BuildCache : cache lookup/update
+    NeoForge --> CompilerInvoker : invokes compiler
+    CompilerInvoker --> CompilerAPI : Standard JSON boundary
+    RuntimeConformance ..> CompilerAPI : validates emitted behavior
+    CSharpRuntimeTests ..> RuntimeConformance : independent report only

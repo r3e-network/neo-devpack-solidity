@@ -1,0 +1,28 @@
+# Reviewed production expect() entries.
+# Format: repository-relative path | exact source line fingerprint
+# Every entry must still have an explanatory invariant in the source or be
+# removed when the expect is replaced with an explicit checked path.
+src/cli/standard_json/standard_json_process/imports.rs | let unit_order = closure_cache.get(file).expect("closure cache populated");
+src/diagnostics/report.rs | .expect("diagnostic JSON must be an object")
+src/frontend/frontend_parse/semver.rs | .expect("MIN_SUPPORTED_SOLIDITY_VERSION must be valid");
+src/frontend/frontend_parse/semver.rs | .expect("MAX_EXCLUDED_SOLIDITY_VERSION must be valid");
+src/ir/ir_context/builtins/resolve.rs | .expect("every builtin library base has a member whitelist"),
+src/ir/ir_context/ctx_locals_scopes.rs | .expect("label counter overflow: contract exceeds usize::MAX labels");
+src/ir/ir_expressions/power.rs | let neg = result_neg_local.expect("int256 pow tracks the result sign");
+src/manifest/build.rs | .expect("collision group is non-empty");
+src/neo/contract_hash.rs | .expect("value in 1..=16")
+src/runtime/execution/execution_impl_part2_native/stdlib.rs | slots.into_iter().next().expect("guarded by len() == 1")
+src/runtime/execution/execution_impl_part3_conversion.rs | let sign = *bytes.last().expect("guarded by non-empty check") & 0x80;
+src/runtime/execution/execution_impl_part3_offsets/call_stack.rs | .expect("guarded by len > stack_base"),
+src/runtime/execution/execution_impl_part3_offsets/input.rs | .expect("clamped calldata read cannot exceed memory_limit");
+src/runtime/execution/syscalls/contract.rs | .expect("value in 1..=16")
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"\bblockhash\s*\(").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"\bselfdestruct\s*\(").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"\.codehash\b").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"\btx\.origin\b").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"\bmsg\.sig\b").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"(?:\.|\b)delegatecall\s*\(").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"(?:\.|\b)staticcall\s*\(").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"\.\s*call\s*(?:\(|\{)").expect("valid regex pattern"));
+src/solidity/upgrade.rs | Regex::new(r"(?:\d|\))\s*(?:wei|gwei|szabo|finney|ether)\b").expect("valid regex pattern")
+src/solidity/upgrade.rs | Lazy::new(|| Regex::new(r"\bsupportsInterface\s*\(").expect("valid regex pattern"));

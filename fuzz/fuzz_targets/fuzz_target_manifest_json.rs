@@ -17,7 +17,7 @@ use libfuzzer_sys::fuzz_target;
 use serde_json::Value;
 
 fuzz_target!(|data: &[u8]| {
-    let _ = std::panic::catch_unwind(|| {
+    match std::panic::catch_unwind(|| {
         // Parse attempt — only non-panicking results count as "accepted".
         if let Ok(value) = serde_json::from_slice::<Value>(data) {
             // Manifest inspection: walk expected sub-paths without
@@ -34,5 +34,8 @@ fuzz_target!(|data: &[u8]| {
                 .and_then(|s| s.as_array())
                 .map(|arr| arr.iter().filter_map(|v| v.as_str()).count());
         }
-    });
+    }) {
+        Ok(()) => {}
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 });

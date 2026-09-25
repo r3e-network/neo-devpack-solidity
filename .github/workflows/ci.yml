@@ -70,18 +70,32 @@ jobs:
           restore-keys: "${{ runner.os }}-cargo-
 
             "
+      - name: Check generated Solidity support matrix
+        run: python3 scripts/generate_solidity_support_matrix.py --check
       - name: Check formatting
         run: cargo fmt --all -- --check
       - name: Run Clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
       - name: Run tests
         run: cargo test --workspace --all-features
-      - name: Audit file length (informational)
+      - name: Run v0.31 follow-up regression tests
+        run: cargo test --test audit_v031_followups --all-features
+      # Production-only audits are release gates. Test-only files are reported
+      # by the scripts but do not block this job; reviewed length exceptions are
+      # versioned in scripts/file-length-allowlist.txt.
+      - name: Audit production file length
         run: bash scripts/audit_file_length.sh
-        continue-on-error: true
-      - name: Audit unwrap usage (informational)
-        run: bash scripts/audit_unwrap.sh
-        continue-on-error: true
+      - name: Audit production panic and unwrap usage
+        run: |
+          set -o pipefail
+          bash scripts/audit_unwrap.sh | tee build-production-rust-audit.txt
+      - name: Upload production audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-rust-audit
+          path: build-production-rust-audit.txt
+          if-no-files-found: ignore
       - name: Build release binary
         run: cargo build --release
       - name: Verify lean build (--no-default-features)
@@ -169,7 +183,7 @@ jobs:
               scripts="lowlevel_call_smoke lowlevel_call_failure_smoke external_member_call_smoke view_readonly_call_smoke"
               ;;
             storage)
-              scripts="permissions_smoke compound_assignment_smoke struct_array_element_smoke nested_struct_storage_smoke"
+              scripts="permissions_smoke compound_assignment_smoke struct_array_element_smoke nested_struct_storage_smoke nep_standards_smoke"
               ;;
             misc)
               scripts="delete_smoke update_smoke evm_compat_smoke abortmsg_smoke"

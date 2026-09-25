@@ -2,7 +2,7 @@
 # Author: Jimmy <jimmy@r3e.network>
 # Repository: https://github.com/r3e-network/neo-devpack-solidity
 
-.PHONY: all build clean test test-all test-all-full test-fuzz-gate test-deploy-smoke test-deploy-callt-smoke test-deploy-constructor-smoke test-deploy-update-smoke test-deploy-permissions-smoke test-deploy-encoding-smoke test-deploy-abidecode-smoke test-deploy-typestrict-smoke test-deploy-abortmsg-smoke test-deploy-trycatch-smoke test-deploy-bytesn-smoke test-deploy-arith-smoke test-deploy-lowlevel-call-smoke test-deploy-lowlevel-call-failure-smoke test-deploy-external-call-smoke test-deploy-view-readonly-call-smoke test-deploy-compound-assignment-smoke test-deploy-struct-array-element-smoke test-deploy-struct-param-smoke test-deploy-nested-struct-smoke test-deploy-delete-smoke test-deploy-new-showcases-smoke test-deploy-evm-compat-smoke test-deploy-smoke-full test-deploy-wgas-smoke test-deploy-flashloan-smoke test-deploy-amm-smoke test-deploy-vesting-smoke test-deploy-lending-smoke test-deploy-dao-smoke test-deploy-famous-all docs docs-api docs-site install format lint release help install-deps tooling-install tooling-build tooling-test tooling-lint runtime-build runtime-test coverage coverage-ci check-coverage
+.PHONY: all build clean test test-all test-all-full test-fuzz-gate test-deploy-smoke test-deploy-callt-smoke test-deploy-constructor-smoke test-deploy-update-smoke test-deploy-permissions-smoke test-deploy-encoding-smoke test-deploy-abidecode-smoke test-deploy-typestrict-smoke test-deploy-abortmsg-smoke test-deploy-trycatch-smoke test-deploy-bytesn-smoke test-deploy-arith-smoke test-deploy-lowlevel-call-smoke test-deploy-lowlevel-call-failure-smoke test-deploy-external-call-smoke test-deploy-view-readonly-call-smoke test-deploy-compound-assignment-smoke test-deploy-struct-array-element-smoke test-deploy-struct-param-smoke test-deploy-nested-struct-smoke test-deploy-delete-smoke test-deploy-new-showcases-smoke test-deploy-evm-compat-smoke test-deploy-nep-standards-smoke test-deploy-smoke-full test-deploy-wgas-smoke test-deploy-flashloan-smoke test-deploy-amm-smoke test-deploy-vesting-smoke test-deploy-lending-smoke test-deploy-dao-smoke test-deploy-famous-all docs docs-api docs-site install format lint release help install-deps tooling-install tooling-build tooling-test tooling-lint runtime-build runtime-test coverage coverage-ci check-coverage
 .PHONY: test-compile-strict production-gate test-fuzz-start test-fuzz-status test-fuzz-stop test-fuzz-cargo-all test-fuzz-differential test-fuzz-coverage
 
 all: build
@@ -182,7 +182,11 @@ test-deploy-evm-compat-smoke:
 	@echo "🌉 Running EVM compatibility adapter smoke test..."
 	bash examples/test_neoxp_evm_compat_smoke.sh
 
-test-deploy-smoke-full: test-deploy-smoke test-deploy-callt-smoke test-deploy-constructor-smoke test-deploy-update-smoke test-deploy-permissions-smoke test-deploy-encoding-smoke test-deploy-abidecode-smoke test-deploy-typestrict-smoke test-deploy-abortmsg-smoke test-deploy-trycatch-smoke test-deploy-bytesn-smoke test-deploy-arith-smoke test-deploy-lowlevel-call-smoke test-deploy-lowlevel-call-failure-smoke test-deploy-external-call-smoke test-deploy-view-readonly-call-smoke test-deploy-compound-assignment-smoke test-deploy-struct-array-element-smoke test-deploy-struct-param-smoke test-deploy-nested-struct-smoke test-deploy-delete-smoke test-deploy-new-showcases-smoke test-deploy-evm-compat-smoke
+test-deploy-nep-standards-smoke:
+	@echo "🪙 Running canonical NEP-17/NEP-11 Neo-Express smoke test..."
+	bash examples/test_neoxp_nep_standards_smoke.sh
+
+test-deploy-smoke-full: test-deploy-smoke test-deploy-callt-smoke test-deploy-constructor-smoke test-deploy-update-smoke test-deploy-permissions-smoke test-deploy-encoding-smoke test-deploy-abidecode-smoke test-deploy-typestrict-smoke test-deploy-abortmsg-smoke test-deploy-trycatch-smoke test-deploy-bytesn-smoke test-deploy-arith-smoke test-deploy-lowlevel-call-smoke test-deploy-lowlevel-call-failure-smoke test-deploy-external-call-smoke test-deploy-view-readonly-call-smoke test-deploy-compound-assignment-smoke test-deploy-struct-array-element-smoke test-deploy-struct-param-smoke test-deploy-nested-struct-smoke test-deploy-delete-smoke test-deploy-new-showcases-smoke test-deploy-evm-compat-smoke test-deploy-nep-standards-smoke
 	@echo "✅ Neo-Express smoke tests complete"
 
 # ========== Famous DeFi/Web3 contract smoke tests ==========
@@ -350,6 +354,7 @@ help:
 	@echo "  test-deploy-smoke      - Basic deployment test"
 	@echo "  test-deploy-new-showcases-smoke - New strict-safe showcase smoke suite"
 	@echo "  test-deploy-evm-compat-smoke - EVM compatibility adapter smoke test"
+	@echo "  test-deploy-nep-standards-smoke - Canonical NEP-17/NEP-11 standard smoke test"
 	@echo "  test-deploy-smoke-full - All deployment smoke tests"
 	@echo "  test-compile-strict - Strict compile sweep (devpack + examples/new)"
 	@echo "  production-gate - Full production readiness verification"

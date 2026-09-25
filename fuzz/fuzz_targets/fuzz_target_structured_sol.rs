@@ -1109,7 +1109,10 @@ fuzz_target!(|data: &[u8]| {
     // Wrap in catch_unwind: the only signal we care about is a real
     // panic / abort. Any Result::Err is expected for ill-typed but
     // parser-clean programs.
-    let _ = std::panic::catch_unwind(move || {
+    match std::panic::catch_unwind(move || {
         let _ = neo_devpack_solidity::cli::compile_contracts(&src, false, opt);
-    });
+    }) {
+        Ok(()) => {}
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 });

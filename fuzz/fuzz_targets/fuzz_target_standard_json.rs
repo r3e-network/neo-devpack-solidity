@@ -16,7 +16,10 @@
 use libfuzzer_sys::fuzz_target;
 
 fuzz_target!(|data: &[u8]| {
-    let _ = std::panic::catch_unwind(|| {
+    match std::panic::catch_unwind(|| {
         let _ = neo_devpack_solidity::cli::fuzz_process_standard_json_content(data);
-    });
+    }) {
+        Ok(()) => {}
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 });

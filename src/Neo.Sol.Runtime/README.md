@@ -51,9 +51,8 @@ A comprehensive runtime library providing EVM semantic emulation on NeoVM. This 
 
 ### 📞 External Calls
 - **CALL, DELEGATECALL, STATICCALL** opcode equivalents
-- **Contract creation** with CREATE and CREATE2 semantics
-- **Address calculation** for deterministic deployment
 - **Call result handling** and error management
+- ⚠️ **CREATE and CREATE2 are not implemented**
 
 ### 📋 Address Registry
 - **Contract registration and metadata** management
@@ -273,6 +272,38 @@ Run tests with:
 dotnet test
 ```
 
+## Known Limitations
+
+### NeoVM Incompatibilities
+
+This library contains several features that are **incompatible with NeoVM's deterministic execution model**:
+
+#### ⚠️ Non-Deterministic .NET Features
+- **`System.Threading.Timer`** and **`System.Diagnostics.Stopwatch`**: These rely on system time and threading, which are non-deterministic and will cause runtime failures on NeoVM.
+- **`GC.Collect()`**: Explicit garbage collection calls are non-deterministic and prohibited in NeoVM smart contracts.
+- **`async/await`**: Asynchronous programming patterns are not supported in NeoVM's synchronous execution environment.
+- **`System.Collections.Concurrent.ConcurrentDictionary`**: Concurrent collections introduce non-deterministic ordering and are incompatible with NeoVM's deterministic requirements.
+
+#### 🔧 Implementation Gaps
+- **CREATE/CREATE2 opcodes**: Contract creation is not implemented. While the features section mentions contract creation semantics, the actual implementation is incomplete.
+- **Missing dependencies**: References to **BouncyCastle** cryptographic library are present in code but the package dependency is not declared in the project file, causing compilation failures.
+
+#### 💾 Storage Incompatibility (Already Documented Above)
+As noted in the warning at the top of this document, this library uses **EVM keccak-style storage layouts** that are fundamentally incompatible with contracts compiled by `neo-solc`, which use `SHA256(variable_name)` base slots. Contracts cannot interoperate across these two storage schemes.
+
+#### 🐛 Static Mutable State
+- The `_consumedGas` static field introduces shared mutable state across contract invocations, violating NeoVM's isolation guarantees and potentially causing race conditions or state corruption in concurrent execution scenarios.
+
+### Recommendations
+
+If you are building production Neo smart contracts:
+- **Use `neo-solc`** for compilation rather than this experimental runtime library
+- **Avoid .NET features** that depend on system time, threading, or garbage collection
+- **Review all cryptographic dependencies** to ensure they are NeoVM-compatible
+- **Test thoroughly** in a Neo test environment before deployment
+
+These limitations make this library suitable for **experimentation and research only**, not production use.
+
 ## Contributing
 
 Contributions are welcome! Please ensure:
@@ -281,6 +312,7 @@ Contributions are welcome! Please ensure:
 2. **Documentation** updates for API changes  
 3. **Performance** considerations for runtime operations
 4. **Compatibility** with existing EVM semantics
+5. **NeoVM compatibility** - avoid non-deterministic .NET features
 
 ## License
 

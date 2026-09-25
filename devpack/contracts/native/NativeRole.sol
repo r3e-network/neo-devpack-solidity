@@ -9,7 +9,7 @@ import "../Syscalls.sol";
  */
 
 library NativeRole {
-    address constant ROLE_CONTRACT = NativeContracts.ROLE_CONTRACT;
+    address constant ROLE_CONTRACT = NativeContracts.ROLE_MANAGEMENT;
     // ========== Role Management Native Contract ==========
     
     /**

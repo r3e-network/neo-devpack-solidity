@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-19T12:48:49.111Z",
+  "sessionId": "sess_ae32495a-708a-436d-8ee2-bd0fde1070be",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "D:/Git/neo-devpack-solidity-latest/CHANGELOG.md",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 6,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

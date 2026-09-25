@@ -682,8 +682,15 @@ contract CompleteNEP11NFT is NEP11, IOracleServiceReceiver {
         for (uint256 i = 0; i < _activeListings.length && i < 20; i++) {
             Listing memory listing = _listings[_activeListings[i]];
             if (listing.active && block.timestamp <= listing.expiry) {
-                // Weight by recency (more recent listings have higher weight)
-                uint256 age = block.timestamp - (listing.expiry - 7 days);
+                // Weight by recency (more recent listings have higher weight).
+                // Clamp the window start to `now` for listings younger than
+                // 7 days (durations up to 30 days are allowed): without the
+                // clamp, `listing.expiry - 7 days` can still lie in the future
+                // and the subtraction below underflows, reverting `buyToken`.
+                uint256 windowStart = listing.expiry - 7 days > block.timestamp
+                    ? block.timestamp
+                    : listing.expiry - 7 days;
+                uint256 age = block.timestamp - windowStart;
                 uint256 weight = age > 0 ? 7 days / (age + 1) : 7 days;
                 
                 newFloorPrice += listing.price * weight;

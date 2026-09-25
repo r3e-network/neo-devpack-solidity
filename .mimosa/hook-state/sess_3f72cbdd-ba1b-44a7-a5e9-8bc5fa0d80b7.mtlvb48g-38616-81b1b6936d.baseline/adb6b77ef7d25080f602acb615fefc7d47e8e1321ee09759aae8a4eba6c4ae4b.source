@@ -1,0 +1,152 @@
+[package]
+name = "neo-devpack-solidity-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+serde_json = "1.0"
+arbitrary = { version = "1", features = ["derive"] }
+
+[dependencies.neo-devpack-solidity]
+path = ".."
+
+# fuzz_target_1 — compile random UTF-8 as Solidity source at optimization
+# levels 0..=3. Catches compiler / parser panics on malformed input.
+[[bin]]
+name = "fuzz_target_1"
+path = "fuzz_targets/fuzz_target_1.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_2 — NEF parser must reject malformed input without panic.
+[[bin]]
+name = "fuzz_target_2"
+path = "fuzz_targets/fuzz_target_2.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_disasm — NeoVM bytecode disassembler is total: any byte
+# sequence must produce a string without panicking.
+[[bin]]
+name = "fuzz_target_disasm"
+path = "fuzz_targets/fuzz_target_disasm.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_nef_roundtrip — parse(NEF) → build_nef_with_tokens(...)
+# must never panic for any parser-accepted input. Catches parser /
+# serializer asymmetry in the NEF header / method-token encoders.
+[[bin]]
+name = "fuzz_target_nef_roundtrip"
+path = "fuzz_targets/fuzz_target_nef_roundtrip.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_manifest_json — manifest JSON parser must reject
+# pathological inputs cleanly without panic. Manifests are produced by
+# third-party tooling, so production robustness requires graceful error
+# paths for malicious / malformed input.
+[[bin]]
+name = "fuzz_target_manifest_json"
+path = "fuzz_targets/fuzz_target_manifest_json.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_standard_json — Solidity standard-JSON input parser must
+# reject arbitrary / malformed inputs with an error instead of panicking.
+# The standard-JSON interface is consumed by Hardhat, Foundry, and other
+# third-party tooling, so production robustness requires graceful error
+# paths for malicious / malformed input.
+[[bin]]
+name = "fuzz_target_standard_json"
+path = "fuzz_targets/fuzz_target_standard_json.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_structured_sol — generate structurally-valid Solidity sources
+# from a small AST grammar via the `arbitrary` crate, then compile at all
+# optimizer levels. Random UTF-8 mostly fails at the parser; structured
+# inputs reach the IR builder, type system, optimizer, and runtime path,
+# dramatically improving coverage of the deeper compile pipeline.
+[[bin]]
+name = "fuzz_target_structured_sol"
+path = "fuzz_targets/fuzz_target_structured_sol.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_runtime_exec — feed arbitrary bytes as NeoVM bytecode into
+# `NeoRuntime::execute`. Any host-level crash (panic, OOM, runaway loop)
+# constitutes a DoS vector against operators running compiled contracts.
+# Complements `fuzz_target_disasm` (which only checks the disassembler is
+# total) by exercising the actual VM bridge: malformed CALLT operands,
+# invalid opcodes, stack imbalance, truncated PUSHDATA, out-of-range JMPs.
+# All must funnel into a graceful runtime exception path. Default config's
+# 10M gas limit bounds infinite loops in microseconds.
+[[bin]]
+name = "fuzz_target_runtime_exec"
+path = "fuzz_targets/fuzz_target_runtime_exec.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_method_tokens — drive NeoVM CALLT (opcode 0x37) dispatch with
+# random method-token tables. `fuzz_target_runtime_exec` calls `execute`
+# with an empty token slice, so any CALLT in its corpus immediately bails
+# on "token index out of bounds" — short-circuiting the actual
+# token-resolution + native-contract dispatch path. This target supplies a
+# 1..=8-entry random token table alongside a small bytecode prefix biased
+# toward containing a CALLT, exercising the param-count pop loop, the
+# `has_return_value` post-push, and the `invoke_native_contract` shim under
+# attacker-supplied NEF tokens.
+[[bin]]
+name = "fuzz_target_method_tokens"
+path = "fuzz_targets/fuzz_target_method_tokens.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_nef_manifest_mutation — mutation-based fuzzer for the NEF
+# parser and manifest JSON parser. `fuzz_target_2` and
+# `fuzz_target_manifest_json` feed pure-random bytes, the vast majority
+# of which fail the magic-byte / non-JSON check at the front and never
+# reach token-table parsing, varint decoders, embedded-string decoding,
+# or checksum verification. This target loads valid seeds from the
+# existing fuzz corpus (with embedded fall-back seeds for fresh
+# checkouts) and applies a small budget of byte-flips, single-byte
+# writes, insertions, and deletions, driving almost-valid inputs deep
+# into the parsers' interior code paths.
+[[bin]]
+name = "fuzz_target_nef_manifest_mutation"
+path = "fuzz_targets/fuzz_target_nef_manifest_mutation.rs"
+test = false
+doc = false
+bench = false
+
+# fuzz_target_yul_assembly — generate Solidity contracts whose function
+# body is a randomly-built `assembly { ... }` (Yul) block, then compile
+# at every optimizer level. Yul is a separate sub-language with its own
+# opcode set lowered through `src/ir/statements/assembly.rs`
+# (lower_yul_statement / lower_yul_expression / lower_yul_function_call
+# and the per-builtin handlers for mload / mstore / sload / sstore /
+# return / revert / arithmetic / bitwise / shifts / comparisons / for /
+# if / let / assign). The structured-Solidity fuzzer never emits
+# `assembly`, so this surface is otherwise uncovered. Yul is also the
+# canonical gas-optimization sub-language and a high-bug-density target.
+[[bin]]
+name = "fuzz_target_yul_assembly"
+path = "fuzz_targets/fuzz_target_yul_assembly.rs"
+test = false
+doc = false
+bench = false

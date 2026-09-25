@@ -1,0 +1,2 @@
+# Reviewed production Rust file-length exceptions.
+# Keep entries repository-relative and remove them when the module is split.

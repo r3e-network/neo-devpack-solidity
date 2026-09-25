@@ -126,6 +126,42 @@ library SyscallsRuntime {
     }
 
     /**
+     * @dev Get current random number — alias of `getRandom` keeping the
+     * monolith `Syscalls.sol` API name so code written against either
+     * surface compiles against the split libraries.
+     */
+    function getCurrentRandom() internal view returns (uint256) {
+        return getRandom();
+    }
+
+    // ========== Utility Functions ==========
+    // Ported from the monolith `Syscalls.sol` so the split libraries are
+    // surface-equivalent.
+
+    /**
+     * @dev Convert script hash to address
+     */
+    function scriptHashToAddress(bytes20 scriptHash) internal pure returns (address) {
+        // A Neo script hash IS a 160-bit value; an `address` holds it directly.
+        // Convert the 20 bytes straight to uint160 to preserve every byte.
+        return address(uint160(scriptHash));
+    }
+
+    /**
+     * @dev Convert address to script hash
+     */
+    function addressToScriptHash(address addr) internal pure returns (bytes20) {
+        return bytes20(uint160(addr));
+    }
+
+    /**
+     * @dev Validate Neo address format
+     */
+    function isValidAddress(address addr) internal pure returns (bool) {
+        return addr != address(0) && uint160(addr) != 0;
+    }
+
+    /**
      * @dev Burn GAS (consumes GAS from the current execution context)
      */
     function burnGas(uint256 amount) internal {

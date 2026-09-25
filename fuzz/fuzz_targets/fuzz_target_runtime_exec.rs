@@ -42,7 +42,7 @@ fn fuzz_config() -> RuntimeConfig {
 }
 
 fuzz_target!(|data: &[u8]| {
-    let _ = std::panic::catch_unwind(|| {
+    match std::panic::catch_unwind(|| {
         let mut rt = match NeoRuntime::new(fuzz_config()) {
             Ok(rt) => rt,
             Err(_) => return,
@@ -50,5 +50,8 @@ fuzz_target!(|data: &[u8]| {
         // Treat the input as bytecode; execute it.
         // Any host-level crash (rust panic, OOM, runaway loop) is a bug.
         let _ = rt.execute(data, &[]);
-    });
+    }) {
+        Ok(()) => {}
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 });

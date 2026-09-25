@@ -1,0 +1,29 @@
+== Production Rust panic/unwrap audit ==
+Scope: src/**/*.rs (test paths and #[cfg(test)] modules excluded)
+src\cli\standard_json\standard_json_process\imports.rs:401: expect(): let unit_order = closure_cache.get(file).expect("closure cache populated"); [reviewed allowlist]
+src\diagnostics\report.rs:165: expect(): .expect("diagnostic JSON must be an object") [reviewed allowlist]
+src\frontend\frontend_parse\semver.rs:249: expect(): .expect("MIN_SUPPORTED_SOLIDITY_VERSION must be valid"); [reviewed allowlist]
+src\frontend\frontend_parse\semver.rs:251: expect(): .expect("MAX_EXCLUDED_SOLIDITY_VERSION must be valid"); [reviewed allowlist]
+src\ir\ir_context\builtins\resolve.rs:102: expect(): .expect("every builtin library base has a member whitelist"), [reviewed allowlist]
+src\ir\ir_context\ctx_locals_scopes.rs:12: expect(): .expect("label counter overflow: contract exceeds usize::MAX labels"); [reviewed allowlist]
+src\ir\ir_expressions\power.rs:237: expect(): let neg = result_neg_local.expect("int256 pow tracks the result sign"); [reviewed allowlist]
+src\manifest\build.rs:199: expect(): .expect("collision group is non-empty"); [reviewed allowlist]
+src\neo\contract_hash.rs:105: expect(): .expect("value in 1..=16") [reviewed allowlist]
+src\runtime\execution\execution_impl_part2_native\stdlib.rs:259: expect(): slots.into_iter().next().expect("guarded by len() == 1") [reviewed allowlist]
+src\runtime\execution\execution_impl_part3_conversion.rs:60: expect(): let sign = *bytes.last().expect("guarded by non-empty check") & 0x80; [reviewed allowlist]
+src\runtime\execution\execution_impl_part3_offsets\call_stack.rs:47: expect(): .expect("guarded by len > stack_base"), [reviewed allowlist]
+src\runtime\execution\execution_impl_part3_offsets\input.rs:69: expect(): .expect("clamped calldata read cannot exceed memory_limit"); [reviewed allowlist]
+src\runtime\execution\syscalls\contract.rs:145: expect(): .expect("value in 1..=16") [reviewed allowlist]
+src\solidity\upgrade.rs:58: expect(): Lazy::new(|| Regex::new(r"\bblockhash\s*\(").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:60: expect(): Lazy::new(|| Regex::new(r"\bselfdestruct\s*\(").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:62: expect(): Lazy::new(|| Regex::new(r"\.codehash\b").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:64: expect(): Lazy::new(|| Regex::new(r"\btx\.origin\b").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:66: expect(): Lazy::new(|| Regex::new(r"\bmsg\.sig\b").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:68: expect(): Lazy::new(|| Regex::new(r"(?:\.|\b)delegatecall\s*\(").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:70: expect(): Lazy::new(|| Regex::new(r"(?:\.|\b)staticcall\s*\(").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:72: expect(): Lazy::new(|| Regex::new(r"\.\s*call\s*(?:\(|\{)").expect("valid regex pattern")); [reviewed allowlist]
+src\solidity\upgrade.rs:81: expect(): Regex::new(r"(?:\d|\))\s*(?:wei|gwei|szabo|finney|ether)\b").expect("valid regex pattern") [reviewed allowlist]
+src\solidity\upgrade.rs:84: expect(): Lazy::new(|| Regex::new(r"\bsupportsInterface\s*\(").expect("valid regex pattern")); [reviewed allowlist]
+Forbidden findings (unwrap/panic/unimplemented/todo): 0
+Production expect() findings: 24
+expect() entries without adjacent invariant comment: 0

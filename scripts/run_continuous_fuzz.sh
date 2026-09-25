@@ -30,8 +30,17 @@ CARGO_FUZZ_TIME="${CARGO_FUZZ_TIME:-300}"
 # fuzz/Cargo.toml.
 if [ -n "${FUZZ_TARGETS:-}" ]; then
   TARGETS=($FUZZ_TARGETS)
-else
-  mapfile -t TARGETS < <(cargo +nightly fuzz list)
+  else
+  TARGET_LIST="/tmp/fuzz-continuous/targets.txt"
+  if ! cargo +nightly fuzz list > "$TARGET_LIST"; then
+    echo "cargo fuzz list failed" >&2
+    exit 1
+  fi
+  mapfile -t TARGETS < "$TARGET_LIST"
+  if [ "${#TARGETS[@]}" -eq 0 ]; then
+    echo "cargo fuzz list returned no targets" >&2
+    exit 1
+  fi
 fi
 
 echo "Starting continuous fuzz loop..."
@@ -76,23 +85,22 @@ while true; do
     # `cargo +nightly fuzz run ... -- -max_total_time=N` self-terminates;
     # wrap in `timeout` as a belt-and-suspenders guard in case the target
     # ignores -max_total_time.
-    timeout "$((CARGO_FUZZ_TIME + 30))" \
+    if timeout "$((CARGO_FUZZ_TIME + 30))" \
       cargo +nightly fuzz run "$TARGET" -- \
         "${DICT_ARG[@]}" \
         -max_total_time="$CARGO_FUZZ_TIME" \
-      > "$LOGFILE" 2>&1 || true
-
-    # A real crash shows as `ERROR:` in libFuzzer output. An OOM / ASAN
-    # error also shows as `ERROR:`. Ignore the `ERROR:` that libFuzzer
-    # prints when it rediscovers a known-benign corpus input (none of our
-    # targets currently hit this).
-    if grep -aq "^ERROR:" "$LOGFILE"; then
-      echo "[$(date)] ❌ cargo-fuzz ${TARGET} FOUND A CRASH"
-      grep -a "^ERROR:" "$LOGFILE" | head -3
-      echo "See: $LOGFILE"
-      exit 1
+      > "$LOGFILE" 2>&1; then
+      FUZZ_STATUS=0
+    else
+      FUZZ_STATUS=$?
     fi
-    COV=$(grep -a "cov:" "$LOGFILE" | tail -1 | grep -oE "cov: [0-9]+" | awk '{print $2}')
+    if [ "$FUZZ_STATUS" -ne 0 ]; then
+      echo "[$(date)] ❌ cargo-fuzz ${TARGET} failed (exit $FUZZ_STATUS)"
+      tail -80 "$LOGFILE"
+      echo "See: $LOGFILE"
+      exit "$FUZZ_STATUS"
+    fi
+    COV=$(grep -a "cov:" "$LOGFILE" | tail -1 | grep -oE "cov: [0-9]+" | awk '{print $2}' || true)
     echo "[$(date)] ✅ ${TARGET} clean (cov:${COV:-?})"
   done
 

@@ -217,7 +217,7 @@ fn apply_mutations(buf: &mut Vec<u8>, u: &mut Unstructured) -> arbitrary::Result
 }
 
 fuzz_target!(|data: &[u8]| {
-    let _ = std::panic::catch_unwind(|| {
+    match std::panic::catch_unwind(|| {
         let mut u = Unstructured::new(data);
 
         // Pick which parser family we're targeting this iteration.
@@ -278,5 +278,8 @@ fuzz_target!(|data: &[u8]| {
                 }
             }
         }
-    });
+    }) {
+        Ok(()) => {}
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 });

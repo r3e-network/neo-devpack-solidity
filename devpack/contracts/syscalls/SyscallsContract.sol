@@ -6,44 +6,14 @@ import "./SyscallsBase.sol";
 
 /**
  * @title Syscalls Contract — Neo N3 Contract operations
+ *
+ * @notice Low-level contract calls (`contractCall`, `contractCallWithFlags`)
+ * live on `SyscallsBase`; this library layers the ContractManagement
+ * operations on top.
  */
 
 library SyscallsContract {
     // ========== Contract System Calls ==========
-    
-    /**
-     * @dev Call another contract
-     */
-    function SyscallsBase.contractCall(
-        address scriptHash,
-        string memory method,
-        bytes memory params
-    ) internal returns (bytes memory) {
-        bytes memory data = abi.encode(scriptHash, method, params);
-        return SyscallsBase._syscallBytes("System.Contract.Call", data);
-    }
-    
-    /**
-     * @dev Call contract with flags
-     * @notice Neo N3 does not have System.Contract.CallEx. The flags parameter is
-     *         accepted for API compatibility but currently has no effect.
-     * @param scriptHash The target contract script hash
-     * @param method The method name to call
-     * @param params The encoded parameters
-     * @param flags Call flags (currently ignored - reserved for future use)
-     * @return The result of the contract call
-     */
-    function SyscallsBase.contractCallWithFlags(
-        address scriptHash,
-        string memory method,
-        bytes memory params,
-        uint8 flags
-    ) internal returns (bytes memory) {
-        // Flags parameter is reserved for future use when Neo N3 adds CallEx support
-        // Currently ignored - passed in data for forward compatibility
-        bytes memory data = abi.encode(scriptHash, method, params, flags);
-        return SyscallsBase._syscallBytes("System.Contract.Call", data);
-    }
 
     /**
      * @dev Get current call flags
@@ -73,7 +43,7 @@ library SyscallsContract {
         bytes memory result = SyscallsBase._syscallBytes("System.Contract.CreateMultisigAccount", data);
         return abi.decode(result, (address));
     }
-    
+
     /**
      * @dev Create new contract
      */
@@ -96,7 +66,7 @@ library SyscallsContract {
         ContractStateNative memory state = abi.decode(result, (ContractStateNative));
         return state.hash;
     }
-    
+
     /**
      * @dev Update contract
      */
@@ -112,14 +82,40 @@ library SyscallsContract {
         bytes memory data = abi.encode(nef, manifest, updateData);
         SyscallsBase.contractCall(SyscallsBase.CONTRACT_MANAGEMENT, "update", data);
     }
-    
+
     /**
      * @dev Destroy contract
      */
     function contractDestroy() internal {
         SyscallsBase.contractCall(SyscallsBase.CONTRACT_MANAGEMENT, "destroy", "");
     }
-    
+
+    // ========== Utility Functions ==========
+    // Ported from the monolith `Syscalls.sol` so the split libraries are
+    // surface-equivalent.
+
+    /**
+     * @dev Get contract NEF (script container)
+     */
+    function getContractScript(address contractHash) internal view returns (bytes memory) {
+        bytes memory data = abi.encode(contractHash);
+        bytes memory result = SyscallsBase.contractCall(SyscallsBase.CONTRACT_MANAGEMENT, "getContract", data);
+        if (result.length == 0) {
+            return "";
+        }
+        SyscallsTypes.ContractStateNative memory state = abi.decode(result, (SyscallsTypes.ContractStateNative));
+        return state.nef;
+    }
+
+    /**
+     * @dev Check if contract exists
+     */
+    function contractExists(address contractHash) internal view returns (bool) {
+        bytes memory data = abi.encode(contractHash);
+        bytes memory result = SyscallsBase.contractCall(SyscallsBase.CONTRACT_MANAGEMENT, "isContract", data);
+        return abi.decode(result, (bool));
+    }
+
     /**
      * @dev Get executing script hash
      */
@@ -127,7 +123,7 @@ library SyscallsContract {
         bytes memory result = SyscallsBase._syscallBytes("System.Runtime.GetExecutingScriptHash", "");
         return abi.decode(result, (address));
     }
-    
+
     /**
      * @dev Get calling script hash
      */
@@ -135,7 +131,7 @@ library SyscallsContract {
         bytes memory result = SyscallsBase._syscallBytes("System.Runtime.GetCallingScriptHash", "");
         return abi.decode(result, (address));
     }
-    
+
     /**
      * @dev Get entry script hash
      */
@@ -159,5 +155,4 @@ library SyscallsContract {
         bytes memory data = abi.encode(script, callFlags, args);
         SyscallsBase._syscallVoid("System.Runtime.LoadScript", data);
     }
-    
 }

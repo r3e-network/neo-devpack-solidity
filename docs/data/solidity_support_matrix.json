@@ -1,0 +1,2274 @@
+{
+  "schemaVersion": 1,
+  "sourceDate": "2026-07-03",
+  "compilerVersionSource": "Cargo.toml",
+  "compilerRange": "0.5.x-0.8.x",
+  "target": "NeoVM (Neo N3, node v3.10.0)",
+  "features": [
+    {
+      "id": "a_bool",
+      "category": "A. Types",
+      "syntax": "`bool`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to NeoVM Boolean",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_int8_int256",
+      "category": "A. Types",
+      "syntax": "`int8`..`int256`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "All widths parsed; NeoVM uses arbitrary-precision BigInteger",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_uint8_uint256",
+      "category": "A. Types",
+      "syntax": "`uint8`..`uint256`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "All widths parsed; NeoVM uses arbitrary-precision BigInteger",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_address",
+      "category": "A. Types",
+      "syntax": "`address`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to Neo UInt160 (Hash160, 20 bytes)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_address_payable",
+      "category": "A. Types",
+      "syntax": "`address payable`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed and canonicalized to `address`; `.transfer()` / `.send()` map to Neo GAS transfer semantics, not EVM attached value",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "a_bytes1_bytes32",
+      "category": "A. Types",
+      "syntax": "`bytes1`..`bytes32`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Fixed-length byte arrays via `NeoType::ByteArray { fixed_len }`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_bytes_dynamic",
+      "category": "A. Types",
+      "syntax": "`bytes` (dynamic)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Dynamic byte array",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_string",
+      "category": "A. Types",
+      "syntax": "`string`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "UTF-8 string type",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_enum",
+      "category": "A. Types",
+      "syntax": "`enum`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Converted via `convert_enum`; backed by uint8",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_struct",
+      "category": "A. Types",
+      "syntax": "`struct`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Full struct support with nested fields; `StructDefinition` converted",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_mapping_k_v",
+      "category": "A. Types",
+      "syntax": "`mapping(K => V)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Storage mappings with Neo StorageMap; key type validation enforced",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_t_dynamic_array",
+      "category": "A. Types",
+      "syntax": "`T[]` (dynamic array)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`new T[](n)` allocation supported",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_t_n_fixed_array",
+      "category": "A. Types",
+      "syntax": "`T[N]` (fixed array)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed; `new T[N]` supported when `N` is compile-time constant; `.length` returns the declared bound `N` (including storage arrays)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_fixed_ufixed",
+      "category": "A. Types",
+      "syntax": "`fixed` / `ufixed`",
+      "status": "unsupported",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Not supported (also unsupported in mainline Solidity)",
+      "compileStatus": "unsupported",
+      "runtimeStatus": "unsupported",
+      "strictCompileStatus": "blocked"
+    },
+    {
+      "id": "a_user_defined_value_types_type_x_is_y",
+      "category": "A. Types",
+      "syntax": "User-defined value types (`type X is Y`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Transparent type aliases; `wrap`/`unwrap` compile to no-ops",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_bytes_concat",
+      "category": "A. Types",
+      "syntax": "`bytes.concat(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Chains NeoVM CAT opcodes; zero args produce empty byte array",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_string_concat",
+      "category": "A. Types",
+      "syntax": "`string.concat(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Same implementation as `bytes.concat` via CAT opcode chain",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_contract_types_e_g_ierc20",
+      "category": "A. Types",
+      "syntax": "Contract types (e.g., `IERC20`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Resolved to Neo UInt160 address; interface types tracked",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_tuple_types",
+      "category": "A. Types",
+      "syntax": "Tuple types",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Represented as NeoVM arrays internally",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "a_function_types_function_internal_external",
+      "category": "A. Types",
+      "syntax": "Function types (`function(...) internal / external`)",
+      "status": "unsupported",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Not representable on NeoVM; state variables, locals, params, and return types of function type are rejected by the `NeoType` resolver. Use named functions and inheritance instead of function pointers.",
+      "compileStatus": "unsupported",
+      "runtimeStatus": "unsupported",
+      "strictCompileStatus": "blocked"
+    },
+    {
+      "id": "b_arithmetic",
+      "category": "B. Expressions",
+      "syntax": "Arithmetic (`+`, `-`, `*`, `/`, `%`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Binary ops via `try_lower_expression_binary_ops`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_comparison",
+      "category": "B. Expressions",
+      "syntax": "Comparison (`==`, `!=`, `<`, `>`, `<=`, `>=`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Via `try_lower_expression_comparisons`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_logical",
+      "category": "B. Expressions",
+      "syntax": "Logical (`&&`, `||`, `!`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Short-circuit evaluation in `logical.rs`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_bitwise",
+      "category": "B. Expressions",
+      "syntax": "Bitwise (`&`, `|`, `^`, `~`, `<<`, `>>`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Full bitwise support with EVM truncation semantics for fixed-width values",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_unary",
+      "category": "B. Expressions",
+      "syntax": "Unary (`++`, `--`, `-`, `!`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Pre/post increment/decrement",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_ternary",
+      "category": "B. Expressions",
+      "syntax": "Ternary (`? :`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`ConditionalOperator` lowered with labels",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_assignment_etc",
+      "category": "B. Expressions",
+      "syntax": "Assignment (`=`, `+=`, `-=`, etc.)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Compound assignments in `assignments/compound.rs`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_delete",
+      "category": "B. Expressions",
+      "syntax": "`delete`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "State vars, mapping entries, locals, array elements, struct fields",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_tuple_expressions_a_b_c",
+      "category": "B. Expressions",
+      "syntax": "Tuple expressions `(a, b, c)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`Expression::List` lowered to NeoVM arrays",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_tuple_destructuring_a_b_f",
+      "category": "B. Expressions",
+      "syntax": "Tuple destructuring `(a, b) = f()`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Nested destructuring assignment supported; some complex target forms still require intermediate locals",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "b_type_casting",
+      "category": "B. Expressions",
+      "syntax": "Type casting",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`TypeCastingShowcase.sol` example compiles",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_type_x_min_type_x_max",
+      "category": "B. Expressions",
+      "syntax": "`type(X).min` / `type(X).max`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Supported for integer types",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_type_t_name",
+      "category": "B. Expressions",
+      "syntax": "`type(T).name`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Compile-time string constant for contract/type names",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_type_i_interfaceid",
+      "category": "B. Expressions",
+      "syntax": "`type(I).interfaceId`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Computed from selector XOR of interface methods",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_abi_encode",
+      "category": "B. Expressions",
+      "syntax": "`abi.encode(...)`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Supported for selected compiler/runtime paths; dynamic payloads and standalone production use need Neo-Express validation",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "b_abi_encodepacked",
+      "category": "B. Expressions",
+      "syntax": "`abi.encodePacked(...)`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Same as `abi.encode` — used for Neo contract call encoding",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "b_abi_encodewithsignature",
+      "category": "B. Expressions",
+      "syntax": "`abi.encodeWithSignature(...)`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "In low-level call contexts it rewrites to Neo contract calls; standalone use approximates calldata as selector plus encoded args",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "b_abi_encodewithselector",
+      "category": "B. Expressions",
+      "syntax": "`abi.encodeWithSelector(...)`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "In low-level call contexts it rewrites to Neo contract calls; standalone use approximates calldata as selector plus encoded args",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "b_abi_encodecall",
+      "category": "B. Expressions",
+      "syntax": "`abi.encodeCall(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `StdLib.serialize`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_abi_decode",
+      "category": "B. Expressions",
+      "syntax": "`abi.decode(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `StdLib.deserialize`; type tuple parsed from second argument",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "b_named_function_call_args_f_x_1",
+      "category": "B. Expressions",
+      "syntax": "Named function call args `f({x: 1})`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Named args reordered to positional order at IR level",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_if_else",
+      "category": "C. Statements",
+      "syntax": "`if` / `else`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Standard conditional branching",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_for_loop",
+      "category": "C. Statements",
+      "syntax": "`for` loop",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Init, condition, post, body all lowered",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_while_loop",
+      "category": "C. Statements",
+      "syntax": "`while` loop",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Condition + body",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_do_while_loop",
+      "category": "C. Statements",
+      "syntax": "`do...while` loop",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Body + condition",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_break",
+      "category": "C. Statements",
+      "syntax": "`break`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Loop break",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_continue",
+      "category": "C. Statements",
+      "syntax": "`continue`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Loop continue",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_return",
+      "category": "C. Statements",
+      "syntax": "`return`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Single and multi-value returns",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_emit_event",
+      "category": "C. Statements",
+      "syntax": "`emit Event(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `Runtime.Notify`; indexed params supported",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_revert",
+      "category": "C. Statements",
+      "syntax": "`revert(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to NeoVM `ABORT` with message",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_revert_customerror",
+      "category": "C. Statements",
+      "syntax": "`revert CustomError(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Named revert with args; `RevertNamedArgs` also handled",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_variable_declaration",
+      "category": "C. Statements",
+      "syntax": "Variable declaration",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Local variable definitions with optional initializer",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_block",
+      "category": "C. Statements",
+      "syntax": "Block `{ ... }`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Scoped statement blocks",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_unchecked",
+      "category": "C. Statements",
+      "syntax": "`unchecked { ... }`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Suppresses Solidity 0.8 checked-arithmetic guards inside the block; fixed-width arithmetic wraps, including `int256` add/sub/mul two's-complement wrap mod 2^256 (`type(int256).max + 1 == type(int256).min`). Checked mode still panics (0x11)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_assembly",
+      "category": "C. Statements",
+      "syntax": "`assembly { ... }`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Limited Yul subset lowering; unsupported EVM-only operations warn and emit no assembly logic for that block",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "c_try_catch",
+      "category": "C. Statements",
+      "syntax": "`try` / `catch`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to NeoVM TRY/ENDTRY; single catch clause preferred",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_catch_error_string",
+      "category": "C. Statements",
+      "syntax": "`catch Error(string)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Named catch with parameter binding",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_catch_panic_uint256",
+      "category": "C. Statements",
+      "syntax": "`catch Panic(uint256)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Matches the canonical `keccak256(\"Panic(uint256)\")[..4] = 0x4e487b71` selector on the revert envelope and decodes the 32-byte BE code (Task #103)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "c_catch_bytes",
+      "category": "C. Statements",
+      "syntax": "`catch (bytes)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Low-level catch with raw bytes",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_regular_functions",
+      "category": "D. Functions",
+      "syntax": "Regular functions",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Public, external, internal, private",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_free_functions_file_scope",
+      "category": "D. Functions",
+      "syntax": "Free functions (file-scope)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Functions declared outside any contract are callable; overloads deduplicated by name+arity, and all overloads are callable",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_constructor",
+      "category": "D. Functions",
+      "syntax": "Constructor",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Single constructor; multiple constructors rejected",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_view_pure",
+      "category": "D. Functions",
+      "syntax": "`view` / `pure`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "State mutability tracked and enforced at IR level",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_payable",
+      "category": "D. Functions",
+      "syntax": "`payable`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed; `payable` on non-receive functions warns (Neo has no native gas payment)",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "d_returns_t",
+      "category": "D. Functions",
+      "syntax": "`returns (T)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Single return type",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_returns_t1_t2",
+      "category": "D. Functions",
+      "syntax": "`returns (T1, T2, ...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Multi-return via NeoVM arrays",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_function_overloading",
+      "category": "D. Functions",
+      "syntax": "Function overloading",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Supported with `neo_name` mangling; one canonical ABI name is preserved and non-primary overloads are exported under generated Neo method names",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "d_modifier",
+      "category": "D. Functions",
+      "syntax": "`modifier`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Full modifier expansion with `_` placeholder substitution",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_receive",
+      "category": "D. Functions",
+      "syntax": "`receive()`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "**Silently remapped** to `onNEP17Payment(address,uint256,bytes)` in the manifest when no explicit `onNEP17Payment` is declared (NEP-17 convention, see `src/solidity/convert/functions.rs:32`). Ethereum devs: the body is preserved but exported under a new ABI name. See \"receive()/fallback() remapping\" note below.",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "d_fallback",
+      "category": "D. Functions",
+      "syntax": "`fallback()`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Retains the name `fallback` in the manifest. No EVM-style unknown-method dispatch; compiler emits diagnostic W105 suggesting `onNEP17Payment()`.",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "d_virtual_override",
+      "category": "D. Functions",
+      "syntax": "`virtual` / `override`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Inheritance flattening resolves overrides; multi-level chains supported",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_function_selectors_selector",
+      "category": "D. Functions",
+      "syntax": "Function selectors (`.selector`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Computed from canonical parameter types",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "d_natspec_comments",
+      "category": "D. Functions",
+      "syntax": "NatSpec comments",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`@notice`, `@dev`, `@param`, `@return` preserved in metadata",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_single_inheritance",
+      "category": "E. OOP Features",
+      "syntax": "Single inheritance",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "C3 linearization with `flatten_contract_inheritance`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_multiple_inheritance",
+      "category": "E. OOP Features",
+      "syntax": "Multiple inheritance",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Diamond inheritance detected; constructor arg conflicts reported",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_interface",
+      "category": "E. OOP Features",
+      "syntax": "`interface`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Interface types tracked; methods validated",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_abstract_contract",
+      "category": "E. OOP Features",
+      "syntax": "`abstract contract`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Fully validated; unimplemented functions detected; non-abstract contracts get actionable errors. A concrete contract holding an abstract-contract-typed field is not forced to implement that field's virtuals",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_library",
+      "category": "E. OOP Features",
+      "syntax": "`library`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Builtin devpack libraries are compiler intrinsics; user-defined libraries are merged/inlined, but still cannot model deployable library state or linking",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "e_using_x_for_y",
+      "category": "E. OOP Features",
+      "syntax": "`using X for Y`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Library member-call syntax fully supported; `using X for *` and `using {f,g} for T` included",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_user_defined_operators_using_f_as_for_t",
+      "category": "E. OOP Features",
+      "syntax": "User-defined operators (`using {f as +} for T`)",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Solidity 0.8.19 operator binding compiles with warning `W_USER_DEFINED_OPERATOR`, but operators are NOT dispatched to the bound function — raw arithmetic runs on the underlying representation. Call the bound function explicitly",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "e_super_keyword",
+      "category": "E. OOP Features",
+      "syntax": "`super` keyword",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Supported via inheritance flattening with `__super_` method preservation",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_is_inheritance",
+      "category": "E. OOP Features",
+      "syntax": "`is` (inheritance)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Inheritance specifiers fully processed",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_constructor_chaining",
+      "category": "E. OOP Features",
+      "syntax": "Constructor chaining",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Base constructor arguments resolved from inheritance specifiers",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_event_inheritance",
+      "category": "E. OOP Features",
+      "syntax": "Event inheritance",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Interface events collected recursively via `collect_interface_events_recursive`; a sibling's INHERITED (interface/base) events are carried through the sibling-merge and via cross-contract `new`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "e_library_declared_events",
+      "category": "E. OOP Features",
+      "syntax": "Library-declared events",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Events declared inside a `library` are inlined into the consuming contract's ABI when emitted",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_state_variables",
+      "category": "F. Storage & Memory",
+      "syntax": "State variables",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Mapped to Neo Storage with prefix-based keys",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_constant",
+      "category": "F. Storage & Memory",
+      "syntax": "`constant`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Compile-time constants inlined",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_immutable",
+      "category": "F. Storage & Memory",
+      "syntax": "`immutable`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Tracked via `is_immutable` flag; modification blocked at compile time",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_transient_state_variables",
+      "category": "F. Storage & Memory",
+      "syntax": "`transient` state variables",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Solidity 0.8.28 (EIP-1153) `transient` compiles to regular PERSISTENT storage with warning `W_TRANSIENT_PERSISTED` (NeoVM has no transient store); values are NOT cleared at transaction end — clear manually at every entry point",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "f_memory_keyword",
+      "category": "F. Storage & Memory",
+      "syntax": "`memory` keyword",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed; NeoVM is stack-based so memory is implicit",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_storage_keyword",
+      "category": "F. Storage & Memory",
+      "syntax": "`storage` keyword",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Storage references for mappings and state variables",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_calldata_keyword",
+      "category": "F. Storage & Memory",
+      "syntax": "`calldata` keyword",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed; treated as `memory` (correct for NeoVM — no calldata region)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_nested_mappings",
+      "category": "F. Storage & Memory",
+      "syntax": "Nested mappings",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`mapping(K1 => mapping(K2 => V))` with composite storage keys",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_struct_in_storage",
+      "category": "F. Storage & Memory",
+      "syntax": "Struct in storage",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Serialized/deserialized via `StdLib.serialize`/`StdLib.deserialize`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_array_push_pop",
+      "category": "F. Storage & Memory",
+      "syntax": "Array `.push()` / `.pop()`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Storage array operations supported",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_array_length",
+      "category": "F. Storage & Memory",
+      "syntax": "Array `.length`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Both memory and storage arrays",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_new_bytes_n_new_string_n",
+      "category": "F. Storage & Memory",
+      "syntax": "`new bytes(n)` / `new string(n)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Buffer allocation via `NEWBUFFER`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_new_t_n",
+      "category": "F. Storage & Memory",
+      "syntax": "`new T[](n)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Dynamic array allocation via `NEWARRAY`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "f_new_contract",
+      "category": "F. Storage & Memory",
+      "syntax": "`new Contract(...)`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Does not deploy a child contract; constructor-like logic is inlined/simulated and a zero-address placeholder is produced. Use `ContractManagement.deploy(...)` for real deployment",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "f_new_x_salt_s_create2",
+      "category": "F. Storage & Memory",
+      "syntax": "`new X{salt: s}()` (CREATE2)",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Salted creation is accepted (parses and compiles); the `salt` is ignored because Neo N3 has no CREATE2. Same inline/simulate model as `new Contract(...)`",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "g_require_condition",
+      "category": "G. Error Handling",
+      "syntax": "`require(condition)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to NeoVM ASSERT",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_require_condition_msg",
+      "category": "G. Error Handling",
+      "syntax": "`require(condition, \"msg\")`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "ASSERT with message",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_require_condition_customerror",
+      "category": "G. Error Handling",
+      "syntax": "`require(condition, CustomError(...))`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Error name and arg count preserved in NeoVM THROW message",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_assert_condition",
+      "category": "G. Error Handling",
+      "syntax": "`assert(condition)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to NeoVM ASSERT",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_revert",
+      "category": "G. Error Handling",
+      "syntax": "`revert()`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to NeoVM ABORT",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_revert_message",
+      "category": "G. Error Handling",
+      "syntax": "`revert(\"message\")`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "ABORT with message",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_revert_customerror",
+      "category": "G. Error Handling",
+      "syntax": "`revert CustomError(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Named revert with arguments",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_custom_error_definitions_error_x",
+      "category": "G. Error Handling",
+      "syntax": "Custom error definitions (`error X(...)`)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed and used in revert statements",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_try_catch",
+      "category": "G. Error Handling",
+      "syntax": "`try` / `catch`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "NeoVM TRY/ENDTRY structured exception handling",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_try_with_return_binding",
+      "category": "G. Error Handling",
+      "syntax": "`try` with return binding",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`try f() returns (uint r) { ... }` supported",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "g_multiple_catch_clauses",
+      "category": "G. Error Handling",
+      "syntax": "Multiple catch clauses",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Lowered with EVM-canonical selector guards for `Error(string)` and `Panic(uint256)`; user-defined named catches retain legacy guards",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_msg_sender",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`msg.sender`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `Runtime.GetCallingScriptHash()`; internal/self-offset runtime paths may inject a direct-caller override",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_msg_value",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`msg.value`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Only mapped inside `onNEP17Payment` callback",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_msg_data",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`msg.data`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Approximated as selector plus encoded current args outside onNEP17Payment",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_msg_sig",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`msg.sig`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Approximated as the current function selector; internal-call propagation still differs from EVM",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_block_timestamp",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.timestamp`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `Runtime.GetTime()` (normalized to seconds)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_block_number",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.number`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `Ledger.CurrentIndex()`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_block_chainid",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.chainid`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to Neo network magic number",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_block_coinbase",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.coinbase`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `address(0)` with warning (dBFT has no miner)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_block_difficulty_block_prevrandao",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.difficulty` / `block.prevrandao`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `Runtime.getRandom()` with warning",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_block_gaslimit",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.gaslimit`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `Policy.getExecFeeFactor()` with warning",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_block_basefee",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.basefee`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `Policy.getFeePerByte()` with warning",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_tx_origin",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`tx.origin`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed; warning about authorization risks",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_tx_gasprice",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`tx.gasprice`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `Policy.getFeePerByte()` with warning",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_gasleft",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`gasleft()`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `System.Runtime.GasLeft` syscall",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_blockhash_n",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`blockhash(n)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `Ledger.getBlockHash()` with warning",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_block_sha3",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`block.sha3`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `Ledger.currentHash`; deprecated in Solidity 0.8+",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_keccak256",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`keccak256(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `CryptoLib.keccak256`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_sha256",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`sha256(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `CryptoLib.sha256`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_ecrecover",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`ecrecover(...)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Uses `CryptoLib.recoverSecp256K1`, then derives the Ethereum address with `keccak256` and `RIGHT 20`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_selfdestruct_addr",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`selfdestruct(addr)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `ContractManagement.destroy()` with warning",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_address_call",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.call(...)`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `System.Contract.Call`; return wrapping and ABI payload parity differ from EVM and need Neo-Express validation",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_address_staticcall",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.staticcall(...)`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `System.Contract.Call` (read-only flag); return wrapping and ABI payload parity differ from EVM",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_address_delegatecall_callcode",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.delegatecall(...)` / `callcode(...)`",
+      "status": "blocked",
+      "diagnosticCode": "EVM_DELEGATECALL_BLOCKED",
+      "alternative": "Use System.Contract.Call, explicit NEP-17 transfer, or redesign state ownership; strict mode rejects this syntax.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Blocked at compile time; Neo N3 has no equivalent caller-storage execution semantics; default mode emits a warning and cannot provide caller-storage semantics; runtime use traps; strict mode blocks compilation.",
+      "compileStatus": "warning",
+      "runtimeStatus": "trap",
+      "strictCompileStatus": "blocked"
+    },
+    {
+      "id": "h_address_transfer_amount",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.transfer(amount)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `GAS.transfer(from,to,amount,data)`; aborts on transfer fail",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_address_send_amount",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.send(amount)`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `GAS.transfer(from,to,amount,data)`; returns bool",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_address_balance",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.balance`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to `GAS.balanceOf(address)`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_address_code",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.code`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Returns Neo contract script bytes; non-contracts return empty bytes. `address.code.length` still maps to a contract-existence check",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_address_codehash",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`address.codehash`",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-mapped to contract script hash with warning; non-contract → bytes32(0)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_ether_units_wei_gwei_ether",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "Ether units (`wei`, `gwei`, `ether`)",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Parsed; warning that Neo uses GAS token (10^8 decimals)",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_time_units_seconds_minutes_etc",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "Time units (`seconds`, `minutes`, etc.)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Compile-time constants (normalized to seconds)",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_this_keyword",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`this` keyword",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Maps to `Runtime.GetExecutingScriptHash()`; correct Neo equivalent",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "h_type_x_creationcode",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`type(X).creationCode`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Compiler-emitted deterministic NEF3-shaped payload for hashing compatibility; not EVM bytecode and requires an in-graph type",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "h_type_x_runtimecode",
+      "category": "H. EVM-Specific Features (with Neo Alternatives)",
+      "syntax": "`type(X).runtimeCode`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "See notes and migration guidance.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Same deterministic Neo-shaped payload model as `creationCode`; not production bytecode introspection",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "i_erc20_nep17",
+      "category": "I. ERC to NEP Protocol Mapping",
+      "syntax": "ERC-20 (Fungible Token)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-detected; `transfer(to,amount)` warns to use 4-param NEP-17 form",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "i_erc721_nep11",
+      "category": "I. ERC to NEP Protocol Mapping",
+      "syntax": "ERC-721 (NFT)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-detected; `transferFrom` warns to use NEP-11 `transfer(to,tokenId,data)`",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "i_erc20_approval_allowance",
+      "category": "I. ERC to NEP Protocol Mapping",
+      "syntax": "ERC-20 `approve`/`allowance`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "Use witness-scoped NEP-17 transfer or document allowance extension.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Warning: not part of NEP-17 spec; Neo uses `Runtime.checkWitness()`",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "i_erc165_manifest",
+      "category": "I. ERC to NEP Protocol Mapping",
+      "syntax": "ERC-165 `supportsInterface`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "Use manifest `supportedstandards` and ContractManagement metadata.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Warning: unnecessary on Neo; manifest-based discovery",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "i_erc4626_nep17",
+      "category": "I. ERC to NEP Protocol Mapping",
+      "syntax": "ERC-4626 (Tokenized Vault)",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "Adapt asset flows and callbacks to NEP-17.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Vault logic compiles; ERC-20 interactions must use NEP-17 equivalents",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    },
+    {
+      "id": "i_erc2981_nep24",
+      "category": "I. ERC to NEP Protocol Mapping",
+      "syntax": "ERC-2981 (Royalty)",
+      "status": "supported",
+      "diagnosticCode": null,
+      "alternative": null,
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "Auto-detected; multiple royalty recipients supported",
+      "compileStatus": "supported",
+      "runtimeStatus": "supported",
+      "strictCompileStatus": "supported"
+    },
+    {
+      "id": "i_receive_fallback_nep17",
+      "category": "I. ERC to NEP Protocol Mapping",
+      "syntax": "`receive()` / `fallback()`",
+      "status": "approximate",
+      "diagnosticCode": null,
+      "alternative": "Use explicit `onNEP17Payment()` or EVM compatibility adapters.",
+      "sourceRefs": [
+        "docs/SOLIDITY_SUPPORT_MATRIX.md"
+      ],
+      "notes": "`receive()` silently remapped; `fallback()` kept as-is. See note below.",
+      "compileStatus": "approximate",
+      "runtimeStatus": "approximate",
+      "strictCompileStatus": "approximate"
+    }
+  ]
+}

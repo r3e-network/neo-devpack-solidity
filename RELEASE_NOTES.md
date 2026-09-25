@@ -1,3 +1,13 @@
+# neo-devpack-solidity v0.31.0 — Release
+
+**Release date:** 2026-09-26
+**Compiler / CLI / workspace:** **v0.31.0**
+**Target Neo N3 node:** **v3.10.0**
+
+> Canonical change list: [`CHANGELOG.md`](./CHANGELOG.md) `[v0.31.0]`.
+
+---
+
 # neo-devpack-solidity v0.30.3 — Audit Hardening & Dead-Code Removal
 
 **Release date:** 2026-08-29

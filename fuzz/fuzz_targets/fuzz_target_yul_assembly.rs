@@ -462,7 +462,10 @@ fuzz_target!(|data: &[u8]| {
     // Wrap in catch_unwind: only a real panic / abort is a finding. Any
     // Result::Err is expected (semantically-weird Yul: uninitialized
     // reads, unreachable code after `return`, jumps out of scope, etc.).
-    let _ = std::panic::catch_unwind(move || {
+    match std::panic::catch_unwind(move || {
         let _ = neo_devpack_solidity::cli::compile_contracts(&src, false, opt);
-    });
+    }) {
+        Ok(()) => {}
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 });

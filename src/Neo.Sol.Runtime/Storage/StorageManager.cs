@@ -87,12 +87,19 @@ public sealed class StorageManager : IDisposable
             throw new ObjectDisposedException(nameof(StorageManager));
             
         var currentTime = (ulong)_accessTimer.ElapsedMilliseconds;
-        
-        // Check cache first
+
+        // Check cache first with atomic update of access metadata
         if (_cache.TryGetValue(slot, out var cachedSlot))
         {
-            cachedSlot.LastAccessed = currentTime;
-            cachedSlot.AccessCount++;
+            // Update access tracking atomically
+            _cache.AddOrUpdate(
+                slot,
+                cachedSlot,
+                (_, existing) => existing with
+                {
+                    LastAccessed = currentTime,
+                    AccessCount = existing.AccessCount + 1
+                });
             Interlocked.Increment(ref _cacheHits);
             return cachedSlot.Value;
         }
@@ -104,19 +111,9 @@ public sealed class StorageManager : IDisposable
         var value = NeoFrameworkStorage.Get(_context, key);
         
         // EVM storage always returns 32 bytes, pad with zeros if needed
-        var result = new byte[SLOT_SIZE];
-        if (value != null && value.Length > 0)
-        {
-            var valueBytes = (byte[])value;
-            if (value.Length <= SLOT_SIZE)
-            {
-                Array.Copy(valueBytes, 0, result, SLOT_SIZE - value.Length, value.Length);
-            }
-            else
-            {
-                Array.Copy(valueBytes, value.Length - SLOT_SIZE, result, 0, SLOT_SIZE);
-            }
-        }
+        var result = value != null && value.Length > 0
+            ? ExpandStoredValue((byte[])value)
+            : new byte[SLOT_SIZE];
         
         // Cache the result with metadata
         var cached = new CachedSlot
@@ -379,6 +376,57 @@ public sealed class StorageManager : IDisposable
     }
     
     /// <summary>
+    /// Decode a raw stored value into its full 32-byte word: compressed
+    /// payloads (see <see cref="CompressValueIfBeneficial"/>) are decompressed
+    /// back into the left-aligned prefix they were written from, short values
+    /// are left-padded, and oversized values keep their low 32 bytes.
+    /// Without decompression, a value persisted in compressed form and read
+    /// back after cache eviction decoded as garbage.
+    /// </summary>
+    public static byte[] ExpandStoredValue(byte[] stored)
+    {
+        var result = new byte[SLOT_SIZE];
+        if (stored == null || stored.Length == 0)
+            return result;
+
+        var valueBytes = stored;
+        if (IsCompressedForm(valueBytes))
+        {
+            var nonZeroLength = valueBytes.Length - 1;
+            if (nonZeroLength > 0)
+            {
+                Array.Copy(valueBytes, 1, result, 0, nonZeroLength);
+            }
+            // result[nonZeroLength..] are already zero.
+        }
+        else if (valueBytes.Length <= SLOT_SIZE)
+        {
+            Array.Copy(valueBytes, 0, result, SLOT_SIZE - valueBytes.Length, valueBytes.Length);
+        }
+        else
+        {
+            Array.Copy(valueBytes, valueBytes.Length - SLOT_SIZE, result, 0, SLOT_SIZE);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// True when the stored bytes are the compressed form produced by
+    /// <see cref="CompressValueIfBeneficial"/>: `[zeroCount][high bytes…]`
+    /// where the header satisfies `zeroCount == SLOT_SIZE - (length - 1)`
+    /// and `zeroCount > SLOT_SIZE/2` (so total length ≤ SLOT_SIZE/2; the
+    /// all-zero word compresses to the single byte `[SLOT_SIZE]`).
+    /// Uncompressed stored values are always exactly SLOT_SIZE bytes, so a
+    /// short value with a matching header byte is unambiguously compressed.
+    /// </summary>
+    private static bool IsCompressedForm(byte[] value)
+    {
+        return value.Length >= 1
+            && value.Length <= SLOT_SIZE / 2
+            && value[0] == SLOT_SIZE - (value.Length - 1);
+    }
+
+    /// <summary>
     /// Compress value if it would reduce storage size
     /// </summary>
     /// <param name="value">Value to potentially compress</param>
@@ -546,21 +594,22 @@ public record StorageStats
 }
 
 /// <summary>
-/// Cached storage slot with metadata
+/// Cached storage slot with metadata.
+/// Thread-safe: immutable record with atomic updates via ConcurrentDictionary.AddOrUpdate.
 /// </summary>
-internal sealed class CachedSlot
+internal sealed record CachedSlot
 {
     /// <summary>Slot value</summary>
-    public byte[] Value { get; set; } = Array.Empty<byte>();
-    
+    public required byte[] Value { get; init; }
+
     /// <summary>Last access time in milliseconds</summary>
-    public ulong LastAccessed { get; set; }
-    
+    public required ulong LastAccessed { get; init; }
+
     /// <summary>Number of times accessed</summary>
-    public ulong AccessCount { get; set; }
-    
+    public required ulong AccessCount { get; init; }
+
     /// <summary>Whether the slot has been modified</summary>
-    public bool IsModified { get; set; }
+    public required bool IsModified { get; init; }
 }
 
 /// <summary>

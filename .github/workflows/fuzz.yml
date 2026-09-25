@@ -70,25 +70,21 @@ jobs:
       - name: Build fuzz targets
         run: cargo +nightly fuzz build
 
-      - name: Run compile-pipeline fuzz target (fuzz_target_1, 60s)
+      - name: Run every registered fuzz target (60s each)
         run: |
-          cargo +nightly fuzz run fuzz_target_1 -- -max_total_time=60
-
-      - name: Run NEF parser fuzz target (fuzz_target_2, 60s)
-        run: |
-          cargo +nightly fuzz run fuzz_target_2 -- -max_total_time=60
-
-      - name: Run bytecode disassembler fuzz target (60s)
-        run: |
-          cargo +nightly fuzz run fuzz_target_disasm -- -max_total_time=60
-
-      - name: Run NEF parse/serialize round-trip fuzz target (60s)
-        run: |
-          cargo +nightly fuzz run fuzz_target_nef_roundtrip -- -max_total_time=60
-
-      - name: Run manifest JSON parser fuzz target (60s)
-        run: |
-          cargo +nightly fuzz run fuzz_target_manifest_json -- -max_total_time=60
+          set -euo pipefail
+          targets_file="fuzz-targets.txt"
+          if ! cargo +nightly fuzz list > "$targets_file"; then
+            echo "cargo fuzz list failed" >&2
+            exit 1
+          fi
+          mapfile -t targets < "$targets_file"
+          test "${#targets[@]}" -gt 0
+          for target in "${targets[@]}"; do
+            echo "::group::${target}"
+            cargo +nightly fuzz run "${target}" -- -max_total_time=60
+            echo "::endgroup::"
+          done
 
       - name: Upload crash artifacts on failure
         if: failure()

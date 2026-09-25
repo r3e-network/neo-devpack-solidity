@@ -139,7 +139,7 @@ This generates:
 
 Use this runtime report when you need executable correctness proof, not deploy-only coverage.
 
-For the strict-safe new showcase suite specifically (wired in CI as `neoxp-showcases`):
+For the strict-safe new showcase suite specifically (run nightly in `.github/workflows/fuzz.yml` as `neoxp-smoke-full`):
 
 ```bash
 make test-deploy-new-showcases-smoke
@@ -189,9 +189,9 @@ make production-gate
 
 ### CI Coverage (Neo-Express Showcases)
 
-The CI workflow (`.github/workflows/ci.yml`) includes a dedicated `neoxp-showcases` job that:
+The nightly workflow (`.github/workflows/fuzz.yml`) runs the showcase smoke suite in `neoxp-smoke-full` and:
 
-- installs Rust + .NET 8 + `jq` on Ubuntu
+- installs Rust + .NET 10 + `jq` on Ubuntu
 - runs `examples/test_neoxp_new_showcases_smoke.sh`
 - validates `UpgradeLifecycleShowcase`, `WitnessGuardShowcase`, and `OracleRelayStrictShowcase` end-to-end
 
@@ -275,7 +275,8 @@ neo-cli contract invoke <contract-hash> totalSupply
 
 ## 🧩 **Solidity Feature Support on NeoVM**
 
-> **146 Solidity features audited** — ✅ 114 fully supported (78%) · ⚠️ 29 partial (20%) · ❌ 2 unsupported (1%) · 🚫 1 intentionally blocked (1%)
+The canonical registry and generated support summary are maintained at
+[`docs/data/solidity_support_matrix.json`](./docs/data/solidity_support_matrix.json).
 
 The maintained per-feature source of truth is
 [`docs/SOLIDITY_SUPPORT_MATRIX.md`](./docs/SOLIDITY_SUPPORT_MATRIX.md), with
@@ -283,6 +284,8 @@ rendered category pages under
 [`docs/solidity/feature-support/`](./docs/solidity/feature-support/). The root
 [`FEATURE_MATRIX.md`](./FEATURE_MATRIX.md) is only a stable redirect for older
 links.
+
+For example, `h_address_delegatecall_callcode` documents the default warning/runtime-trap behavior and strict compilation blocking; inspect it with `python3 scripts/generate_solidity_support_matrix.py --explain h_address_delegatecall_callcode`.
 
 Important NeoVM differences:
 

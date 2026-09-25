@@ -1,0 +1,27 @@
+{
+  "name": "@neo-devpack-solidity/integration-tests",
+  "version": "0.14.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@neo-devpack-solidity/abi-router": "^0.14.1",
+    "@neo-devpack-solidity/cli-tools": "^0.14.1",
+    "@neo-devpack-solidity/neo-foundry": "^0.14.1",
+    "@neo-devpack-solidity/templates": "^0.14.1",
+    "fs-extra": "^11.3.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.19.37",
+    "eslint": "^8.57.1",
+    "typescript": "^5.3.3",
+    "vitest": "^4.0.18"
+  }
+}

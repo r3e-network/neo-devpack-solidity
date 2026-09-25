@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant Lead as Team Lead/QA
+    participant Guard as Workspace Guard
+    participant Audit as Audit Scripts
+    participant CI as GitHub CI
+    participant IR as Rust IR Facades
+    participant Forge as neo-forge/Hardhat
+    participant Neo as Neo-Express
+    participant CSharp as Neo.Sol.Runtime.Tests
+
+    Lead->>Guard: Read-only status/diff and external file backup
+    Guard-->>Lead: 75-file map, SHA-256 manifest, stage patch directory
+    Lead->>Audit: Scan production/test roots
+    Audit-->>Lead: file-length + panic/unwrap/expect + version reports
+    Lead->>CI: Wire hard gates and artifact uploads
+    CI->>Audit: Execute scripts (no continue-on-error)
+    Audit-->>CI: exit 0 pass / 1 violation / 2-3 script failure
+    Lead->>IR: Move one natural domain at a time
+    IR->>IR: Preserve pub(crate) signatures, scratch and label invariants
+    IR-->>Lead: Facade compiles and golden IR/NEF diff
+    Lead->>Forge: Build scaffold with profile/cache/error options
+    Forge->>IR: Invoke Standard JSON / compile API
+    IR-->>Forge: NEF + manifest or structured diagnostics
+    Forge-->>Lead: Artifacts, cache result, exit status
+    Lead->>Neo: Run core/calls/storage/misc smoke groups
+    Neo-->>Lead: Real Neo N3 execution result
+    Lead->>CSharp: Run independent .NET runtime tests
+    CSharp-->>Lead: Separate experimental-runtime report
+    Lead->>CI: Run fmt/check/clippy/test/doc/TS/Solidity gates
+    CI-->>Lead: Release candidate evidence bundle
+    Lead->>Guard: File-level diff and rollback rehearsal
+    Guard-->>Lead: Confirm non-target working-tree changes preserved

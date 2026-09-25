@@ -214,10 +214,12 @@ pub(crate) fn builtin_library_supported_members(base: &str) -> Option<&'static [
             "bls12381Add",
             "bls12381Mul",
             "bls12381Pairing",
-            // NOTE: `bls12381G1Add`/`G1Mul`/`G1Neg`/`G2Add`/`G2Mul`/`G2Neg`
-            // were removed — no such methods exist on the on-chain CryptoLib
-            // (see `resolve_cryptolib_member`). Mapping them emitted a
-            // `System.Contract.Call` that faults with "Method not found".
+            "bls12381G1Add",
+            "bls12381G1Mul",
+            "bls12381G2Add",
+            "bls12381G2Mul",
+            "bls12381G1Neg",
+            "bls12381G2Neg",
             // Alias for `keccak256` — the devpack's `Syscalls.sol` exposes
             // it as `neoKeccak256` so the name doesn't shadow Solidity's
             // bare `keccak256` intrinsic. Unwired here before the audit.
@@ -407,53 +409,6 @@ pub(crate) fn builtin_library_supported_members(base: &str) -> Option<&'static [
     }
 }
 
-pub(crate) fn resolve_runtime_member(member: &str) -> Option<BuiltinCall> {
-    match member {
-        "notify" => Some(BuiltinCall::RuntimeNotify),
-        "checkWitness" => Some(BuiltinCall::RuntimeCheckWitness),
-        "gasLeft" => Some(BuiltinCall::Syscall("System.Runtime.GasLeft".to_string())),
-        "burnGas" => Some(BuiltinCall::Syscall("System.Runtime.BurnGas".to_string())),
-        "log" => Some(BuiltinCall::Syscall("System.Runtime.Log".to_string())),
-        "getTime" => Some(BuiltinCall::Syscall("System.Runtime.GetTime".to_string())),
-        "getTrigger" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetTrigger".to_string(),
-        )),
-        "getInvocationCounter" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetInvocationCounter".to_string(),
-        )),
-        "getCurrentSigners" => Some(BuiltinCall::Syscall(
-            "System.Runtime.CurrentSigners".to_string(),
-        )),
-        "getCallFlags" => Some(BuiltinCall::Syscall(
-            "System.Contract.GetCallFlags".to_string(),
-        )),
-        "getScriptContainer" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetScriptContainer".to_string(),
-        )),
-        "loadScript" => Some(BuiltinCall::Syscall(
-            "System.Runtime.LoadScript".to_string(),
-        )),
-        "getNetwork" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetNetwork".to_string(),
-        )),
-        "getPlatform" => Some(BuiltinCall::Syscall("System.Runtime.Platform".to_string())),
-        "getAddressVersion" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetAddressVersion".to_string(),
-        )),
-        "getRandom" => Some(BuiltinCall::Syscall("System.Runtime.GetRandom".to_string())),
-        "getExecutingScriptHash" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetExecutingScriptHash".to_string(),
-        )),
-        "getCallingScriptHash" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetCallingScriptHash".to_string(),
-        )),
-        "getEntryScriptHash" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetEntryScriptHash".to_string(),
-        )),
-        _ => None,
-    }
-}
-
 pub(crate) fn resolve_abi_member(member: &str) -> Option<BuiltinCall> {
     match member {
         "encode" => Some(BuiltinCall::AbiEncode),
@@ -462,123 +417,6 @@ pub(crate) fn resolve_abi_member(member: &str) -> Option<BuiltinCall> {
         "encodeWithSignature" => Some(BuiltinCall::AbiEncodeWithSignature),
         "encodeWithSelector" => Some(BuiltinCall::AbiEncodeWithSignature),
         "decode" => Some(BuiltinCall::AbiDecode),
-        _ => None,
-    }
-}
-
-pub(crate) fn resolve_storage_member(member: &str) -> Option<BuiltinCall> {
-    // Note: every mapping here must target a syscall that exists in Neo N3's
-    // ApplicationEngine interop table. The former `*Local` family lowered to
-    // fictional `System.Storage.Local.*` names (sha256-hashed interop IDs that
-    // no real node registers → unknown-syscall FAULT at runtime), and helpers
-    // like `batchPut`/`count`/`exists`/`clearPrefix` were lowered to a single
-    // raw syscall with the wrong arity and semantics. They were removed so
-    // calls fail at compile time via the "unsupported builtin library call"
-    // diagnostic instead of corrupting state or faulting on-chain.
-    match member {
-        "find" => Some(BuiltinCall::StorageFind),
-        "put" => Some(BuiltinCall::StoragePut),
-        "get" => Some(BuiltinCall::StorageGet),
-        "remove" => Some(BuiltinCall::StorageDelete),
-        "initializeContext" => Some(BuiltinCall::Syscall(
-            "System.Storage.GetContext".to_string(),
-        )),
-        "getContext" => Some(BuiltinCall::Syscall(
-            "System.Storage.GetContext".to_string(),
-        )),
-        "getReadOnlyContext" => Some(BuiltinCall::Syscall(
-            "System.Storage.GetReadOnlyContext".to_string(),
-        )),
-        "asReadOnly" => Some(BuiltinCall::Syscall(
-            "System.Storage.AsReadOnly".to_string(),
-        )),
-        _ => None,
-    }
-}
-
-pub(crate) fn resolve_neo_member(member: &str) -> Option<BuiltinCall> {
-    match member {
-        "verifySignature" => Some(BuiltinCall::VerifySignature),
-        "callContract" => Some(BuiltinCall::ContractCall),
-        "deployContract" => Some(BuiltinCall::DeployContract),
-        "getNeoBalance" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Neo,
-            method: "balanceOf".to_string(),
-        }),
-        "getGasBalance" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Gas,
-            method: "balanceOf".to_string(),
-        }),
-        // Canonical name; `getGasPrice` below is the deprecated alias and
-        // resolves to the same Policy.getFeePerByte native.
-        "getFeePerByte" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Policy,
-            method: "getFeePerByte".to_string(),
-        }),
-        "getGasPrice" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Policy,
-            method: "getFeePerByte".to_string(),
-        }),
-        "getStoragePrice" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Policy,
-            method: "getStoragePrice".to_string(),
-        }),
-        "getCommittee" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Neo,
-            method: "getCommittee".to_string(),
-        }),
-        "getValidators" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Neo,
-            method: "getNextBlockValidators".to_string(),
-        }),
-        "isCommittee" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Neo,
-            method: "getCommittee".to_string(),
-        }),
-        "isValidator" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Neo,
-            method: "getNextBlockValidators".to_string(),
-        }),
-        "getRandom" => Some(BuiltinCall::Syscall("System.Runtime.GetRandom".to_string())),
-        "getBlockHeight" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Ledger,
-            method: "currentIndex".to_string(),
-        }),
-        "getCurrentBlock" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Ledger,
-            method: "currentIndex".to_string(),
-        }),
-        "transactionExists" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Ledger,
-            method: "getTransaction".to_string(),
-        }),
-        "getNetworkMagic" => Some(BuiltinCall::Syscall(
-            "System.Runtime.GetNetwork".to_string(),
-        )),
-        "getBlockByIndex" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Ledger,
-            method: "getBlock".to_string(),
-        }),
-        "getBlockTime" => Some(BuiltinCall::Syscall("System.Runtime.GetTime".to_string())),
-        "getTransaction" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Ledger,
-            method: "getTransaction".to_string(),
-        }),
-        "getTransactionHeight" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::Ledger,
-            method: "getTransactionHeight".to_string(),
-        }),
-        "verifyWithWitness" => Some(BuiltinCall::Syscall(
-            "System.Runtime.CheckWitness".to_string(),
-        )),
-        "sha256Hash" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::CryptoLib,
-            method: "sha256".to_string(),
-        }),
-        "ripemd160Hash" => Some(BuiltinCall::NativeCall {
-            contract: NativeContract::CryptoLib,
-            method: "ripemd160".to_string(),
-        }),
         _ => None,
     }
 }
@@ -620,13 +458,13 @@ pub(crate) fn resolve_cryptolib_member(member: &str) -> Option<BuiltinCall> {
         | "bls12381Equal"
         | "bls12381Add"
         | "bls12381Mul"
-        // NOTE: the former `bls12381G1Add`/`G1Mul`/`G1Neg`/`G2Add`/`G2Mul`/
-        // `G2Neg` members were removed — the on-chain CryptoLib exposes
-        // exactly six BLS methods (Serialize/Deserialize/Equal/Add/Mul/
-        // Pairing); G1 vs G2 is inferred from the deserialized point length,
-        // not from the method name. The invented names would fault on-chain
-        // with "Method not found".
-        => Some(BuiltinCall::NativeCall {
+        | "bls12381Pairing"
+        | "bls12381G1Add"
+        | "bls12381G1Mul"
+        | "bls12381G1Neg"
+        | "bls12381G2Add"
+        | "bls12381G2Mul"
+        | "bls12381G2Neg" => Some(BuiltinCall::NativeCall {
             contract: NativeContract::CryptoLib,
             method: member.to_string(),
         }),

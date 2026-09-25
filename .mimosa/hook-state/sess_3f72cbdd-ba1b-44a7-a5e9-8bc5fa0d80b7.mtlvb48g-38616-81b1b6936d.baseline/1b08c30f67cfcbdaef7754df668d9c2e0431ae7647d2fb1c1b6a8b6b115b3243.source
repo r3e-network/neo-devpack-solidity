@@ -1,0 +1,62 @@
+{
+  "name": "@neo-devpack-solidity/hardhat-solc-neo",
+  "version": "0.14.1",
+  "description": "Hardhat plugin for compiling Solidity contracts to NeoVM bytecode",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts"
+  },
+  "keywords": [
+    "hardhat",
+    "hardhat-plugin",
+    "neo",
+    "blockchain",
+    "solidity",
+    "compiler",
+    "neovm"
+  ],
+  "dependencies": {
+    "@neo-devpack-solidity/types": "^0.14.1",
+    "ethers": "^6.16.0",
+    "fs-extra": "^11.3.4",
+    "chalk": "^5.3.0",
+    "debug": "^4.3.4",
+    "semver": "^7.7.4",
+    "source-map": "^0.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.37",
+    "@types/fs-extra": "^11.0.4",
+    "@types/debug": "^4.1.12",
+    "@types/semver": "^7.5.6",
+    "@types/source-map": "^0.5.7",
+    "typescript": "^5.3.3",
+    "vitest": "^4.0.18",
+    "eslint": "^8.57.1"
+  },
+  "peerDependencies": {
+    "hardhat": ">=2.28.6 <3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

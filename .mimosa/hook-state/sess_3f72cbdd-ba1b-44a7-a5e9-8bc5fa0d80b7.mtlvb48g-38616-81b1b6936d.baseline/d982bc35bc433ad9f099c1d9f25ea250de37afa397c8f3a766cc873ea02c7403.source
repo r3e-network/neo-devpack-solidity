@@ -1,0 +1,102 @@
+{
+  "name": "@neo-devpack-solidity/tooling",
+  "version": "0.1.1",
+  "description": "Comprehensive developer tooling for Neo DevPack for Solidity ecosystem",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.6.0",
+  "workspaces": [
+    "packages/types",
+    "packages/abi-router",
+    "packages/cli-tools",
+    "packages/hardhat-solc-neo",
+    "packages/hardhat-neo-deployer",
+    "packages/neo-foundry",
+    "packages/integration-tests",
+    "packages/templates"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "dev": "turbo run dev",
+    "clean": "turbo run clean",
+    "publish": "changeset publish",
+    "version": "changeset version"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "debug": "^4.3.4",
+    "ethers": "^6.16.0",
+    "fs-extra": "^11.3.4",
+    "glob": "^10.5.0",
+    "inquirer": "^9.2.12",
+    "ora": "^8.0.1",
+    "semver": "^7.7.4",
+    "source-map": "^0.7.4",
+    "web3": "^4.3.0",
+    "yargs": "^17.7.2"
+  },
+  "overrides": {
+    "ajv": "6.14.0",
+    "cookie": "1.1.1",
+    "flatted": "3.4.2",
+    "serialize-javascript": "7.0.5",
+    "tmp": "0.2.5",
+    "undici": "6.24.1",
+    "mocha": {
+      "minimatch": "5.1.8",
+      "serialize-javascript": "7.0.5"
+    },
+    "elliptic": {
+      "bn.js": "4.12.3"
+    },
+    "eslint": {
+      "minimatch": "3.1.4"
+    },
+    "@eslint/eslintrc": {
+      "minimatch": "3.1.4"
+    },
+    "@humanwhocodes/config-array": {
+      "minimatch": "3.1.4"
+    },
+    "glob": {
+      ".": "$glob",
+      "minimatch": "9.0.7"
+    }
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@types/debug": "^4.1.12",
+    "@types/fs-extra": "^11.0.4",
+    "@types/glob": "^8.1.0",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.19.37",
+    "@types/semver": "^7.5.6",
+    "@types/source-map": "^0.5.7",
+    "@types/yargs": "^17.0.35",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "hardhat": "^2.28.6",
+    "prettier": "^3.8.1",
+    "turbo": "^1.11.2",
+    "typescript": "^5.3.3",
+    "vitest": "^4.0.18"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || ^24.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r3e-network/neo-devpack-solidity.git",
+    "directory": "tooling"
+  },
+  "author": "Neo DevPack for Solidity Team",
+  "license": "MIT"
+}

@@ -245,24 +245,14 @@ Neo N3 uses the `onNEP17Payment(address from, uint256 amount, bytes data)` callb
 
 ---
 
+<!-- Generated from docs/data/solidity_support_matrix.json; do not edit counts manually. -->
 ## Summary
 
-| Category            | ✅      | ⚠️     | ❌    | 🚫    |
-| ------------------- | ------- | ------ | ----- | ----- |
-| A. Types            | 17      | 1      | 2     | 0     |
-| B. Expressions      | 16      | 5      | 0     | 0     |
-| C. Statements       | 17      | 1      | 0     | 0     |
-| D. Functions        | 10      | 4      | 0     | 0     |
-| E. OOP Features     | 10      | 2      | 0     | 0     |
-| F. Storage & Memory | 12      | 3      | 0     | 0     |
-| G. Error Handling   | 11      | 0      | 0     | 0     |
-| H. EVM-Specific     | 21      | 11     | 0     | 1     |
-| I. ERC-NEP Mapping  | 3       | 4      | 0     | 0     |
-| **Total**           | **117** | **31** | **2** | **1** |
-
-**Total features audited: 151**
-
-- ✅ Fully supported: 117 (77%)
-- ⚠️ Partial support: 31 (21%)
-- ❌ Not supported: 2 (1%)
-- 🚫 Intentionally blocked: 1 (1%)
+| Status | Count |
+| --- | ---: |
+| ✅ supported | 117 |
+| ⚠️ approximate | 31 |
+| 🔁 manual_migration | 0 |
+| ❌ unsupported | 2 |
+| 🚫 blocked | 1 |
+| **Total** | **151** |

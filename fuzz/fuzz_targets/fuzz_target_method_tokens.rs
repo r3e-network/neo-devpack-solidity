@@ -146,7 +146,7 @@ fn arbitrary_bytecode(
 }
 
 fuzz_target!(|data: &[u8]| {
-    let _ = std::panic::catch_unwind(|| {
+    match std::panic::catch_unwind(|| {
         let mut u = Unstructured::new(data);
 
         // Build the method-token table first so the bytecode generator
@@ -180,5 +180,8 @@ fuzz_target!(|data: &[u8]| {
         // OOM, runaway loop) is a bug — graceful runtime exceptions and
         // `Err(RuntimeError::_)` are both expected outcomes.
         let _ = rt.execute_with_tokens(&bytecode, &[], &tokens);
-    });
+    }) {
+        Ok(()) => {}
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 });

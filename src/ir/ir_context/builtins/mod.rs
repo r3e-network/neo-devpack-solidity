@@ -6,6 +6,8 @@ mod native_calls;
 pub(crate) use native_calls::*;
 mod helpers;
 pub(crate) use helpers::*;
+mod resolve_core;
+pub(crate) use resolve_core::*;
 mod resolve;
 pub use resolve::builtin_intrinsic_surface;
 pub(crate) use resolve::*;

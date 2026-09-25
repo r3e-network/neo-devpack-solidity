@@ -1,0 +1,76 @@
+   Compiling neo-devpack-solidity v0.30.3 (D:\Git\neo-devpack-solidity)
+error: expected item after doc comment
+   --> src\ir\ir_statements\dispatch\return_lower.rs:679:1
+    |
+671 | / /// Used by the three Task #116 / #127 / single-dynamic paths that
+672 | | /// recognise an externally-callable `return abi.decode(buf, types)` whose
+673 | | /// canonical byte encoding equals `buf` verbatim:
+674 | | ///
+...   |
+677 | | ///    `Panic(0x41)` when the buffer violates the size contract.
+678 | | /// 3. `Label(ok); Return` — RET the buffer verbatim.
+    | |_____________________________________________________- other attributes here
+679 |   ///
+    |   ^^^ this doc comment doesn't document anything
+
+warning: unused import: `return_lower::*`
+  --> src\ir\ir_statements\dispatch\mod.rs:12:16
+   |
+12 | pub(crate) use return_lower::*;
+   |                ^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `return_abi::*`
+  --> src\ir\ir_statements\dispatch\mod.rs:14:16
+   |
+14 | pub(crate) use return_abi::*;
+   |                ^^^^^^^^^^^^^
+
+warning: unused import: `return_tuple::*`
+  --> src\ir\ir_statements\dispatch\mod.rs:16:16
+   |
+16 | pub(crate) use return_tuple::*;
+   |                ^^^^^^^^^^^^^^^
+
+error[E0425]: cannot find function `wrap_external_single_array_return_value` in this scope
+   --> src\ir\ir_build\function.rs:208:37
+    |
+208 | ...                   let _ = wrap_external_single_array_return_value(
+    |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function `wrap_external_single_array_return_value` in this scope
+   --> src\ir\ir_build\function.rs:215:37
+    |
+215 | ...                   let _ = wrap_external_single_array_return_value(
+    |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function `lower_return_statement` in this scope
+   --> src\ir\ir_statements\dispatch\statement.rs:76:39
+    |
+ 76 |           Statement::Return(_, expr) => lower_return_statement(expr.as_ref(), ctx, instructions),
+    |                                         ^^^^^^^^^^^^^^^^^^^^^^
+    |
+   ::: src\ir\ir_statements\dispatch\revert_lower.rs:368:1
+    |
+368 | / pub(crate) fn lower_revert_statement(
+369 | |     ident: Option<&solang_parser::pt::IdentifierPath>,
+370 | |     args: &[Expression],
+371 | |     ctx: &mut LoweringContext,
+...   |
+530 | |     true
+531 | | }
+    | |_- similarly named function `lower_revert_statement` defined here
+    |
+help: a function with a similar name exists
+    |
+ 76 -         Statement::Return(_, expr) => lower_return_statement(expr.as_ref(), ctx, instructions),
+ 76 +         Statement::Return(_, expr) => lower_revert_statement(expr.as_ref(), ctx, instructions),
+    |
+
+For more information about this error, try `rustc --explain E0425`.
+warning: `neo-devpack-solidity` (lib) generated 3 warnings
+error: could not compile `neo-devpack-solidity` (lib) due to 4 previous errors; 3 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `neo-devpack-solidity` (lib test) generated 3 warnings (3 duplicates)
+error: could not compile `neo-devpack-solidity` (lib test) due to 4 previous errors; 3 warnings emitted

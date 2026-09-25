@@ -5,6 +5,41 @@ All notable changes to the Neo DevPack for Solidity will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.31.0] - 2026-09-26
+
+Comprehensive test coverage and critical bug fixes for C# runtime components and NeoVM limits.
+
+### Added
+
+- **Comprehensive test suite for C# runtime components (129 new tests)**:
+  - `AbiEncoderTests.cs` (39 tests) - Function selectors, static/dynamic types, arrays, security validation
+  - `AddressRegistryTests.cs` (34 tests) - Contract registration, ENS resolution, interface support
+  - `ExternalCallManagerTests.cs` (20 tests) - Call/DelegateCall/StaticCall, gas transfer, reentrancy guards
+  - `EvmExceptionHandlerTests.cs` (36 tests) - Revert/Require/Assert, error propagation, async handling
+- **NeoVM limits edge case tests** (5 tests) in `src/codegen/tests/neovm_limits.rs`:
+  - 255 local variable slot limit enforcement
+  - 255 function parameter limit enforcement
+  - INITSLOT operand encoding boundary tests
+  - CALLT 128 method token limit enforcement
+  - 512 KB bytecode size limit validation
+- **Documentation for C# runtime NeoVM incompatibilities** in `src/Neo.Sol.Runtime/README.md`
+- **Missing test fixture**: `examples/new/LibraryExternalError.sol`
+
+### Fixed
+
+- **Critical thread safety bug in StorageManager.cs**:
+  - Converted `CachedSlot` from mutable class to immutable record
+  - Removed unused `_lock` field
+  - Fixed race conditions in cache access tracking through atomic `ConcurrentDictionary.AddOrUpdate` operations
+- **Compilation error** from orphaned doc comment in `src/ir/ir_statements/dispatch/return_lower.rs`
+
+### Verification
+
+- All 1,455 tests passing (100% pass rate)
+- Zero build warnings or errors
+- C# runtime builds successfully
+- Comprehensive audit completed with all confirmed issues resolved
+
 ## [v0.30.3] - 2026-08-11
 
 Release focused on runtime modularization, documentation cleanliness, and
@@ -38,11 +73,11 @@ CI-driven hardening of the compiler and standard library.
 ### Added
 
 **CI audit scripts**:
-- `scripts/ci/file_length_audit.py`: Enforces a per-file line-count budget to
-  prevent runaway module growth.
-- `scripts/ci/unwrap_audit.py`: Audits production `unwrap()` and `expect()`
-  usage and verifies each remaining instance is documented with an invariant
-  comment.
+- `scripts/audit_file_length.sh`: Enforces a per-file line-count budget for
+  production Rust modules while reporting test-only files separately.
+- `scripts/audit_unwrap.sh`: Runs the production Rust quality audit for
+  `unwrap()`, `panic!`, `unimplemented!`, and `todo!` calls; production
+  `expect()` usage is reported with adjacent invariant-comment status.
 
 ### Verification
 - `cargo fmt --all -- --check`: passed
